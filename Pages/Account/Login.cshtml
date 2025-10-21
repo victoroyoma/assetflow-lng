@@ -1,0 +1,74 @@
+@page
+@model buildone.Pages.Account.LoginModel
+@{
+    ViewData["Title"] = "Log in";
+    Layout = "_LoginLayout";
+}
+
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <div class="login-logo">
+                <i class="fas fa-cubes"></i>
+            </div>
+            <h1 class="login-title">AssetFlow</h1>
+            <p class="login-subtitle">Asset Management System</p>
+        </div>
+        
+        <div class="login-form">
+            <form id="account" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+                
+                <div class="form-group">
+                    <label asp-for="Input.Email" class="form-label">Email Address</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Enter your email" />
+                    </div>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="Input.Password" class="form-label">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Enter your password" />
+                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="Input.RememberMe" />
+                    <label class="form-check-label" asp-for="Input.RememberMe">
+                        Remember me
+                    </label>
+                </div>
+                
+                <button id="login-submit" type="submit" class="btn btn-primary btn-login">
+                    <i class="fas fa-sign-in-alt me-2"></i>
+                    Sign In
+                </button>
+            </form>
+        </div>
+        
+        <div class="login-footer">
+            <div class="demo-credentials">
+                <h6><i class="fas fa-info-circle me-2"></i>Demo Credentials</h6>
+                <div class="credential-item">
+                    <strong>Administrator:</strong> admin@buildone.com / Admin123!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

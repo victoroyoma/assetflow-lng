@@ -1,0 +1,226 @@
+@model buildone.Models.SystemSettingsViewModel
+
+@{
+    ViewData["Title"] = "System Settings";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="fas fa-cog me-2"></i>System Settings
+                        </h5>
+                        <div class="btn-group" role="group">
+                            <a asp-action="Index" class="btn btn-light btn-sm active">General</a>
+                            <a asp-action="Security" class="btn btn-outline-light btn-sm">Security</a>
+                            <a asp-action="Database" class="btn btn-outline-light btn-sm">Database</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Index" method="post">
+                        <!-- Company Information -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="border-bottom pb-2 mb-3">
+                                    <i class="fas fa-building me-2"></i>Company Information
+                                </h6>
+                                
+                                <div class="mb-3">
+                                    <label asp-for="CompanyInfo.CompanyName" class="form-label">Company Name</label>
+                                    <input asp-for="CompanyInfo.CompanyName" class="form-control" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="CompanyInfo.Address" class="form-label">Address</label>
+                                    <input asp-for="CompanyInfo.Address" class="form-control" />
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label asp-for="CompanyInfo.City" class="form-label">City</label>
+                                            <input asp-for="CompanyInfo.City" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="mb-3">
+                                            <label asp-for="CompanyInfo.State" class="form-label">State</label>
+                                            <input asp-for="CompanyInfo.State" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="mb-3">
+                                            <label asp-for="CompanyInfo.ZipCode" class="form-label">Zip Code</label>
+                                            <input asp-for="CompanyInfo.ZipCode" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="CompanyInfo.Country" class="form-label">Country</label>
+                                    <input asp-for="CompanyInfo.Country" class="form-control" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="CompanyInfo.Phone" class="form-label">Phone</label>
+                                    <input asp-for="CompanyInfo.Phone" class="form-control" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="CompanyInfo.Email" class="form-label">Email</label>
+                                    <input asp-for="CompanyInfo.Email" class="form-control" type="email" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="CompanyInfo.Website" class="form-label">Website</label>
+                                    <input asp-for="CompanyInfo.Website" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <!-- Email Settings -->
+                                <h6 class="border-bottom pb-2 mb-3">
+                                    <i class="fas fa-envelope me-2"></i>Email Settings
+                                </h6>
+
+                                <div class="mb-3">
+                                    <label asp-for="EmailSettings.SmtpServer" class="form-label">SMTP Server</label>
+                                    <input asp-for="EmailSettings.SmtpServer" class="form-control" />
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label asp-for="EmailSettings.SmtpPort" class="form-label">SMTP Port</label>
+                                            <input asp-for="EmailSettings.SmtpPort" class="form-control" type="number" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <div class="form-check mt-4">
+                                                <input asp-for="EmailSettings.EnableSsl" class="form-check-input" />
+                                                <label asp-for="EmailSettings.EnableSsl" class="form-check-label">Enable SSL</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="EmailSettings.SmtpUsername" class="form-label">SMTP Username</label>
+                                    <input asp-for="EmailSettings.SmtpUsername" class="form-control" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="EmailSettings.SmtpPassword" class="form-label">SMTP Password</label>
+                                    <input asp-for="EmailSettings.SmtpPassword" class="form-control" type="password" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="EmailSettings.FromEmail" class="form-label">From Email</label>
+                                    <input asp-for="EmailSettings.FromEmail" class="form-control" type="email" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="EmailSettings.FromName" class="form-label">From Name</label>
+                                    <input asp-for="EmailSettings.FromName" class="form-control" />
+                                </div>
+
+                                <!-- Notification Settings -->
+                                <h6 class="border-bottom pb-2 mb-3 mt-4">
+                                    <i class="fas fa-bell me-2"></i>Notification Settings
+                                </h6>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input asp-for="EmailSettings.NotificationsEnabled" class="form-check-input" />
+                                        <label asp-for="EmailSettings.NotificationsEnabled" class="form-check-label">Enable Email Notifications</label>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input asp-for="EmailSettings.WarrantyAlerts" class="form-check-input" />
+                                        <label asp-for="EmailSettings.WarrantyAlerts" class="form-check-label">Warranty Expiration Alerts</label>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input asp-for="EmailSettings.ImagingJobAlerts" class="form-check-input" />
+                                        <label asp-for="EmailSettings.ImagingJobAlerts" class="form-check-label">Imaging Job Completion Alerts</label>
+                                    </div>
+                                </div>
+
+                                <!-- Maintenance Settings -->
+                                <h6 class="border-bottom pb-2 mb-3 mt-4">
+                                    <i class="fas fa-tools me-2"></i>Maintenance Settings
+                                </h6>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input asp-for="MaintenanceSettings.MaintenanceMode" class="form-check-input" />
+                                        <label asp-for="MaintenanceSettings.MaintenanceMode" class="form-check-label">Maintenance Mode</label>
+                                    </div>
+                                    <small class="form-text text-muted">When enabled, only administrators can access the system</small>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="MaintenanceSettings.MaintenanceMessage" class="form-label">Maintenance Message</label>
+                                    <textarea asp-for="MaintenanceSettings.MaintenanceMessage" class="form-control" rows="2"></textarea>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <div class="form-check">
+                                                <input asp-for="MaintenanceSettings.AutoBackupEnabled" class="form-check-input" />
+                                                <label asp-for="MaintenanceSettings.AutoBackupEnabled" class="form-check-label">Auto Backup</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label asp-for="MaintenanceSettings.BackupTime" class="form-label">Backup Time</label>
+                                            <input asp-for="MaintenanceSettings.BackupTime" class="form-control" type="time" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="MaintenanceSettings.BackupRetentionDays" class="form-label">Backup Retention (Days)</label>
+                                    <input asp-for="MaintenanceSettings.BackupRetentionDays" class="form-control" type="number" min="1" max="365" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-top pt-3 mt-4">
+                            <div class="d-flex justify-content-between">
+                                <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left me-1"></i>Back to Dashboard
+                                </a>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-1"></i>Save Settings
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Auto-hide success/error messages after 5 seconds
+        setTimeout(function() {
+            $('.alert').fadeOut('slow');
+        }, 5000);
+    </script>
+}

@@ -1,0 +1,106 @@
+@model buildone.Controllers.EditUserViewModel
+
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">@ViewData["Title"]</h3>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit" method="post">
+                    <input asp-for="Id" type="hidden" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="FullName" class="form-label"></label>
+                                <input asp-for="FullName" class="form-control" />
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="Email" class="form-label"></label>
+                                <input asp-for="Email" class="form-control" type="email" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="Phone" class="form-label"></label>
+                                <input asp-for="Phone" class="form-control" />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="EmployeeId" class="form-label"></label>
+                                <select asp-for="EmployeeId" class="form-select">
+                                    <option value="">-- Select Employee (Optional) --</option>
+                                    @foreach (var employee in Model.AvailableEmployees)
+                                    {
+                                        <option value="@employee.Id" selected="@(Model.EmployeeId == employee.Id)">@employee.FullName</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Roles</label>
+                        <div class="row">
+                            @foreach (var role in Model.AvailableRoles)
+                            {
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="SelectedRoles" value="@role.Name" 
+                                               id="role_@role.Id" @(Model.SelectedRoles != null && Model.SelectedRoles.Contains(role.Name!) ? "checked" : "") />
+                                        <label class="form-check-label" for="role_@role.Id">
+                                            @role.Name
+                                            @if (!string.IsNullOrEmpty(role.Description))
+                                            {
+                                                <small class="text-muted d-block">@role.Description</small>
+                                            }
+                                        </label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input asp-for="IsActive" class="form-check-input" />
+                        <label asp-for="IsActive" class="form-check-label">
+                            @Html.DisplayNameFor(m => m.IsActive)
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save"></i> Update User
+                        </button>
+                        <a asp-action="ResetPassword" asp-route-id="@Model.Id" class="btn btn-warning">
+                            <i class="bi bi-key"></i> Reset Password
+                        </a>
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Back to List
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

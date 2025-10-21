@@ -1,0 +1,28 @@
+@page
+@model buildone.Pages.Account.LogoutModel
+@{
+    ViewData["Title"] = "Logged Out";
+    Layout = "_LoginLayout";
+}
+
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <div class="login-logo">
+                <i class="fas fa-sign-out-alt"></i>
+            </div>
+            <h1 class="login-title">Successfully Logged Out</h1>
+            <p class="login-subtitle">You have been securely signed out</p>
+        </div>
+        
+        <div class="login-form">
+            <div class="text-center">
+                <p class="mb-4 text-muted">Thank you for using AssetFlow. Your session has been terminated.</p>
+                <a class="btn btn-primary btn-login" asp-page="/Account/Login">
+                    <i class="fas fa-sign-in-alt me-2"></i>
+                    Sign In Again
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

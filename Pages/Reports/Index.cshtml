@@ -1,0 +1,616 @@
+@page
+@model buildone.Pages.Reports.IndexModel
+@{
+    ViewData["Title"] = "Reports Dashboard";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3 mb-1">
+            <i class="bi bi-graph-up me-2"></i>Reports Dashboard
+        </h1>
+        <p class="text-muted mb-0">Comprehensive analytics and insights for asset management</p>
+    </div>
+    <div>
+        <a asp-page="./WarrantyAlerts" class="btn btn-warning me-2">
+            <i class="bi bi-shield-exclamation me-1"></i>Warranty Alerts
+        </a>
+        <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#dateRangeModal">
+            <i class="bi bi-calendar-range"></i> Date Range
+        </button>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                <i class="bi bi-download"></i> Export
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" onclick="exportToPDF()"><i class="bi bi-file-earmark-pdf me-2"></i>PDF Report</a></li>
+                <li><a class="dropdown-item" href="#" onclick="exportToExcel()"><i class="bi bi-file-earmark-excel me-2"></i>Excel Report</a></li>
+                <li><a class="dropdown-item" href="#" onclick="exportToCSV()"><i class="bi bi-file-earmark-csv me-2"></i>CSV Data</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Stats Cards -->
+<div class="row mb-4">
+    <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card bg-primary text-white h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="card-title mb-1">@Model.TotalAssets</h4>
+                        <p class="card-text mb-0">Total Assets</p>
+                        <small class="opacity-75">@Model.ActiveAssets active</small>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="bi bi-boxes display-4 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-white bg-opacity-25">
+                <small>@((double)Model.ActiveAssets / Math.Max(Model.TotalAssets, 1) * 100):F1% utilization rate</small>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card bg-success text-white h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="card-title mb-1">@Model.TotalEmployees</h4>
+                        <p class="card-text mb-0">Employees</p>
+                        <small class="opacity-75">@Model.EmployeesWithAssets with assets</small>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="bi bi-people display-4 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-white bg-opacity-25">
+                <small>@Model.TotalDepartments departments</small>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card bg-info text-white h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="card-title mb-1">@Model.TotalImagingJobs</h4>
+                        <p class="card-text mb-0">Imaging Jobs</p>
+                        <small class="opacity-75">@Model.PendingJobs pending</small>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="bi bi-hdd-stack display-4 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-white bg-opacity-25">
+                <small>@Model.JobsCompletedThisMonth completed this month</small>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card bg-warning text-white h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="card-title mb-1">@Model.MaintenanceAssets</h4>
+                        <p class="card-text mb-0">In Maintenance</p>
+                        <small class="opacity-75">@Model.UnassignedAssets unassigned</small>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="bi bi-wrench display-4 opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-white bg-opacity-25">
+                <small>@Model.RetiredAssets retired assets</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts and Analytics Row -->
+<div class="row mb-4">
+    <!-- Asset Status Chart -->
+    <div class="col-lg-12 mb-4">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="bi bi-bar-chart me-2"></i>Asset Status Overview
+                </h5>
+                <div class="btn-group btn-group-sm">
+                    <button class="btn btn-outline-secondary active" onclick="switchStatusView('chart')">Chart</button>
+                    <button class="btn btn-outline-secondary" onclick="switchStatusView('table')">Table</button>
+                </div>
+            </div>
+            <div class="card-body" style="min-height: 350px;">
+                <div id="statusChartView">
+                    <canvas id="assetStatusChart" height="280"></canvas>
+                </div>
+                <div id="statusTableView" style="display: none;">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Count</th>
+                                    <th>Percentage</th>
+                                    <th>Visual</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var status in Model.AssetsByStatus)
+                                {
+                                    var percentage = (double)status.Value / Math.Max(Model.TotalAssets, 1) * 100;
+                                    <tr>
+                                        <td>@status.Key</td>
+                                        <td><strong>@status.Value</strong></td>
+                                        <td>@percentage.ToString("F1")%</td>
+                                        <td>
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar" style="width: @percentage%"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Department Analytics and Recent Activity -->
+<div class="row mb-4">
+    <!-- Department Asset Distribution -->
+    <div class="col-lg-8 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-building me-2"></i>Assets by Department
+                </h5>
+            </div>
+            <div class="card-body" style="min-height: 300px;">
+                <canvas id="departmentChart" height="250"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Performance Metrics -->
+    <div class="col-lg-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-speedometer2 me-2"></i>Performance Metrics
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-4">
+                    <h6 class="text-muted mb-1">Asset Utilization Rate</h6>
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-primary" style="width: @Model.AssetUtilizationRate%"></div>
+                            </div>
+                        </div>
+                        <span class="ms-2 fw-bold">@Model.AssetUtilizationRate.ToString("F1")%</span>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h6 class="text-muted mb-1">Avg. Job Completion Time</h6>
+                    <h4 class="text-primary mb-0">@Model.AverageJobCompletionTime.ToString("F1") hrs</h4>
+                </div>
+                
+                <div class="mb-4">
+                    <h6 class="text-muted mb-1">Jobs This Month</h6>
+                    <h4 class="text-success mb-0">@Model.JobsCompletedThisMonth</h4>
+                </div>
+                
+                <div class="mb-0">
+                    <h6 class="text-muted mb-1">System Health</h6>
+                    @{
+                        var healthScore = (Model.ActiveAssets + Model.CompletedJobs - Model.FailedJobs - Model.MaintenanceAssets);
+                        var healthPercentage = Math.Max(0, Math.Min(100, healthScore * 2));
+                        var healthColor = healthPercentage > 70 ? "success" : healthPercentage > 40 ? "warning" : "danger";
+                    }
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-@healthColor" style="width: @healthPercentage%"></div>
+                            </div>
+                        </div>
+                        <span class="ms-2 fw-bold text-@healthColor">@healthPercentage.ToString("F0")%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Activity Tables -->
+<div class="row mb-4">
+    <!-- Recent Assets -->
+    <div class="col-lg-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="bi bi-clock-history me-2"></i>Recent Asset Activity
+                </h5>
+                <a asp-page="/Assets/Index" class="btn btn-sm btn-outline-primary">View All</a>
+            </div>
+            <div class="card-body p-0">
+                @if (Model.RecentAssets.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Asset</th>
+                                    <th>Status</th>
+                                    <th>Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var asset in Model.RecentAssets.Take(8))
+                                {
+                                    <tr>
+                                        <td>
+                                            <div>
+                                                <strong>@asset.AssetTag</strong>
+                                                <br><small class="text-muted">@asset.Type</small>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-@(asset.Status.ToString() == "Active" ? "success" : 
+                                                              asset.Status.ToString() == "InMaintenance" ? "warning" : 
+                                                              asset.Status.ToString() == "Retired" ? "dark" : "secondary")">
+                                                @asset.Status
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <small class="text-muted">
+                                                @((asset.UpdatedAt ?? asset.CreatedAt).ToString("MMM dd, HH:mm"))
+                                            </small>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center py-4">
+                        <i class="bi bi-inbox display-4 text-muted"></i>
+                        <p class="text-muted mt-2">No recent activity</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    
+    <!-- Recent Imaging Jobs -->
+    <div class="col-lg-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="bi bi-hdd me-2"></i>Recent Imaging Jobs
+                </h5>
+                <a asp-page="/Imaging/Queue" class="btn btn-sm btn-outline-primary">View Queue</a>
+            </div>
+            <div class="card-body p-0">
+                @if (Model.RecentJobs.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Asset</th>
+                                    <th>Status</th>
+                                    <th>Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var job in Model.RecentJobs.Take(8))
+                                {
+                                    <tr>
+                                        <td>
+                                            <div>
+                                                <strong>@job.Asset?.AssetTag</strong>
+                                                <br><small class="text-muted">@job.ImagingType</small>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-@(job.Status.ToString() == "Completed" ? "success" : 
+                                                              job.Status.ToString() == "InProgress" ? "info" : 
+                                                              job.Status.ToString() == "Failed" ? "danger" : "secondary")">
+                                                @job.Status
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <small class="text-muted">
+                                                @job.UpdatedAt?.ToString("MMM dd, HH:mm")
+                                            </small>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center py-4">
+                        <i class="bi bi-inbox display-4 text-muted"></i>
+                        <p class="text-muted mt-2">No recent jobs</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Navigation to Detailed Reports -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-file-text me-2"></i>Detailed Reports
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <a asp-page="./Assets" class="text-decoration-none">
+                            <div class="d-flex align-items-center p-3 bg-primary bg-opacity-10 rounded">
+                                <div class="me-3">
+                                    <i class="bi bi-boxes text-primary fs-1"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Asset Reports</h6>
+                                    <small class="text-muted">Comprehensive asset analytics</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <a asp-page="./Employees" class="text-decoration-none">
+                            <div class="d-flex align-items-center p-3 bg-success bg-opacity-10 rounded">
+                                <div class="me-3">
+                                    <i class="bi bi-people text-success fs-1"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Employee Reports</h6>
+                                    <small class="text-muted">Staff and assignment analytics</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <a asp-page="./Departments" class="text-decoration-none">
+                            <div class="d-flex align-items-center p-3 bg-info bg-opacity-10 rounded">
+                                <div class="me-3">
+                                    <i class="bi bi-building text-info fs-1"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Department Reports</h6>
+                                    <small class="text-muted">Department-level insights</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <a asp-page="./Imaging" class="text-decoration-none">
+                            <div class="d-flex align-items-center p-3 bg-warning bg-opacity-10 rounded">
+                                <div class="me-3">
+                                    <i class="bi bi-hdd-stack text-warning fs-1"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Imaging Reports</h6>
+                                    <small class="text-muted">IT workflow analytics</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Date Range Modal -->
+<div class="modal fade" id="dateRangeModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-calendar-range me-2"></i>Select Date Range
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form method="get">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="startDate" class="form-label">Start Date</label>
+                            <input type="date" class="form-control" id="startDate" name="startDate" 
+                                   value="@Model.StartDate?.ToString("yyyy-MM-dd")">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="endDate" class="form-label">End Date</label>
+                            <input type="date" class="form-control" id="endDate" name="endDate" 
+                                   value="@Model.EndDate?.ToString("yyyy-MM-dd")">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <div class="btn-group w-100" role="group">
+                                <button type="button" class="btn btn-outline-secondary" onclick="setDateRange('today')">Today</button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="setDateRange('week')">This Week</button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="setDateRange('month')">This Month</button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="setDateRange('quarter')">Quarter</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="applyDateRange()">Apply Filter</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Chart.js charts
+        let assetStatusChart, departmentChart;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCharts();
+        });
+
+        function initializeCharts() {
+            // Asset Status Chart
+            const assetStatusCtx = document.getElementById('assetStatusChart').getContext('2d');
+            assetStatusChart = new Chart(assetStatusCtx, {
+                type: 'bar',
+                data: {
+                    labels: @Html.Raw(Json.Serialize(Model.AssetsByStatus.Keys)),
+                    datasets: [{
+                        data: @Html.Raw(Json.Serialize(Model.AssetsByStatus.Values)),
+                        backgroundColor: '#2563eb',
+                        borderColor: '#1d4ed8',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Department Distribution Chart
+            const departmentCtx = document.getElementById('departmentChart').getContext('2d');
+            departmentChart = new Chart(departmentCtx, {
+                type: 'horizontalBar',
+                data: {
+                    labels: @Html.Raw(Json.Serialize(Model.AssetsByDepartment.Keys)),
+                    datasets: [{
+                        data: @Html.Raw(Json.Serialize(Model.AssetsByDepartment.Values)),
+                        backgroundColor: '#10b981',
+                        borderColor: '#059669',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function switchStatusView(view) {
+            const chartView = document.getElementById('statusChartView');
+            const tableView = document.getElementById('statusTableView');
+            const buttons = document.querySelectorAll('[onclick^="switchStatusView"]');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (view === 'chart') {
+                chartView.style.display = 'block';
+                tableView.style.display = 'none';
+            } else {
+                chartView.style.display = 'none';
+                tableView.style.display = 'block';
+            }
+        }
+
+        function refreshChart(chartId) {
+            // Refresh chart data (could make AJAX call here)
+            location.reload();
+        }
+
+        function setDateRange(range) {
+            const startDate = document.getElementById('startDate');
+            const endDate = document.getElementById('endDate');
+            const today = new Date();
+            
+            endDate.value = today.toISOString().split('T')[0];
+            
+            switch(range) {
+                case 'today':
+                    startDate.value = today.toISOString().split('T')[0];
+                    break;
+                case 'week':
+                    const weekStart = new Date(today);
+                    weekStart.setDate(today.getDate() - 7);
+                    startDate.value = weekStart.toISOString().split('T')[0];
+                    break;
+                case 'month':
+                    const monthStart = new Date(today);
+                    monthStart.setMonth(today.getMonth() - 1);
+                    startDate.value = monthStart.toISOString().split('T')[0];
+                    break;
+                case 'quarter':
+                    const quarterStart = new Date(today);
+                    quarterStart.setMonth(today.getMonth() - 3);
+                    startDate.value = quarterStart.toISOString().split('T')[0];
+                    break;
+            }
+        }
+
+        function applyDateRange() {
+            const form = document.querySelector('#dateRangeModal form');
+            form.submit();
+        }
+
+        function exportToPDF() {
+            alert('PDF export functionality to be implemented');
+        }
+
+        function exportToExcel() {
+            alert('Excel export functionality to be implemented');
+        }
+
+        function exportToCSV() {
+            alert('CSV export functionality to be implemented');
+        }
+    </script>
+}

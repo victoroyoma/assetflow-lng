@@ -1,0 +1,260 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Asset Management Dashboard";
+}
+
+<div class="dashboard-container">
+    <!-- Dashboard Header -->
+    <div class="dashboard-header mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="h3 mb-2">Asset Management Dashboard</h1>
+                <p class="text-muted mb-0">Comprehensive overview of your IT assets and operations</p>
+            </div>
+            <div class="d-flex gap-2">
+                <a asp-page="/Assets/Index" class="btn btn-primary">
+                    <i class="fas fa-desktop me-2"></i>Manage Assets
+                </a>
+                <a asp-page="/Assets/Create" class="btn btn-success">
+                    <i class="fas fa-plus me-2"></i>Add Asset
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Metrics Cards -->
+    <div class="row g-4 mb-4">
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="stats-icon bg-primary">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <div class="stats-number">@Model.TotalAssets</div>
+                            <div class="stats-label">Total Assets</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="stats-icon bg-success">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <div class="stats-number">@Model.ActiveAssets</div>
+                            <div class="stats-label">Active Assets</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="stats-icon bg-warning">
+                                <i class="fas fa-wrench"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <div class="stats-number">@Model.MaintenanceAssets</div>
+                            <div class="stats-label">In Maintenance</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="stats-icon bg-info">
+                                <i class="fas fa-box-open"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <div class="stats-number">@Model.UnassignedAssets</div>
+                            <div class="stats-label">Unassigned</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions & Recent Activity -->
+    <div class="row g-4 mb-4">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <a asp-page="/Assets/Create" class="action-card text-decoration-none">
+                                <div class="p-3 border rounded-3 h-100 text-center hover-shadow">
+                                    <i class="fas fa-plus-circle fa-2x text-success mb-2"></i>
+                                    <h6 class="mb-1">Add New Asset</h6>
+                                    <small class="text-muted">Register new hardware</small>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a asp-page="/ImagingJobs/Create" class="action-card text-decoration-none">
+                                <div class="p-3 border rounded-3 h-100 text-center hover-shadow">
+                                    <i class="fas fa-compact-disc fa-2x text-primary mb-2"></i>
+                                    <h6 class="mb-1">Schedule Imaging</h6>
+                                    <small class="text-muted">Create imaging job</small>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a asp-page="/Assets/Maintenance" class="action-card text-decoration-none">
+                                <div class="p-3 border rounded-3 h-100 text-center hover-shadow">
+                                    <i class="fas fa-tools fa-2x text-warning mb-2"></i>
+                                    <h6 class="mb-1">Maintenance</h6>
+                                    <small class="text-muted">Schedule maintenance</small>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">Imaging Jobs</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted">Pending Jobs</span>
+                        <span class="badge bg-warning rounded-pill">@Model.PendingJobs</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted">Completed Today</span>
+                        <span class="badge bg-success rounded-pill">@Model.CompletedJobsToday</span>
+                    </div>
+                    <div class="mt-3">
+                        <a asp-page="/ImagingJobs/Index" class="btn btn-outline-primary w-100">
+                            <i class="fas fa-list me-2"></i>View All Jobs
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Health & Alerts -->
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">System Health</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="text-center p-3 bg-light rounded">
+                                <i class="fas fa-server fa-2x text-success mb-2"></i>
+                                <div class="h6 mb-1">Server Status</div>
+                                <small class="text-success">Online</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center p-3 bg-light rounded">
+                                <i class="fas fa-database fa-2x text-success mb-2"></i>
+                                <div class="h6 mb-1">Database</div>
+                                <small class="text-success">Connected</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="card-title mb-0">Recent Alerts</h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning border-0 d-flex align-items-center">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <small>3 assets require warranty renewal within 30 days</small>
+                    </div>
+                    <div class="alert alert-info border-0 d-flex align-items-center mb-0">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <small>System backup completed successfully</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .dashboard-container {
+        padding: 1.5rem;
+    }
+    
+    .stats-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+    }
+    
+    .stats-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #2c3e50;
+        line-height: 1;
+    }
+    
+    .stats-label {
+        font-size: 0.875rem;
+        color: #6c757d;
+        font-weight: 500;
+    }
+    
+    .action-card:hover .hover-shadow {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        transform: translateY(-2px);
+        transition: all 0.3s ease;
+    }
+    
+    .action-card .hover-shadow {
+        transition: all 0.3s ease;
+    }
+    
+    .card {
+        transition: all 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-2px);
+    }
+</style>

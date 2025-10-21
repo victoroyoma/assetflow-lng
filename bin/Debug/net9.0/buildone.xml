@@ -1,0 +1,300 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>buildone</name>
+    </assembly>
+    <members>
+        <member name="T:buildone.Authorization.PermissionRequirement">
+            <summary>
+            Custom authorization requirement for permission-based access control
+            </summary>
+        </member>
+        <member name="T:buildone.Authorization.PermissionHandler">
+            <summary>
+            Handler for permission-based authorization
+            </summary>
+        </member>
+        <member name="T:buildone.Authorization.Policies">
+            <summary>
+            Defines authorization policy names used throughout the application
+            </summary>
+        </member>
+        <member name="T:buildone.Authorization.Roles">
+            <summary>
+            Defines role names used throughout the application
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.DataSeedingController.SeedBasicData">
+            <summary>
+            Seeds basic data (roles and admin user)
+            </summary>
+            <returns>Success message</returns>
+        </member>
+        <member name="M:buildone.Controllers.DataSeedingController.SeedBulkData">
+            <summary>
+            Seeds bulk data (departments, employees, assets, and imaging jobs)
+            This will create 10 employees, 400 assets, and 400 imaging jobs
+            </summary>
+            <returns>Success message with statistics</returns>
+        </member>
+        <member name="M:buildone.Controllers.DataSeedingController.GetStatistics">
+            <summary>
+            Gets current database statistics
+            </summary>
+            <returns>Database statistics</returns>
+        </member>
+        <member name="M:buildone.Controllers.NotificationsController.GetNotifications">
+            <summary>
+            Temporary endpoint returning empty notifications until full implementation
+            </summary>
+        </member>
+        <member name="T:buildone.DTOs.ApiResponse`1">
+            <summary>
+            Standard API response wrapper for consistent response format
+            </summary>
+            <typeparam name="T">Type of data being returned</typeparam>
+        </member>
+        <member name="P:buildone.DTOs.ApiResponse`1.Success">
+            <summary>
+            Indicates if the operation was successful
+            </summary>
+        </member>
+        <member name="P:buildone.DTOs.ApiResponse`1.Data">
+            <summary>
+            The response data
+            </summary>
+        </member>
+        <member name="P:buildone.DTOs.ApiResponse`1.Message">
+            <summary>
+            A message describing the result
+            </summary>
+        </member>
+        <member name="P:buildone.DTOs.ApiResponse`1.Errors">
+            <summary>
+            List of validation errors or other error messages
+            </summary>
+        </member>
+        <member name="P:buildone.DTOs.ApiResponse`1.Timestamp">
+            <summary>
+            Timestamp of the response
+            </summary>
+        </member>
+        <member name="P:buildone.DTOs.ApiResponse`1.RequestId">
+            <summary>
+            Request ID for tracking
+            </summary>
+        </member>
+        <member name="M:buildone.DTOs.ApiResponse`1.SuccessResponse(`0,System.String)">
+            <summary>
+            Create a successful response
+            </summary>
+        </member>
+        <member name="M:buildone.DTOs.ApiResponse`1.ErrorResponse(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Create an error response
+            </summary>
+        </member>
+        <member name="M:buildone.DTOs.ApiResponse`1.ValidationErrorResponse(System.Collections.Generic.List{System.String})">
+            <summary>
+            Create a validation error response
+            </summary>
+        </member>
+        <member name="T:buildone.DTOs.AssetResponseDto">
+            <summary>
+            DTO for Asset responses
+            </summary>
+        </member>
+        <member name="T:buildone.DTOs.CreateAssetDto">
+            <summary>
+            DTO for creating assets
+            </summary>
+        </member>
+        <member name="T:buildone.DTOs.UpdateAssetDto">
+            <summary>
+            DTO for updating assets
+            </summary>
+        </member>
+        <member name="T:buildone.DTOs.EmployeeBasicDto">
+            <summary>
+            Basic employee information for nested DTOs
+            </summary>
+        </member>
+        <member name="T:buildone.DTOs.DepartmentBasicDto">
+            <summary>
+            Basic department information for nested DTOs
+            </summary>
+        </member>
+        <member name="T:buildone.DTOs.UserResponseDto">
+            <summary>
+            DTO for user responses
+            </summary>
+        </member>
+        <member name="T:buildone.DTOs.CreateUserDto">
+            <summary>
+            DTO for creating users
+            </summary>
+        </member>
+        <member name="T:buildone.DTOs.UpdateUserDto">
+            <summary>
+            DTO for updating users
+            </summary>
+        </member>
+        <member name="T:buildone.Mapping.MappingProfile">
+            <summary>
+            AutoMapper profile for entity to DTO mappings
+            </summary>
+        </member>
+        <member name="T:buildone.Middleware.GlobalExceptionMiddleware">
+            <summary>
+            Global exception handling middleware
+            </summary>
+        </member>
+        <member name="T:buildone.Middleware.GlobalExceptionMiddlewareExtensions">
+            <summary>
+            Extension method to register the middleware
+            </summary>
+        </member>
+        <member name="T:buildone.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:buildone.Migrations.FixSeedData">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.FixSeedData.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.FixSeedData.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.FixSeedData.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:buildone.Migrations.AddAssetTypeWarrantyLastUpdated">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddAssetTypeWarrantyLastUpdated.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddAssetTypeWarrantyLastUpdated.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddAssetTypeWarrantyLastUpdated.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:buildone.Migrations.DropProductsTable">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.DropProductsTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.DropProductsTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.DropProductsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:buildone.Migrations.FixDatabaseIssues">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.FixDatabaseIssues.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.FixDatabaseIssues.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.FixDatabaseIssues.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:buildone.Migrations.RemoveDemoData">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.RemoveDemoData.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.RemoveDemoData.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.RemoveDemoData.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:buildone.Migrations.AddIdentity">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddIdentity.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddIdentity.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddIdentity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:buildone.Migrations.AddIdentityFixed">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddIdentityFixed.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddIdentityFixed.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddIdentityFixed.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:buildone.Migrations.AddIdentityFinalFix">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddIdentityFinalFix.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddIdentityFinalFix.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddIdentityFinalFix.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:buildone.Migrations.RemoveStaticSeedData">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.RemoveStaticSeedData.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.RemoveStaticSeedData.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.RemoveStaticSeedData.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:buildone.Migrations.AddJobQueueEnhancements">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddJobQueueEnhancements.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddJobQueueEnhancements.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddJobQueueEnhancements.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:buildone.Validators.CreateAssetValidator">
+            <summary>
+            Validator for asset creation
+            </summary>
+        </member>
+        <member name="T:buildone.Validators.CreateUserValidator">
+            <summary>
+            Validator for user creation
+            </summary>
+        </member>
+    </members>
+</doc>

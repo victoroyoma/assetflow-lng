@@ -1,0 +1,213 @@
+@page
+@model buildone.Pages.Admin.SeedDataModel
+@{
+    ViewData["Title"] = "Data Seeding";
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">
+                        <i class="fas fa-database me-2"></i>Database Seeding Management
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Note:</strong> Use this page to populate the database with test data. 
+                        This is useful for development and testing purposes before implementing Single Sign-On (SSO).
+                    </div>
+
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>
+                            @TempData["SuccessMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            @TempData["ErrorMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    <div class="row">
+                        <!-- Current Statistics -->
+                        <div class="col-md-6 mb-4">
+                            <div class="card bg-light">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-chart-bar me-2"></i>Current Database Statistics
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    @if (Model.Statistics != null)
+                                    {
+                                        <div class="row g-3">
+                                            <div class="col-6">
+                                                <div class="text-center p-3 bg-white rounded shadow-sm">
+                                                    <i class="fas fa-building text-primary fa-2x mb-2"></i>
+                                                    <h3 class="mb-0">@Model.Statistics.Value.Departments</h3>
+                                                    <small class="text-muted">Departments</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="text-center p-3 bg-white rounded shadow-sm">
+                                                    <i class="fas fa-users text-success fa-2x mb-2"></i>
+                                                    <h3 class="mb-0">@Model.Statistics.Value.Employees</h3>
+                                                    <small class="text-muted">Employees</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="text-center p-3 bg-white rounded shadow-sm">
+                                                    <i class="fas fa-laptop text-info fa-2x mb-2"></i>
+                                                    <h3 class="mb-0">@Model.Statistics.Value.Assets</h3>
+                                                    <small class="text-muted">Assets</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="text-center p-3 bg-white rounded shadow-sm">
+                                                    <i class="fas fa-tasks text-warning fa-2x mb-2"></i>
+                                                    <h3 class="mb-0">@Model.Statistics.Value.ImagingJobs</h3>
+                                                    <small class="text-muted">Imaging Jobs</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-center mt-3">
+                                            <small class="text-muted">Last updated: @DateTime.Now.ToString("g")</small>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-muted text-center mb-0">No statistics available. Please refresh the page.</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Seeding Actions -->
+                        <div class="col-md-6 mb-4">
+                            <div class="card bg-light">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-cog me-2"></i>Seeding Actions
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <form method="post">
+                                        <!-- Basic Seeding -->
+                                        <div class="mb-4">
+                                            <h6 class="fw-bold">
+                                                <i class="fas fa-user-shield me-2 text-primary"></i>Basic Seeding
+                                            </h6>
+                                            <p class="text-muted small mb-2">
+                                                Seeds essential roles (Administrator, Technician, User) and creates the default admin account.
+                                            </p>
+                                            <button type="submit" asp-page-handler="SeedBasic" 
+                                                    class="btn btn-primary w-100"
+                                                    onclick="return confirm('Are you sure you want to seed basic data?');">
+                                                <i class="fas fa-play me-2"></i>Seed Basic Data
+                                            </button>
+                                        </div>
+
+                                        <hr />
+
+                                        <!-- Bulk Seeding -->
+                                        <div class="mb-3">
+                                            <h6 class="fw-bold">
+                                                <i class="fas fa-database me-2 text-success"></i>Bulk Seeding
+                                            </h6>
+                                            <p class="text-muted small mb-2">
+                                                Populates the database with comprehensive test data:
+                                            </p>
+                                            <ul class="small text-muted mb-3">
+                                                <li>8 Departments (IT, HR, Finance, etc.)</li>
+                                                <li>10 Employees across departments</li>
+                                                <li>400 Assets (200 Laptops, 140 Desktops, 60 Tablets)</li>
+                                                <li>400 Imaging Jobs with various statuses</li>
+                                            </ul>
+                                            <button type="submit" asp-page-handler="SeedBulk" 
+                                                    class="btn btn-success w-100"
+                                                    onclick="return confirm('This will create 400+ records. This may take a minute. Continue?');">
+                                                <i class="fas fa-rocket me-2"></i>Seed Bulk Data
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Information Panel -->
+                    <div class="card bg-light mt-3">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-lightbulb me-2"></i>Information
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="fw-bold">Default Admin Credentials:</h6>
+                            <ul class="mb-3">
+                                <li><strong>Email:</strong> admin@buildone.com</li>
+                                <li><strong>Password:</strong> Admin123!</li>
+                            </ul>
+
+                            <h6 class="fw-bold">What gets created:</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-muted mt-2">Departments:</h6>
+                                    <ul class="small">
+                                        <li>Information Technology (IT)</li>
+                                        <li>Human Resources (HR)</li>
+                                        <li>Finance (FIN)</li>
+                                        <li>Operations (OPS)</li>
+                                        <li>Sales (SALES)</li>
+                                        <li>Marketing (MKT)</li>
+                                        <li>Customer Support (CS)</li>
+                                        <li>Research & Development (RD)</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-muted mt-2">Asset Distribution:</h6>
+                                    <ul class="small">
+                                        <li>50% Laptops (Dell, HP, Lenovo, Apple, etc.)</li>
+                                        <li>35% Desktops (Dell, HP, Lenovo, Acer)</li>
+                                        <li>15% Tablets (Apple iPad, Samsung, Microsoft Surface)</li>
+                                    </ul>
+                                    <h6 class="text-muted mt-2">Job Status Distribution:</h6>
+                                    <ul class="small">
+                                        <li>Completed, In Progress, Pending</li>
+                                        <li>Scheduled, Failed, Cancelled</li>
+                                        <li>Various priorities (Low, Normal, High, Urgent)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-warning mt-3 mb-0">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <strong>Important:</strong> The seeding process is idempotent - running it multiple times 
+                                will not create duplicate data. Existing records will be preserved.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Auto-refresh statistics every 30 seconds
+        setInterval(function() {
+            location.reload();
+        }, 30000);
+    </script>
+}

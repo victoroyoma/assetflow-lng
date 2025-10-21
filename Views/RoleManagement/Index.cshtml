@@ -1,0 +1,244 @@
+@model IEnumerable<buildone.Data.ApplicationRole>
+
+@{
+    ViewData["Title"] = "Role Management";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1><i class="fas fa-shield-alt me-2"></i>@ViewData["Title"]</h1>
+                <a asp-action="Create" class="btn btn-primary">
+                    <i class="fas fa-plus me-1"></i>Add New Role
+                </a>
+            </div>
+        </div>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>@TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>@TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Info Cards -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card border-primary shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-shield-alt fa-3x text-primary"></i>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h5 class="card-title mb-0">Total Roles</h5>
+                            <h2 class="mb-0">@Model.Count()</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-success shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-check-circle fa-3x text-success"></i>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h5 class="card-title mb-0">Active Roles</h5>
+                            <h2 class="mb-0">@Model.Count(r => r.IsActive)</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-info shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-lock fa-3x text-info"></i>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h5 class="card-title mb-0">System Roles</h5>
+                            <h2 class="mb-0">@Model.Count(r => r.Name == "Administrator" || r.Name == "User" || r.Name == "Technician")</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="fas fa-list me-2"></i>Role List
+                        </h5>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (Model.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th><i class="fas fa-shield-alt me-1"></i>Role Name</th>
+                                        <th><i class="fas fa-info-circle me-1"></i>Description</th>
+                                        <th><i class="fas fa-circle me-1"></i>Status</th>
+                                        <th><i class="fas fa-calendar me-1"></i>Created</th>
+                                        <th><i class="fas fa-cog me-1"></i>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="role-row">
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="role-icon me-2">
+                                                        @if (item.Name == "Administrator")
+                                                        {
+                                                            <i class="fas fa-crown text-warning"></i>
+                                                        }
+                                                        else if (item.Name == "Technician")
+                                                        {
+                                                            <i class="fas fa-tools text-info"></i>
+                                                        }
+                                                        else if (item.Name == "User")
+                                                        {
+                                                            <i class="fas fa-user text-primary"></i>
+                                                        }
+                                                        else
+                                                        {
+                                                            <i class="fas fa-shield text-secondary"></i>
+                                                        }
+                                                    </div>
+                                                    <div>
+                                                        <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
+                                                        @if (item.Name == "Administrator" || item.Name == "User" || item.Name == "Technician")
+                                                        {
+                                                            <span class="badge bg-info ms-2">System Role</span>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                @if (!string.IsNullOrEmpty(item.Description))
+                                                {
+                                                    <small>@Html.DisplayFor(modelItem => item.Description)</small>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted"><em>No description</em></span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (item.IsActive)
+                                                {
+                                                    <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>Active</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-secondary"><i class="fas fa-times-circle me-1"></i>Inactive</span>
+                                                }
+                                            </td>
+                                            <td><small>@item.CreatedAt.ToString("MMM dd, yyyy")</small></td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm" title="View Details">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                    @if (item.Name != "Administrator" && item.Name != "User" && item.Name != "Technician")
+                                                    {
+                                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning btn-sm" title="Edit">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm" title="Delete">
+                                                            <i class="fas fa-trash"></i>
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button class="btn btn-outline-secondary btn-sm" disabled title="System roles cannot be modified">
+                                                            <i class="fas fa-lock"></i>
+                                                        </button>
+                                                    }
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-5">
+                            <i class="fas fa-shield-alt fa-4x text-muted mb-3"></i>
+                            <h5 class="text-muted">No roles found</h5>
+                            <p class="text-muted">Create your first custom role to get started.</p>
+                            <a asp-action="Create" class="btn btn-primary mt-3">
+                                <i class="fas fa-plus me-1"></i>Add New Role
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+<style>
+    .role-icon {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background-color: rgba(0, 123, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+    }
+    
+    .role-row {
+        transition: all 0.2s ease;
+    }
+    
+    .role-row:hover {
+        background-color: rgba(0, 123, 255, 0.05);
+        transform: translateX(2px);
+    }
+</style>
+}
+
+@section Scripts {
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Auto-hide success/error messages after 5 seconds
+        setTimeout(function() {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function(alert) {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            });
+        }, 5000);
+    });
+</script>
+}

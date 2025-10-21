@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Asset Management System</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-3 text-muted">Loading...</p>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div aria-live="polite" aria-atomic="true" class="position-relative">
+        <div class="toast-container position-fixed top-0 end-0 p-3" id="toastContainer"></div>
+    </div>
+
+    <!-- Sidebar -->
+    @if (User.Identity!.IsAuthenticated)
+    {
+        <nav id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <div class="d-flex align-items-center">
+                <div class="sidebar-brand">
+                    <i class="fas fa-cubes me-2"></i>
+                    <span class="brand-text">AssetFlow</span>
+                </div>
+                <button type="button" id="sidebarCollapse" class="btn btn-link sidebar-toggle d-lg-none">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="sidebar-menu">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-page="/Index">
+                        <i class="fas fa-tachometer-alt me-2"></i>
+                        <span class="nav-text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-page="/Assets/Index">
+                        <i class="fas fa-laptop me-2"></i>
+                        <span class="nav-text">Assets</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#departmentsSubmenu" data-bs-toggle="collapse" aria-expanded="false">
+                        <i class="fas fa-building me-2"></i>
+                        <span class="nav-text">Departments</span>
+                        <i class="fas fa-chevron-down ms-auto nav-arrow"></i>
+                    </a>
+                    <div class="collapse" id="departmentsSubmenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link sub-link" asp-area="" asp-page="/Departments/Index">
+                                    <i class="fas fa-list me-2"></i>View All
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-link" asp-area="" asp-page="/Departments/Create">
+                                    <i class="fas fa-plus me-2"></i>Add Department
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#employeesSubmenu" data-bs-toggle="collapse" aria-expanded="false">
+                        <i class="fas fa-users me-2"></i>
+                        <span class="nav-text">Employees</span>
+                        <i class="fas fa-chevron-down ms-auto nav-arrow"></i>
+                    </a>
+                    <div class="collapse" id="employeesSubmenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link sub-link" asp-area="" asp-page="/Employees/Index">
+                                    <i class="fas fa-list me-2"></i>View All
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-link" asp-area="" asp-page="/Employees/Create">
+                                    <i class="fas fa-plus me-2"></i>Add Employee
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#imagingSubmenu" data-bs-toggle="collapse" aria-expanded="false">
+                        <i class="fas fa-compact-disc me-2"></i>
+                        <span class="nav-text">Imaging Jobs</span>
+                        <i class="fas fa-chevron-down ms-auto nav-arrow"></i>
+                    </a>
+                    <div class="collapse" id="imagingSubmenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link sub-link" asp-area="" asp-page="/Imaging/Index">
+                                    <i class="fas fa-list me-2"></i>All Jobs
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-link" asp-area="" asp-page="/Imaging/Queue">
+                                    <i class="fas fa-clock me-2"></i>Job Queue
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-link" asp-area="" asp-page="/Imaging/Create">
+                                    <i class="fas fa-plus me-2"></i>Create Job
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#reportsSubmenu" data-bs-toggle="collapse" aria-expanded="false">
+                        <i class="fas fa-chart-bar me-2"></i>
+                        <span class="nav-text">Reports</span>
+                        <i class="fas fa-chevron-down ms-auto nav-arrow"></i>
+                    </a>
+                    <div class="collapse" id="reportsSubmenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link sub-link" asp-page="/Reports/Index">
+                                    <i class="fas fa-chart-line me-2"></i>Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-link" asp-page="/Reports/Assets">
+                                    <i class="fas fa-laptop me-2"></i>Asset Reports
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-link" asp-page="/Reports/WarrantyAlerts">
+                                    <i class="fas fa-shield-alt me-2"></i>Warranty Alerts
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                @if (User.Identity!.IsAuthenticated && User.IsInRole("Administrator"))
+                {
+                    var currentPath = Context.Request.Path.ToString().ToLower();
+                    var isAdminPage = currentPath.Contains("/usermanagement") || 
+                                     currentPath.Contains("/rolemanagement") || 
+                                     currentPath.Contains("/systemsettings") ||
+                                     currentPath.Contains("/admin/seeddata");
+                    var adminCollapseClass = isAdminPage ? "collapse show" : "collapse";
+                    var adminAriaExpanded = isAdminPage ? "true" : "false";
+                    
+                    <li class="nav-item">
+                        <a class="nav-link @(isAdminPage ? "active" : "")" href="#adminSubmenu" data-bs-toggle="collapse" aria-expanded="@adminAriaExpanded">
+                            <i class="fas fa-cog me-2"></i>
+                            <span class="nav-text">Administration</span>
+                            <i class="fas fa-chevron-down ms-auto nav-arrow"></i>
+                        </a>
+                        <div class="@adminCollapseClass" id="adminSubmenu">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link sub-link @(currentPath.Contains("/usermanagement") ? "active" : "")" href="/UserManagement">
+                                        <i class="fas fa-users-cog me-2"></i>User Management
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link sub-link @(currentPath.Contains("/rolemanagement") ? "active" : "")" href="/RoleManagement">
+                                        <i class="fas fa-shield-alt me-2"></i>Role Management
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link sub-link @(currentPath.Contains("/systemsettings") ? "active" : "")" href="/SystemSettings">
+                                        <i class="fas fa-sliders-h me-2"></i>System Settings
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link sub-link @(currentPath.Contains("/admin/seeddata") ? "active" : "")" asp-area="" asp-page="/Admin/SeedData">
+                                        <i class="fas fa-database me-2"></i>Data Seeding
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <div class="sidebar-footer">
+            @if (User.Identity!.IsAuthenticated)
+            {
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name">@User.Identity.Name</div>
+                        <div class="user-role">@(User.IsInRole("Administrator") ? "Administrator" : User.IsInRole("Technician") ? "Technician" : "User")</div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user-slash"></i>
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name">Not Logged In</div>
+                        <div class="user-role">Guest</div>
+                    </div>
+                </div>
+            }
+        </div>
+    </nav>
+    }
+
+    <!-- Main Content -->
+    <div id="content" class="@(User.Identity!.IsAuthenticated ? "content" : "content-no-sidebar")">
+        <!-- Top Navigation -->
+        <nav class="top-navbar">
+            <div class="navbar-content">
+                <div class="navbar-left">
+                    <button type="button" id="sidebarToggle" class="btn btn-link sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    
+                    <!-- Breadcrumb -->
+                    <nav aria-label="breadcrumb" class="d-none d-md-block">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item">
+                                <a asp-page="/Index">
+                                    <i class="fas fa-home"></i>
+                                </a>
+                            </li>
+                            @if (ViewData["Breadcrumb"] != null)
+                            {
+                                @Html.Raw(ViewData["Breadcrumb"])
+                            }
+                        </ol>
+                    </nav>
+                </div>
+
+                <div class="navbar-right">
+                    <!-- Global Search -->
+                    <div class="search-container d-none d-md-flex">
+                        <div class="search-box">
+                            <input type="text" class="form-control" placeholder="Search assets, employees..." id="globalSearch">
+                            <i class="fas fa-search search-icon"></i>
+                        </div>
+                    </div>
+
+                    <!-- Notifications -->
+                    <div class="dropdown me-3">
+                        <button class="btn btn-link notification-btn" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge">3</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end notification-dropdown">
+                            <li class="dropdown-header">
+                                <strong>Notifications</strong>
+                                <span class="badge bg-primary">3</span>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="notification-item">
+                                <a class="dropdown-item" href="#">
+                                    <div class="notification-icon bg-warning">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <div class="notification-title">Warranty Expiring</div>
+                                        <div class="notification-text">5 assets expire within 30 days</div>
+                                        <div class="notification-time">2 hours ago</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="notification-item">
+                                <a class="dropdown-item" href="#">
+                                    <div class="notification-icon bg-info">
+                                        <i class="fas fa-info-circle"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <div class="notification-title">Imaging Job Complete</div>
+                                        <div class="notification-text">LAPTOP001 imaging successful</div>
+                                        <div class="notification-time">1 hour ago</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="notification-item">
+                                <a class="dropdown-item" href="#">
+                                    <div class="notification-icon bg-success">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <div class="notification-title">Asset Deployed</div>
+                                        <div class="notification-text">DESKTOP003 assigned to John Doe</div>
+                                        <div class="notification-time">3 hours ago</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-center" href="#">View all notifications</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- User Menu -->
+                    @if (User.Identity!.IsAuthenticated)
+                    {
+                        <div class="dropdown">
+                            <button class="btn btn-link user-menu-btn" type="button" data-bs-toggle="dropdown">
+                                <div class="user-avatar-small">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <span class="d-none d-md-inline ms-2">@User.Identity.Name</span>
+                                <i class="fas fa-chevron-down ms-1"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li class="dropdown-header">Signed in as <strong>@User.Identity.Name</strong></li>
+                                <li class="dropdown-header">Role: <span class="badge bg-primary">@(User.IsInRole("Administrator") ? "Administrator" : User.IsInRole("Technician") ? "Technician" : "User")</span></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form method="post" asp-page="/Account/Logout" class="d-inline">
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="fas fa-sign-out-alt me-2"></i>Sign out
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <a class="btn btn-primary" asp-page="/Account/Login">
+                                <i class="fas fa-sign-in-alt me-2"></i>Login
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Content -->
+        <div class="page-content">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fas fa-check-circle me-2"></i>
+                    @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+            
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    @TempData["ErrorMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            @RenderBody()
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

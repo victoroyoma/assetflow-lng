@@ -1,0 +1,420 @@
+@page "{id:int}"
+@model buildone.Pages.Assets.EditModel
+@{
+    ViewData["Title"] = "Edit Asset";
+}
+
+<div class="d-flex justify-content-between align-item                            @if (Model.Asset.AssignedEmployee != null)
+                            {
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    Currently assigned to: <strong>@Model.Asset.AssignedEmployee.FullName</strong>
+                                </div>
+                            }r mb-4">
+    <div>
+        <h1 class="h3 mb-1">Edit Asset</h1>
+        <p class="text-muted mb-0">Update asset information for <strong>@Model.Asset.Name</strong> (@Model.Asset.AssetTag)</p>
+    </div>
+    <div>
+        <a asp-page="./Details" asp-route-id="@Model.Asset.Id" class="btn btn-outline-info me-2">
+            <i class="bi bi-eye"></i> View Details
+        </a>
+        <a asp-page="./Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Assets
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-8 col-lg-10">
+        <form method="post" class="needs-validation" novalidate>
+            <input type="hidden" asp-for="Asset.Id" />
+            <input type="hidden" asp-for="Asset.CreatedAt" />
+            
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+            
+            <!-- Status Alert -->
+            @if (Model.Asset.Status == buildone.Data.Enums.AssetStatus.InMaintenance)
+            {
+                <div class="alert alert-warning" role="alert">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    This asset is currently in maintenance. Consider updating status after completing repairs.
+                </div>
+            }
+            else if (Model.Asset.Status == buildone.Data.Enums.AssetStatus.Retired)
+            {
+                <div class="alert alert-secondary" role="alert">
+                    <i class="bi bi-info-circle me-2"></i>
+                    This asset is marked as retired. Some fields may be read-only.
+                </div>
+            }
+
+            <!-- Basic Information Card -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-info-circle me-2"></i>Basic Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Asset.Name" class="form-label">Asset Name <span class="text-danger">*</span></label>
+                            <input asp-for="Asset.Name" class="form-control" required>
+                            <span asp-validation-for="Asset.Name" class="invalid-feedback"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Asset.AssetTag" class="form-label">Asset Tag <span class="text-danger">*</span></label>
+                            <input asp-for="Asset.AssetTag" class="form-control" required>
+                            <span asp-validation-for="Asset.AssetTag" class="invalid-feedback"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Asset.SerialNumber" class="form-label">Serial Number</label>
+                            <input asp-for="Asset.SerialNumber" class="form-control">
+                            <span asp-validation-for="Asset.SerialNumber" class="invalid-feedback"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Asset.AssetType" class="form-label">Asset Type <span class="text-danger">*</span></label>
+                            <select asp-for="Asset.AssetType" class="form-select" required>
+                                <option value="">Select asset type</option>
+                                <option value="Hardware">Hardware</option>
+                                <option value="Software">Software</option>
+                                <option value="Equipment">Equipment</option>
+                                <option value="Vehicle">Vehicle</option>
+                                <option value="Furniture">Furniture</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <span asp-validation-for="Asset.AssetType" class="invalid-feedback"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Asset.Description" class="form-label">Description</label>
+                            <textarea asp-for="Asset.Description" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Asset.Description" class="invalid-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Details Card -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-gear me-2"></i>Technical Details
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Asset.Manufacturer" class="form-label">Manufacturer</label>
+                            <input asp-for="Asset.Manufacturer" class="form-control">
+                            <span asp-validation-for="Asset.Manufacturer" class="invalid-feedback"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Asset.Model" class="form-label">Model</label>
+                            <input asp-for="Asset.Model" class="form-control">
+                            <span asp-validation-for="Asset.Model" class="invalid-feedback"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Asset.Specifications" class="form-label">Specifications</label>
+                            <textarea asp-for="Asset.Specifications" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Asset.Specifications" class="invalid-feedback"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Asset.OperatingSystem" class="form-label">Operating System</label>
+                            <input asp-for="Asset.OperatingSystem" class="form-control">
+                            <span asp-validation-for="Asset.OperatingSystem" class="invalid-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assignment & Location Card -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-person-badge me-2"></i>Assignment & Location
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Asset.Status" class="form-label">Status <span class="text-danger">*</span></label>
+                            <select asp-for="Asset.Status" class="form-select" required>
+                                <option value="">Select status</option>
+                                <option value="InStock">In Stock</option>
+                                <option value="Active">Active</option>
+                                <option value="InMaintenance">In Maintenance</option>
+                                <option value="Retired">Retired</option>
+                            </select>
+                            <span asp-validation-for="Asset.Status" class="invalid-feedback"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Asset.Location" class="form-label">Location</label>
+                            <input asp-for="Asset.Location" class="form-control">
+                            <span asp-validation-for="Asset.Location" class="invalid-feedback"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Asset.AssignedToId" class="form-label">Assigned To</label>
+                            <select asp-for="Asset.AssignedToId" class="form-select">
+                                <option value="">Not assigned</option>
+                                @foreach (var employee in Model.Employees)
+                                {
+                                    <option value="@employee.Id">@employee.FullName (@employee.Department?.Name)</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Asset.AssignedToId" class="invalid-feedback"></span>
+                            @if (Model.Asset.AssignedTo != null)
+                            {
+                                <div class="form-text">
+                                    <i class="bi bi-info-circle"></i>
+                                    Currently assigned to: <strong>@Model.Asset.AssignedTo.FirstName @Model.Asset.AssignedTo.LastName</strong>
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Asset.DepartmentId" class="form-label">Department</label>
+                            <select asp-for="Asset.DepartmentId" class="form-select">
+                                <option value="">No department</option>
+                                @foreach (var department in Model.Departments)
+                                {
+                                    <option value="@department.Id">@department.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Asset.DepartmentId" class="invalid-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financial Information Card -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-currency-dollar me-2"></i>Financial Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Asset.PurchasePrice" class="form-label">Purchase Price</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input asp-for="Asset.PurchasePrice" class="form-control" type="number" step="0.01" min="0">
+                            </div>
+                            <span asp-validation-for="Asset.PurchasePrice" class="invalid-feedback"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Asset.PurchaseDate" class="form-label">Purchase Date</label>
+                            <input asp-for="Asset.PurchaseDate" class="form-control" type="date">
+                            <span asp-validation-for="Asset.PurchaseDate" class="invalid-feedback"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Asset.WarrantyExpiry" class="form-label">Warranty Expiry</label>
+                            <input asp-for="Asset.WarrantyExpiry" class="form-control" type="date">
+                            <span asp-validation-for="Asset.WarrantyExpiry" class="invalid-feedback"></span>
+                            @if (Model.Asset.WarrantyExpiry.HasValue)
+                            {
+                                var isExpired = Model.Asset.WarrantyExpiry.Value < DateTime.Now;
+                                var daysRemaining = (Model.Asset.WarrantyExpiry.Value - DateTime.Now).Days;
+                                <div class="form-text">
+                                    @if (isExpired)
+                                    {
+                                        <span class="text-danger"><i class="bi bi-exclamation-triangle"></i> Warranty expired @Math.Abs(daysRemaining) days ago</span>
+                                    }
+                                    else if (daysRemaining <= 30)
+                                    {
+                                        <span class="text-warning"><i class="bi bi-clock"></i> Warranty expires in @daysRemaining days</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-success"><i class="bi bi-check-circle"></i> Warranty valid for @daysRemaining days</span>
+                                    }
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Asset.DepreciationRate" class="form-label">Depreciation Rate (%)</label>
+                            <div class="input-group">
+                                <input asp-for="Asset.DepreciationRate" class="form-control" type="number" step="0.01" min="0" max="100">
+                                <span class="input-group-text">%</span>
+                            </div>
+                            <span asp-validation-for="Asset.DepreciationRate" class="invalid-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Information Card -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-journal-text me-2"></i>Additional Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Asset.Vendor" class="form-label">Vendor</label>
+                            <input asp-for="Asset.Vendor" class="form-control">
+                            <span asp-validation-for="Asset.Vendor" class="invalid-feedback"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Asset.PurchaseOrderNumber" class="form-label">Purchase Order Number</label>
+                            <input asp-for="Asset.PurchaseOrderNumber" class="form-control">
+                            <span asp-validation-for="Asset.PurchaseOrderNumber" class="invalid-feedback"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Asset.Notes" class="form-label">Notes</label>
+                            <textarea asp-for="Asset.Notes" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Asset.Notes" class="invalid-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audit Information Card -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-clock-history me-2"></i>Audit Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <small class="text-muted">
+                                <strong>Created:</strong> @Model.Asset.CreatedAt.ToString("MMM dd, yyyy 'at' HH:mm")
+                            </small>
+                        </div>
+                        <div class="col-md-6">
+                            <small class="text-muted">
+                                <strong>Last Updated:</strong> @Model.Asset.UpdatedAt.ToString("MMM dd, yyyy 'at' HH:mm")
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <a asp-page="./Index" class="btn btn-outline-secondary me-2">
+                                <i class="bi bi-x-lg me-2"></i>Cancel
+                            </a>
+                            <a asp-page="./Delete" asp-route-id="@Model.Asset.Id" class="btn btn-outline-danger">
+                                <i class="bi bi-trash me-2"></i>Delete Asset
+                            </a>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-outline-primary me-2" onclick="resetForm()">
+                                <i class="bi bi-arrow-clockwise me-2"></i>Reset Changes
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-lg me-2"></i>Update Asset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <!-- History Sidebar -->
+    <div class="col-xl-4 col-lg-2 d-none d-lg-block">
+        <div class="card sticky-top" style="top: 2rem;">
+            <div class="card-header">
+                <h6 class="card-title mb-0">
+                    <i class="bi bi-clock-history me-2"></i>Recent Activity
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="small">
+                    <!-- This would be populated with actual audit log data -->
+                    <div class="mb-3">
+                        <div class="text-muted">@Model.Asset.UpdatedAt.ToString("MMM dd, yyyy")</div>
+                        <div>Asset information updated</div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="text-muted">@Model.Asset.CreatedAt.ToString("MMM dd, yyyy")</div>
+                        <div>Asset created</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">
+                    <i class="bi bi-info-circle"></i>
+                    Changes are tracked for audit purposes
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    
+    <script>
+        // Enable Bootstrap validation
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
+        // Department auto-select when employee is selected
+        document.querySelector('select[name="Asset.AssignedToId"]').addEventListener('change', function() {
+            if (this.value) {
+                const selectedOption = this.options[this.selectedIndex];
+                const text = selectedOption.text;
+                const departmentMatch = text.match(/\(([^)]+)\)$/);
+                if (departmentMatch && departmentMatch[1] !== 'No Department') {
+                    const departmentSelect = document.querySelector('select[name="Asset.DepartmentId"]');
+                    for (let option of departmentSelect.options) {
+                        if (option.text === departmentMatch[1]) {
+                            departmentSelect.value = option.value;
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+
+        function resetForm() {
+            if (confirm('Are you sure you want to reset all changes? This action cannot be undone.')) {
+                location.reload();
+            }
+        }
+
+        // Warn about unsaved changes
+        let formChanged = false;
+        document.querySelectorAll('input, select, textarea').forEach(element => {
+            element.addEventListener('change', () => {
+                formChanged = true;
+            });
+        });
+
+        window.addEventListener('beforeunload', (e) => {
+            if (formChanged) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+
+        // Remove warning when form is submitted
+        document.querySelector('form').addEventListener('submit', () => {
+            formChanged = false;
+        });
+    </script>
+}

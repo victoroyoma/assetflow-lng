@@ -1,0 +1,116 @@
+@page
+@model buildone.Pages.Departments.CreateModel
+@{
+    ViewData["Title"] = "Create Department";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3 mb-1">Create New Department</h1>
+        <p class="text-muted mb-0">Add a new department to the organization</p>
+    </div>
+    <div>
+        <a asp-page="./Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Departments
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <form method="post" class="needs-validation" novalidate>
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-building me-2"></i>Department Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Department.Code" class="form-label">Department Code <span class="text-danger">*</span></label>
+                            <input asp-for="Department.Code" class="form-control" placeholder="e.g., IT, HR, FIN" required>
+                            <span asp-validation-for="Department.Code" class="invalid-feedback"></span>
+                            <div class="form-text">A short, unique identifier for the department (e.g., IT, HR, SALES)</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Department.Name" class="form-label">Department Name <span class="text-danger">*</span></label>
+                            <input asp-for="Department.Name" class="form-control" placeholder="e.g., Information Technology" required>
+                            <span asp-validation-for="Department.Name" class="invalid-feedback"></span>
+                            <div class="form-text">The full name of the department</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card mt-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <a asp-page="./Index" class="btn btn-outline-secondary">
+                            <i class="bi bi-x-lg me-2"></i>Cancel
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-lg me-2"></i>Create Department
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Help Sidebar -->
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title mb-0">
+                    <i class="bi bi-question-circle me-2"></i>Guidelines
+                </h6>
+            </div>
+            <div class="card-body">
+                <h6>Department Code</h6>
+                <ul class="small text-muted">
+                    <li>Use 2-10 characters</li>
+                    <li>Uppercase recommended</li>
+                    <li>Must be unique</li>
+                    <li>Examples: IT, HR, SALES, MKTG</li>
+                </ul>
+                
+                <h6 class="mt-3">Department Name</h6>
+                <ul class="small text-muted">
+                    <li>Full descriptive name</li>
+                    <li>Be specific and clear</li>
+                    <li>Examples: Information Technology, Human Resources</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    
+    <script>
+        // Auto-generate department code from name
+        document.querySelector('input[name="Department.Name"]').addEventListener('input', function() {
+            const name = this.value;
+            const codeInput = document.querySelector('input[name="Department.Code"]');
+            
+            if (codeInput.value === '' && name.length > 0) {
+                // Generate code from first letters of words, max 5 chars
+                const code = name.split(' ')
+                    .map(word => word.charAt(0).toUpperCase())
+                    .join('')
+                    .substring(0, 5);
+                codeInput.value = code;
+            }
+        });
+        
+        // Uppercase department code as user types
+        document.querySelector('input[name="Department.Code"]').addEventListener('input', function() {
+            this.value = this.value.toUpperCase();
+        });
+    </script>
+}

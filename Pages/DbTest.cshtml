@@ -1,0 +1,22 @@
+@page
+@model DbTestModel
+@{
+    ViewData["Title"] = "Database Test";
+}
+
+<h2>Database Connection Test</h2>
+
+@if (Model.ConnectionSuccessful)
+{
+    <div class="alert alert-success">
+        <i class="fas fa-check-circle"></i> Database connection successful!
+    </div>
+}
+else
+{
+    <div class="alert alert-danger">
+        <i class="fas fa-exclamation-triangle"></i> Database connection failed: @Model.ErrorMessage
+    </div>
+}
+
+<a asp-page="/Index" class="btn btn-secondary">Back to Home</a>

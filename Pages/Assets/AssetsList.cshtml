@@ -1,0 +1,459 @@
+@page
+@using buildone.Data.Enums
+@model buildone.Pages.Assets.AssetsListModel
+@{
+    ViewData["Title"] = "Assets Management";
+    ViewData["PageIcon"] = "fas fa-laptop";
+    ViewData["BreadcrumbItems"] = new List<object>
+    {
+        new { Text = "Home", Url = "/" },
+        new { Text = "Assets", Url = "#", IsActive = true }
+    };
+}
+
+<div class="page-header">
+    <div class="page-title">
+        <h1><i class="fas fa-laptop me-3"></i>Assets Management</h1>
+        <p class="text-muted">Manage and track all hardware assets in your organization</p>
+    </div>
+    <div class="page-actions">
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#filterModal">
+            <i class="fas fa-filter me-2"></i>Advanced Filters
+        </button>
+        <button type="button" class="btn btn-success" onclick="AssetFlow.exportData('csv')">
+            <i class="fas fa-download me-2"></i>Export CSV
+        </button>
+        <a asp-page="Create" class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>Add Asset
+        </a>
+    </div>
+</div>
+
+<!-- Search & Filter Bar -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="get" class="search-form">
+            <div class="row g-3">
+                <div class="col-lg-4">
+                    <div class="search-input-group">
+                        <i class="fas fa-search"></i>
+                        <input type="text" name="searchTerm" value="@Model.SearchTerm" 
+                               class="form-control" placeholder="Search by Asset Tag, PC ID, Brand, or Model..." 
+                               autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <select name="statusFilter" class="form-select">
+                        <option value="">All Statuses</option>
+                        @foreach (var status in Model.AvailableStatuses)
+                        {
+                            <option value="@status.Value" selected="@(status.Value == Model.StatusFilter?.ToString())">
+                                @status.Text
+                            </option>
+                        }
+                    </select>
+                </div>
+                <div class="col-lg-2">
+                    <select name="departmentFilter" class="form-select">
+                        <option value="">All Departments</option>
+                        @foreach (var dept in Model.AvailableDepartments)
+                        {
+                            <option value="@dept.Value" selected="@(dept.Value == Model.DepartmentFilter?.ToString())">
+                                @dept.Text
+                            </option>
+                        }
+                    </select>
+                </div>
+                <div class="col-lg-2">
+                    <select name="typeFilter" class="form-select">
+                        <option value="">All Types</option>
+                        <option value="Desktop">Desktop</option>
+                        <option value="Laptop">Laptop</option>
+                        <option value="Server">Server</option>
+                        <option value="Tablet">Tablet</option>
+                        <option value="Monitor">Monitor</option>
+                        <option value="Printer">Printer</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="col-lg-2">
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary flex-fill">
+                            <i class="fas fa-search me-2"></i>Search
+                        </button>
+                        <a asp-page="AssetsList" class="btn btn-outline-secondary">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Assets Grid -->
+<div class="assets-grid">
+    @if (Model.Assets.Any())
+    {
+        <!-- Bulk Actions Bar (hidden by default) -->
+        <div id="bulkActionsBar" class="bulk-actions-bar d-none mb-3">
+            <div class="d-flex align-items-center justify-content-between">
+                <span class="text-muted">
+                    <span class="selected-count">0</span> assets selected
+                </span>
+                <div class="bulk-actions">
+                    <button type="button" class="btn btn-outline-primary btn-sm me-2" onclick="AssetFlow.bulkAssign()">
+                        <i class="fas fa-user-tag me-1"></i>Bulk Assign
+                    </button>
+                    <button type="button" class="btn btn-outline-warning btn-sm me-2" onclick="AssetFlow.bulkMaintenance()">
+                        <i class="fas fa-tools me-1"></i>Set Maintenance
+                    </button>
+                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="AssetFlow.bulkRetire()">
+                        <i class="fas fa-archive me-1"></i>Bulk Retire
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assets Table -->
+        <div class="card">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-modern mb-0" id="assetsTable">
+                        <thead>
+                            <tr>
+                                <th class="no-sort" width="40">
+                                    <input type="checkbox" class="form-check-input select-all" id="selectAll">
+                                </th>
+                                <th>Asset Info</th>
+                                <th>Assignment</th>
+                                <th>Status</th>
+                                <th>Warranty</th>
+                                <th>Last Updated</th>
+                                <th class="no-sort text-end" width="120">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var asset in Model.Assets)
+                            {
+                                <tr data-asset-id="@asset.Id">
+                                    <td>
+                                        <input type="checkbox" class="form-check-input select-row" value="@asset.Id">
+                                    </td>
+                                    <td>
+                                        <div class="asset-info">
+                                            <div class="asset-header">
+                                                <strong class="asset-tag">@asset.AssetTag</strong>
+                                                <span class="asset-type-badge">@asset.Type</span>
+                                            </div>
+                                            <div class="asset-details">
+                                                <div class="text-primary fw-medium">@asset.Brand @asset.Model</div>
+                                                <small class="text-muted">
+                                                    PC ID: @asset.PcId
+                                                    @if (!string.IsNullOrEmpty(asset.SerialNumber))
+                                                    {
+                                                        <span class="ms-2">• SN: @asset.SerialNumber</span>
+                                                    }
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if (asset.AssignedEmployee != null)
+                                        {
+                                            <div class="assignment-info">
+                                                <div class="fw-medium">@asset.AssignedEmployee.FullName</div>
+                                                <small class="text-muted">@asset.Department?.Name</small>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-light text-dark">
+                                                <i class="fas fa-user-slash me-1"></i>Unassigned
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <span class="status-badge status-@asset.Status.ToString().ToLower()">
+                                            <i class="status-icon"></i>
+                                            @asset.Status
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @if (asset.WarrantyExpiry.HasValue)
+                                        {
+                                            var warrantyStatus = asset.WarrantyExpiry.Value < DateTime.Now ? "expired" : 
+                                                               asset.WarrantyExpiry.Value < DateTime.Now.AddDays(90) ? "expiring" : "valid";
+                                            <span class="warranty-badge warranty-@warrantyStatus">
+                                                @asset.WarrantyExpiry.Value.ToString("MMM dd, yyyy")
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">Not set</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <time datetime="@asset.LastUpdated.ToString("yyyy-MM-dd")" data-bs-toggle="tooltip" 
+                                              title="@asset.LastUpdated.ToString("MMMM dd, yyyy HH:mm")">
+                                            @asset.LastUpdated.ToString("MMM dd, yyyy")
+                                        </time>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="btn-group" role="group">
+                                            <a asp-page="Details" asp-route-id="@asset.Id" class="btn btn-sm btn-outline-primary" 
+                                               data-bs-toggle="tooltip" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a asp-page="Edit" asp-route-id="@asset.Id" class="btn btn-sm btn-outline-secondary" 
+                                               data-bs-toggle="tooltip" title="Edit Asset">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" 
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                    <li>
+                                                        <a class="dropdown-item" asp-page="Assign" asp-route-id="@asset.Id">
+                                                            <i class="fas fa-user-tag me-2"></i>Assign Employee
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" asp-page="Imaging" asp-route-id="@asset.Id">
+                                                            <i class="fas fa-hdd me-2"></i>Create Imaging Job
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" href="#" onclick="AssetFlow.viewHistory(@asset.Id)">
+                                                            <i class="fas fa-history me-2"></i>View History
+                                                        </a>
+                                                    </li>
+                                                    <li><hr class="dropdown-divider"></li>
+                                                    <li>
+                                                        <a class="dropdown-item text-warning" href="#" onclick="AssetFlow.setMaintenance(@asset.Id)">
+                                                            <i class="fas fa-tools me-2"></i>Set Maintenance
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item text-danger" href="#" 
+                                                           onclick="AssetFlow.retireAsset(@asset.Id)"
+                                                           data-confirm="Are you sure you want to retire this asset?">
+                                                            <i class="fas fa-archive me-2"></i>Retire Asset
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assets Summary Cards -->
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="stats-card bg-primary">
+                    <div class="stats-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <div class="stats-content">
+                        <h3>@Model.Assets.Count()</h3>
+                        <p>Total Assets</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card bg-success">
+                    <div class="stats-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stats-content">
+                        <h3>@Model.Assets.Count(a => a.Status == AssetStatus.Active)</h3>
+                        <p>Active Assets</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card bg-warning">
+                    <div class="stats-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="stats-content">
+                        <h3>@Model.Assets.Count(a => a.Status == AssetStatus.Maintenance)</h3>
+                        <p>In Maintenance</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card bg-info">
+                    <div class="stats-icon">
+                        <i class="fas fa-user-slash"></i>
+                    </div>
+                    <div class="stats-content">
+                        <h3>@Model.Assets.Count(a => a.AssignedEmployeeId == null)</h3>
+                        <p>Unassigned</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Empty State -->
+        <div class="empty-state">
+            <div class="empty-state-icon">
+                <i class="fas fa-laptop"></i>
+            </div>
+            <h3>No Assets Found</h3>
+            <p class="text-muted">
+                @if (!string.IsNullOrEmpty(Model.SearchTerm) || Model.StatusFilter.HasValue || 
+                     Model.DepartmentFilter.HasValue)
+                {
+                    <span>No assets match your current filters. Try adjusting your search criteria.</span>
+                }
+                else
+                {
+                    <span>Start by adding your first asset to the system.</span>
+                }
+            </p>
+            <div class="empty-state-actions">
+                @if (!string.IsNullOrEmpty(Model.SearchTerm) || Model.StatusFilter.HasValue || 
+                     Model.DepartmentFilter.HasValue)
+                {
+                    <a asp-page="AssetsList" class="btn btn-outline-primary me-2">
+                        <i class="fas fa-times me-2"></i>Clear Filters
+                    </a>
+                }
+                <a asp-page="Create" class="btn btn-primary">
+                    <i class="fas fa-plus me-2"></i>Add First Asset
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Toast Container -->
+<div id="toastContainer" class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1060;"></div>
+
+<!-- Additional JavaScript for Enhanced Functionality -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize table selection
+    initTableSelection();
+    
+    // Initialize search debouncing
+    initSearchDebouncing();
+    
+    // Initialize tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+});
+
+function initTableSelection() {
+    const selectAll = document.getElementById('selectAll');
+    const selectRows = document.querySelectorAll('.select-row');
+    const bulkActionsBar = document.getElementById('bulkActionsBar');
+    
+    if (selectAll) {
+        selectAll.addEventListener('change', function() {
+            selectRows.forEach(row => {
+                row.checked = this.checked;
+            });
+            updateBulkActions();
+        });
+    }
+    
+    selectRows.forEach(row => {
+        row.addEventListener('change', updateBulkActions);
+    });
+    
+    function updateBulkActions() {
+        const selectedCount = document.querySelectorAll('.select-row:checked').length;
+        const countElement = document.querySelector('.selected-count');
+        
+        if (countElement) {
+            countElement.textContent = selectedCount;
+        }
+        
+        if (bulkActionsBar) {
+            if (selectedCount > 0) {
+                bulkActionsBar.classList.remove('d-none');
+            } else {
+                bulkActionsBar.classList.add('d-none');
+            }
+        }
+    }
+}
+
+function initSearchDebouncing() {
+    const searchInput = document.querySelector('input[name="searchTerm"]');
+    if (searchInput) {
+        let debounceTimer;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                if (this.value.length >= 3 || this.value.length === 0) {
+                    this.form.submit();
+                }
+            }, 500);
+        });
+    }
+}
+
+// Asset Flow Extensions
+window.AssetFlow = window.AssetFlow || {};
+
+Object.assign(window.AssetFlow, {
+    viewHistory: function(assetId) {
+        // Implement history modal or redirect
+        console.log('View history for asset:', assetId);
+        this.showToast('History view feature coming soon!', 'info');
+    },
+    
+    setMaintenance: function(assetId) {
+        // Implement maintenance mode
+        console.log('Set maintenance for asset:', assetId);
+        this.showToast('Maintenance mode feature coming soon!', 'info');
+    },
+    
+    retireAsset: function(assetId) {
+        // Implement asset retirement
+        console.log('Retire asset:', assetId);
+        this.showToast('Asset retirement feature coming soon!', 'info');
+    },
+    
+    bulkAssign: function() {
+        const selectedAssets = this.getSelectedAssets();
+        console.log('Bulk assign assets:', selectedAssets);
+        this.showToast('Bulk assignment feature coming soon!', 'info');
+    },
+    
+    bulkMaintenance: function() {
+        const selectedAssets = this.getSelectedAssets();
+        console.log('Bulk maintenance for assets:', selectedAssets);
+        this.showToast('Bulk maintenance feature coming soon!', 'info');
+    },
+    
+    bulkRetire: function() {
+        const selectedAssets = this.getSelectedAssets();
+        console.log('Bulk retire assets:', selectedAssets);
+        this.showToast('Bulk retirement feature coming soon!', 'info');
+    },
+    
+    getSelectedAssets: function() {
+        const selected = [];
+        document.querySelectorAll('.select-row:checked').forEach(checkbox => {
+            selected.push(checkbox.value);
+        });
+        return selected;
+    }
+});
+</script>

@@ -1,0 +1,302 @@
+@model IEnumerable<buildone.Controllers.UserViewModel>
+
+@{
+    ViewData["Title"] = "User Management";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1><i class="fas fa-users-cog me-2"></i>@ViewData["Title"]</h1>
+                <a asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Create New User
+                </a>
+            </div>
+        </div>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>@TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>@TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Search and Filter Section -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <input type="text" id="userSearch" class="form-control" placeholder="Search by name or email...">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select id="roleFilter" class="form-select">
+                        <option value="">All Roles</option>
+                        <option value="Administrator">Administrator</option>
+                        <option value="Technician">Technician</option>
+                        <option value="User">User</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select id="statusFilter" class="form-select">
+                        <option value="">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" id="clearFilters" class="btn btn-outline-secondary w-100">
+                        <i class="fas fa-redo"></i> Clear
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-list me-2"></i>User List
+                </h5>
+                <span id="userCount" class="badge bg-light text-dark">Total: @Model.Count()</span>
+            </div>
+        </div>
+        <div class="card-body">
+            @if (Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle" id="usersTable">
+                        <thead class="table-light">
+                            <tr>
+                                <th><i class="fas fa-user me-1"></i>@Html.DisplayNameFor(model => model.FullName)</th>
+                                <th><i class="fas fa-envelope me-1"></i>@Html.DisplayNameFor(model => model.Email)</th>
+                                <th><i class="fas fa-shield-alt me-1"></i>Roles</th>
+                                <th><i class="fas fa-id-badge me-1"></i>Employee</th>
+                                <th><i class="fas fa-circle me-1"></i>Status</th>
+                                <th><i class="fas fa-calendar me-1"></i>Created</th>
+                                <th><i class="fas fa-clock me-1"></i>Last Login</th>
+                                <th><i class="fas fa-cog me-1"></i>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="user-row @(item.IsActive ? "" : "table-secondary")" 
+                                    data-roles="@string.Join(",", item.Roles)" 
+                                    data-status="@(item.IsActive ? "active" : "inactive")"
+                                    data-name="@item.FullName.ToLower()"
+                                    data-email="@item.Email.ToLower()">
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-circle me-2">
+                                                @item.FullName.Substring(0, 1).ToUpper()
+                                            </div>
+                                            <strong>@Html.DisplayFor(modelItem => item.FullName)</strong>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <small>@Html.DisplayFor(modelItem => item.Email)</small>
+                                    </td>
+                                    <td>
+                                        @if (item.Roles.Any())
+                                        {
+                                            @foreach (var role in item.Roles)
+                                            {
+                                                <span class="badge @(role == "Administrator" ? "bg-danger" : role == "Technician" ? "bg-info" : "bg-primary") me-1">
+                                                    @role
+                                                </span>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted"><em>No roles</em></span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(item.EmployeeName))
+                                        {
+                                            <span><i class="fas fa-link me-1 text-success"></i>@item.EmployeeName</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted"><em>Not linked</em></span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.IsActive)
+                                        {
+                                            <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>Active</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary"><i class="fas fa-times-circle me-1"></i>Inactive</span>
+                                        }
+                                    </td>
+                                    <td><small>@item.CreatedAt.ToString("MMM dd, yyyy")</small></td>
+                                    <td>
+                                        @if (item.LastLoginAt.HasValue)
+                                        {
+                                            <small>@item.LastLoginAt.Value.ToString("MMM dd, yyyy")<br/>@item.LastLoginAt.Value.ToString("HH:mm")</small>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted"><em>Never</em></span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="User actions">
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <a asp-action="ResetPassword" asp-route-id="@item.Id" class="btn btn-sm btn-outline-warning" title="Reset Password">
+                                                <i class="bi bi-key"></i>
+                                            </a>
+                                            @if (!item.Roles.Contains("Administrator") || Model.Count(u => u.Roles.Contains("Administrator")) > 1)
+                                            {
+                                                <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline" 
+                                                      onsubmit="return confirm('Are you sure you want to delete user @item.FullName?')">
+                                                    @Html.AntiForgeryToken()
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
+                                            }
+                                            else
+                                            {
+                                                <button class="btn btn-sm btn-outline-secondary" disabled title="Cannot delete last admin">
+                                                    <i class="bi bi-lock"></i>
+                                                </button>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- No Results Message (hidden by default) -->
+                <div id="noResults" class="text-center py-4" style="display: none;">
+                    <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">No users match your search criteria</h5>
+                    <p class="text-muted">Try adjusting your filters or search terms.</p>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="fas fa-users fa-4x text-muted mb-3"></i>
+                    <h5 class="text-muted">No users found</h5>
+                    <p class="text-muted">Create your first user to get started.</p>
+                    <a asp-action="Create" class="btn btn-primary mt-3">
+                        <i class="bi bi-plus-circle"></i> Create User
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Styles {
+<style>
+    .avatar-circle {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 14px;
+    }
+    
+    .user-row {
+        transition: all 0.2s ease;
+    }
+    
+    .user-row:hover {
+        background-color: rgba(0, 123, 255, 0.05) !important;
+        transform: translateX(2px);
+    }
+</style>
+}
+
+@section Scripts {
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('userSearch');
+        const roleFilter = document.getElementById('roleFilter');
+        const statusFilter = document.getElementById('statusFilter');
+        const clearFiltersBtn = document.getElementById('clearFilters');
+        const userRows = document.querySelectorAll('.user-row');
+        const noResults = document.getElementById('noResults');
+        const userCount = document.getElementById('userCount');
+        const totalUsers = userRows.length;
+
+        function filterUsers() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedRole = roleFilter.value.toLowerCase();
+            const selectedStatus = statusFilter.value.toLowerCase();
+            let visibleCount = 0;
+
+            userRows.forEach(row => {
+                const name = row.dataset.name;
+                const email = row.dataset.email;
+                const roles = row.dataset.roles.toLowerCase();
+                const status = row.dataset.status;
+
+                const matchesSearch = searchTerm === '' || name.includes(searchTerm) || email.includes(searchTerm);
+                const matchesRole = selectedRole === '' || roles.includes(selectedRole);
+                const matchesStatus = selectedStatus === '' || status === selectedStatus;
+
+                if (matchesSearch && matchesRole && matchesStatus) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            // Show/hide no results message
+            if (visibleCount === 0 && userRows.length > 0) {
+                noResults.style.display = 'block';
+                document.querySelector('#usersTable').style.display = 'none';
+            } else {
+                noResults.style.display = 'none';
+                document.querySelector('#usersTable').style.display = 'table';
+            }
+
+            // Update count
+            userCount.textContent = `Showing: ${visibleCount} of ${totalUsers}`;
+        }
+
+        // Event listeners
+        searchInput.addEventListener('input', filterUsers);
+        roleFilter.addEventListener('change', filterUsers);
+        statusFilter.addEventListener('change', filterUsers);
+        
+        clearFiltersBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            roleFilter.value = '';
+            statusFilter.value = '';
+            filterUsers();
+        });
+    });
+</script>
+}

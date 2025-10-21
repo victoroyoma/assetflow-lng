@@ -1,0 +1,305 @@
+@page
+@model buildone.Pages.Employees.EditModel
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3 mb-0">
+            <i class="bi bi-pencil me-2 text-primary"></i>Edit Employee
+        </h1>
+        <p class="text-muted mb-0">Update employee information and settings</p>
+    </div>
+    <div>
+        <a asp-page="./Details" asp-route-id="@Model.EmployeeEdit.Id" class="btn btn-outline-info me-2">
+            <i class="bi bi-eye me-2"></i>View Details
+        </a>
+        <a asp-page="./Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-2"></i>Back to Employees
+        </a>
+    </div>
+</div>
+
+<!-- Validation Summary -->
+<div asp-validation-summary="All" class="alert alert-danger d-none"></div>
+
+<form method="post" id="editEmployeeForm">
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Basic Information -->
+            <div class="card mb-4 border-0 shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-person me-2"></i>Basic Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="EmployeeEdit.FullName" class="form-label required">Full Name</label>
+                            <input asp-for="EmployeeEdit.FullName" class="form-control" placeholder="Enter full name" />
+                            <span asp-validation-for="EmployeeEdit.FullName" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="EmployeeEdit.Username" class="form-label required">Username</label>
+                            <div class="input-group">
+                                <input asp-for="EmployeeEdit.Username" class="form-control" placeholder="Enter username" />
+                                <span class="input-group-text" id="usernameStatus">
+                                    <i class="bi bi-check-circle text-success d-none" id="usernameAvailable"></i>
+                                    <i class="bi bi-x-circle text-danger d-none" id="usernameTaken"></i>
+                                </span>
+                            </div>
+                            <span asp-validation-for="EmployeeEdit.Username" class="text-danger small"></span>
+                            <div class="form-text">Username can only contain letters, numbers, dots, hyphens, and underscores</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="card mb-4 border-0 shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-envelope me-2"></i>Contact Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="EmployeeEdit.Email" class="form-label">Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                <input asp-for="EmployeeEdit.Email" class="form-control" placeholder="employee@company.com" />
+                                <span class="input-group-text" id="emailStatus">
+                                    <i class="bi bi-check-circle text-success d-none" id="emailAvailable"></i>
+                                    <i class="bi bi-x-circle text-danger d-none" id="emailTaken"></i>
+                                </span>
+                            </div>
+                            <span asp-validation-for="EmployeeEdit.Email" class="text-danger small"></span>
+                            <div class="form-text">Optional - used for notifications and communication</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="EmployeeEdit.Phone" class="form-label">Phone Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                                <input asp-for="EmployeeEdit.Phone" class="form-control" placeholder="(555) 123-4567" />
+                            </div>
+                            <span asp-validation-for="EmployeeEdit.Phone" class="text-danger small"></span>
+                            <div class="form-text">Optional - contact number for the employee</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Department Assignment -->
+            <div class="card mb-4 border-0 shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-building me-2"></i>Department Assignment
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-8">
+                            <label asp-for="EmployeeEdit.DepartmentId" class="form-label">Department</label>
+                            <select asp-for="EmployeeEdit.DepartmentId" asp-items="Model.Departments" class="form-select">
+                                <option value="">No department assigned</option>
+                            </select>
+                            <span asp-validation-for="EmployeeEdit.DepartmentId" class="text-danger small"></span>
+                            <div class="form-text">Assign employee to a department for organization and asset management</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="d-flex gap-2 mb-4">
+                <button type="submit" class="btn btn-primary" id="saveButton">
+                    <i class="bi bi-check-lg me-2"></i>Save Changes
+                </button>
+                <a asp-page="./Details" asp-route-id="@Model.EmployeeEdit.Id" class="btn btn-outline-secondary">
+                    <i class="bi bi-x-lg me-2"></i>Cancel
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Help Panel -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-light">
+                    <h6 class="card-title mb-0">
+                        <i class="bi bi-info-circle me-2"></i>Editing Guidelines
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="small">
+                        <h6 class="fw-bold">Username Requirements:</h6>
+                        <ul class="list-unstyled mb-3">
+                            <li><i class="bi bi-check text-success me-2"></i>Must be unique</li>
+                            <li><i class="bi bi-check text-success me-2"></i>Letters, numbers, dots, hyphens, underscores</li>
+                            <li><i class="bi bi-check text-success me-2"></i>Maximum 100 characters</li>
+                        </ul>
+
+                        <h6 class="fw-bold">Contact Information:</h6>
+                        <ul class="list-unstyled mb-3">
+                            <li><i class="bi bi-info text-primary me-2"></i>Email must be unique if provided</li>
+                            <li><i class="bi bi-info text-primary me-2"></i>Phone number is optional</li>
+                            <li><i class="bi bi-info text-primary me-2"></i>Both are used for notifications</li>
+                        </ul>
+
+                        <h6 class="fw-bold">Department Assignment:</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-info text-primary me-2"></i>Optional but recommended</li>
+                            <li><i class="bi bi-info text-primary me-2"></i>Helps organize employees</li>
+                            <li><i class="bi bi-info text-primary me-2"></i>Used for asset management</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input asp-for="EmployeeEdit.Id" type="hidden" />
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function() {
+            // Username availability checking
+            $('#EmployeeEdit_Username').on('input', debounce(function() {
+                var username = $(this).val().trim();
+                var employeeId = $('#EmployeeEdit_Id').val();
+                
+                if (username.length > 0) {
+                    checkUsernameAvailability(username, employeeId);
+                } else {
+                    resetUsernameStatus();
+                }
+            }, 500));
+
+            // Email availability checking
+            $('#EmployeeEdit_Email').on('input', debounce(function() {
+                var email = $(this).val().trim();
+                var employeeId = $('#EmployeeEdit_Id').val();
+                
+                if (email.length > 0) {
+                    checkEmailAvailability(email, employeeId);
+                } else {
+                    resetEmailStatus();
+                }
+            }, 500));
+
+            // Form submission
+            $('#editEmployeeForm').on('submit', function(e) {
+                var saveButton = $('#saveButton');
+                saveButton.prop('disabled', true);
+                saveButton.html('<span class="spinner-border spinner-border-sm me-2"></span>Saving...');
+                
+                // Re-enable button after 5 seconds as fallback
+                setTimeout(function() {
+                    saveButton.prop('disabled', false);
+                    saveButton.html('<i class="bi bi-check-lg me-2"></i>Save Changes');
+                }, 5000);
+            });
+
+            // Phone number formatting
+            $('#EmployeeEdit_Phone').on('input', function() {
+                var value = $(this).val().replace(/\D/g, '');
+                if (value.length >= 6) {
+                    value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+                } else if (value.length >= 3) {
+                    value = value.replace(/(\d{3})(\d{0,3})/, '($1) $2');
+                }
+                $(this).val(value);
+            });
+        });
+
+        function checkUsernameAvailability(username, employeeId) {
+            $.get('/Employees/Edit', { 
+                handler: 'CheckUsername', 
+                username: username,
+                id: employeeId
+            })
+            .done(function(data) {
+                if (data.isAvailable) {
+                    showUsernameAvailable();
+                } else {
+                    showUsernameTaken();
+                }
+            })
+            .fail(function() {
+                resetUsernameStatus();
+            });
+        }
+
+        function checkEmailAvailability(email, employeeId) {
+            $.get('/Employees/Edit', { 
+                handler: 'CheckEmail', 
+                email: email,
+                id: employeeId
+            })
+            .done(function(data) {
+                if (data.isAvailable) {
+                    showEmailAvailable();
+                } else {
+                    showEmailTaken();
+                }
+            })
+            .fail(function() {
+                resetEmailStatus();
+            });
+        }
+
+        function showUsernameAvailable() {
+            $('#usernameAvailable').removeClass('d-none');
+            $('#usernameTaken').addClass('d-none');
+        }
+
+        function showUsernameTaken() {
+            $('#usernameAvailable').addClass('d-none');
+            $('#usernameTaken').removeClass('d-none');
+        }
+
+        function resetUsernameStatus() {
+            $('#usernameAvailable').addClass('d-none');
+            $('#usernameTaken').addClass('d-none');
+        }
+
+        function showEmailAvailable() {
+            $('#emailAvailable').removeClass('d-none');
+            $('#emailTaken').addClass('d-none');
+        }
+
+        function showEmailTaken() {
+            $('#emailAvailable').addClass('d-none');
+            $('#emailTaken').removeClass('d-none');
+        }
+
+        function resetEmailStatus() {
+            $('#emailAvailable').addClass('d-none');
+            $('#emailTaken').addClass('d-none');
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+    </script>
+
+    <style>
+        .required::after {
+            content: " *";
+            color: #dc3545;
+        }
+    </style>
+}

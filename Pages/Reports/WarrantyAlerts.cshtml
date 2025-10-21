@@ -1,0 +1,499 @@
+@page
+@model buildone.Pages.Reports.WarrantyAlertsModel
+@{
+    ViewData["Title"] = "Warranty Alerts";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3 mb-1">
+            <i class="bi bi-shield-exclamation me-2 text-warning"></i>Warranty Alerts
+        </h1>
+        <p class="text-muted mb-0">Monitor and manage asset warranty expiration dates</p>
+    </div>
+    <div>
+        <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="collapse" data-bs-target="#filterPanel">
+            <i class="bi bi-funnel"></i> Filters
+        </button>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                <i class="bi bi-download"></i> Export
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" onclick="exportWarrantyReport('all')"><i class="bi bi-file-earmark-text me-2"></i>All Alerts</a></li>
+                <li><a class="dropdown-item" href="#" onclick="exportWarrantyReport('critical')"><i class="bi bi-file-earmark-pdf me-2"></i>Critical Only</a></li>
+                <li><a class="dropdown-item" href="#" onclick="exportWarrantyReport('expired')"><i class="bi bi-file-earmark-excel me-2"></i>Expired Assets</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Filter Panel -->
+<div class="collapse mb-4" id="filterPanel">
+    <div class="card">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-2">
+                    <label for="daysFilter" class="form-label">Days Ahead</label>
+                    <select class="form-select" id="daysFilter" name="daysFilter">
+                        <option value="30" selected="@(Model.DaysFilter == "30")">30 Days</option>
+                        <option value="60" selected="@(Model.DaysFilter == "60")">60 Days</option>
+                        <option value="90" selected="@(Model.DaysFilter == "90")">90 Days</option>
+                        <option value="180" selected="@(Model.DaysFilter == "180")">6 Months</option>
+                        <option value="365" selected="@(Model.DaysFilter == "365")">1 Year</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="urgencyFilter" class="form-label">Urgency</label>
+                    <select class="form-select" id="urgencyFilter" name="urgencyFilter">
+                        <option value="">All Levels</option>
+                        <option value="expired" selected="@(Model.UrgencyFilter == "expired")">Expired</option>
+                        <option value="critical" selected="@(Model.UrgencyFilter == "critical")">Critical (≤30 days)</option>
+                        <option value="warning" selected="@(Model.UrgencyFilter == "warning")">Warning (31-60 days)</option>
+                        <option value="watch" selected="@(Model.UrgencyFilter == "watch")">Watch (61-90 days)</option>
+                        <option value="no-warranty" selected="@(Model.UrgencyFilter == "no-warranty")">No Warranty Info</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="statusFilter" class="form-label">Status</label>
+                    <select class="form-select" id="statusFilter" name="statusFilter">
+                        <option value="">All Statuses</option>
+                        <option value="Active" selected="@(Model.StatusFilter == "Active")">Active</option>
+                        <option value="Assigned" selected="@(Model.StatusFilter == "Assigned")">Assigned</option>
+                        <option value="Deployed" selected="@(Model.StatusFilter == "Deployed")">Deployed</option>
+                        <option value="InStock" selected="@(Model.StatusFilter == "InStock")">In Stock</option>
+                        <option value="Maintenance" selected="@(Model.StatusFilter == "Maintenance")">Maintenance</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="typeFilter" class="form-label">Type</label>
+                    <select class="form-select" id="typeFilter" name="typeFilter">
+                        <option value="">All Types</option>
+                        <option value="Desktop" selected="@(Model.TypeFilter == "Desktop")">Desktop</option>
+                        <option value="Laptop" selected="@(Model.TypeFilter == "Laptop")">Laptop</option>
+                        <option value="Server" selected="@(Model.TypeFilter == "Server")">Server</option>
+                        <option value="Monitor" selected="@(Model.TypeFilter == "Monitor")">Monitor</option>
+                        <option value="Printer" selected="@(Model.TypeFilter == "Printer")">Printer</option>
+                        <option value="Tablet" selected="@(Model.TypeFilter == "Tablet")">Tablet</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="departmentFilter" class="form-label">Department</label>
+                    <select class="form-select" id="departmentFilter" name="departmentFilter">
+                        <option value="">All Departments</option>
+                        @foreach (var department in Model.Departments)
+                        {
+                            <option value="@department.Id" selected="@(Model.DepartmentFilter == department.Id.ToString())">
+                                @department.Name
+                            </option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary me-2">Apply</button>
+                    <a asp-page="./WarrantyAlerts" class="btn btn-outline-secondary">Clear</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Summary Statistics -->
+<div class="row mb-4">
+    <div class="col-xl-2 col-md-4 col-sm-6 mb-3">
+        <div class="card bg-danger text-white">
+            <div class="card-body text-center">
+                <i class="bi bi-exclamation-triangle display-4 mb-2"></i>
+                <h4 class="card-title mb-1">@Model.ExpiredCount</h4>
+                <p class="card-text mb-0 small">Expired</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-2 col-md-4 col-sm-6 mb-3">
+        <div class="card bg-warning text-dark">
+            <div class="card-body text-center">
+                <i class="bi bi-alarm display-4 mb-2"></i>
+                <h4 class="card-title mb-1">@Model.CriticalCount</h4>
+                <p class="card-text mb-0 small">Critical (≤30d)</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-2 col-md-4 col-sm-6 mb-3">
+        <div class="card bg-info text-white">
+            <div class="card-body text-center">
+                <i class="bi bi-clock display-4 mb-2"></i>
+                <h4 class="card-title mb-1">@Model.WarningCount</h4>
+                <p class="card-text mb-0 small">Warning (31-60d)</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-2 col-md-4 col-sm-6 mb-3">
+        <div class="card bg-secondary text-white">
+            <div class="card-body text-center">
+                <i class="bi bi-eye display-4 mb-2"></i>
+                <h4 class="card-title mb-1">@Model.WatchCount</h4>
+                <p class="card-text mb-0 small">Watch (61-90d)</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-2 col-md-4 col-sm-6 mb-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body text-center">
+                <i class="bi bi-shield-check display-4 mb-2"></i>
+                <h4 class="card-title mb-1">@Model.TotalAlertsCount</h4>
+                <p class="card-text mb-0 small">Total Alerts</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-2 col-md-4 col-sm-6 mb-3">
+        <div class="card bg-success text-white">
+            <div class="card-body text-center">
+                <i class="bi bi-calendar-check display-4 mb-2"></i>
+                <h4 class="card-title mb-1">@Model.AverageWarrantyDaysRemaining.ToString("F0")</h4>
+                <p class="card-text mb-0 small">Avg Days Left</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Expired Assets -->
+@if (Model.ExpiredAssets.Any())
+{
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-exclamation-triangle me-2"></i>Expired Warranties (@Model.ExpiredAssets.Count)
+                        <span class="badge bg-light text-dark ms-2">Immediate Action Required</span>
+                    </h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Asset Tag</th>
+                                    <th>Type</th>
+                                    <th>Brand/Model</th>
+                                    <th>Department</th>
+                                    <th>Assigned To</th>
+                                    <th>Expired Date</th>
+                                    <th>Days Overdue</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var asset in Model.ExpiredAssets)
+                                {
+                                    var daysOverdue = (DateTime.Now - asset.WarrantyExpiry!.Value).Days;
+                                    <tr class="table-danger">
+                                        <td><strong>@asset.AssetTag</strong></td>
+                                        <td><span class="badge bg-secondary">@asset.Type</span></td>
+                                        <td>
+                                            <div>@asset.Brand @asset.Model</div>
+                                            <small class="text-muted">S/N: @asset.SerialNumber</small>
+                                        </td>
+                                        <td>@(asset.Department?.Name ?? "Unassigned")</td>
+                                        <td>@(asset.AssignedEmployee?.FullName ?? "Unassigned")</td>
+                                        <td>@asset.WarrantyExpiry.Value.ToString("MMM dd, yyyy")</td>
+                                        <td>
+                                            <span class="badge bg-danger">
+                                                <i class="bi bi-exclamation-circle me-1"></i>@daysOverdue days
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a asp-page="/Assets/Details" asp-route-id="@asset.Id" class="btn btn-outline-info">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                                <a asp-page="/Assets/Edit" asp-route-id="@asset.Id" class="btn btn-outline-warning">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Critical Assets (0-30 days) -->
+@if (Model.CriticalAssets.Any())
+{
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-warning">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">
+                        <i class="bi bi-alarm me-2"></i>Critical - Expiring Within 30 Days (@Model.CriticalAssets.Count)
+                        <span class="badge bg-dark ms-2">Urgent</span>
+                    </h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-warning">
+                                <tr>
+                                    <th>Asset Tag</th>
+                                    <th>Type</th>
+                                    <th>Brand/Model</th>
+                                    <th>Department</th>
+                                    <th>Assigned To</th>
+                                    <th>Expiry Date</th>
+                                    <th>Days Left</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var asset in Model.CriticalAssets)
+                                {
+                                    var daysLeft = (asset.WarrantyExpiry!.Value - DateTime.Now).Days;
+                                    <tr class="@(daysLeft <= 7 ? "table-danger" : "table-warning")">
+                                        <td><strong>@asset.AssetTag</strong></td>
+                                        <td><span class="badge bg-secondary">@asset.Type</span></td>
+                                        <td>
+                                            <div>@asset.Brand @asset.Model</div>
+                                            <small class="text-muted">S/N: @asset.SerialNumber</small>
+                                        </td>
+                                        <td>@(asset.Department?.Name ?? "Unassigned")</td>
+                                        <td>@(asset.AssignedEmployee?.FullName ?? "Unassigned")</td>
+                                        <td>@asset.WarrantyExpiry.Value.ToString("MMM dd, yyyy")</td>
+                                        <td>
+                                            <span class="badge bg-@(daysLeft <= 7 ? "danger" : "warning")">
+                                                <i class="bi bi-@(daysLeft <= 7 ? "exclamation-triangle" : "clock") me-1"></i>@daysLeft days
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a asp-page="/Assets/Details" asp-route-id="@asset.Id" class="btn btn-outline-info">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                                <a asp-page="/Assets/Edit" asp-route-id="@asset.Id" class="btn btn-outline-warning">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Warning Assets (31-60 days) -->
+@if (Model.WarningAssets.Any())
+{
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-info">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-info-circle me-2"></i>Warning - Expiring in 31-60 Days (@Model.WarningAssets.Count)
+                        <span class="badge bg-light text-dark ms-2">Plan Renewal</span>
+                    </h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-info">
+                                <tr>
+                                    <th>Asset Tag</th>
+                                    <th>Type</th>
+                                    <th>Brand/Model</th>
+                                    <th>Department</th>
+                                    <th>Expiry Date</th>
+                                    <th>Days Left</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var asset in Model.WarningAssets)
+                                {
+                                    var daysLeft = (asset.WarrantyExpiry!.Value - DateTime.Now).Days;
+                                    <tr>
+                                        <td><strong>@asset.AssetTag</strong></td>
+                                        <td><span class="badge bg-secondary">@asset.Type</span></td>
+                                        <td>@asset.Brand @asset.Model</td>
+                                        <td>@(asset.Department?.Name ?? "Unassigned")</td>
+                                        <td>@asset.WarrantyExpiry.Value.ToString("MMM dd, yyyy")</td>
+                                        <td>
+                                            <span class="badge bg-info">
+                                                <i class="bi bi-clock me-1"></i>@daysLeft days
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a asp-page="/Assets/Details" asp-route-id="@asset.Id" class="btn btn-outline-info">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                                <a asp-page="/Assets/Edit" asp-route-id="@asset.Id" class="btn btn-outline-primary">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Watch Assets (61-90+ days) -->
+@if (Model.WatchAssets.Any())
+{
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-secondary">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-eye me-2"></i>Watch List - Expiring Later (@Model.WatchAssets.Count)
+                        <span class="badge bg-light text-dark ms-2">Monitor</span>
+                    </h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-secondary">
+                                <tr>
+                                    <th>Asset Tag</th>
+                                    <th>Type</th>
+                                    <th>Brand/Model</th>
+                                    <th>Department</th>
+                                    <th>Expiry Date</th>
+                                    <th>Days Left</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var asset in Model.WatchAssets.Take(10))
+                                {
+                                    var daysLeft = (asset.WarrantyExpiry!.Value - DateTime.Now).Days;
+                                    <tr>
+                                        <td><strong>@asset.AssetTag</strong></td>
+                                        <td><span class="badge bg-secondary">@asset.Type</span></td>
+                                        <td>@asset.Brand @asset.Model</td>
+                                        <td>@(asset.Department?.Name ?? "Unassigned")</td>
+                                        <td>@asset.WarrantyExpiry.Value.ToString("MMM dd, yyyy")</td>
+                                        <td>
+                                            <span class="badge bg-secondary">
+                                                <i class="bi bi-calendar me-1"></i>@daysLeft days
+                                            </span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    @if (Model.WatchAssets.Count > 10)
+                    {
+                        <div class="card-footer text-center">
+                            <small class="text-muted">Showing 10 of @Model.WatchAssets.Count assets</small>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Assets with No Warranty Information -->
+@if (Model.NoWarrantyAssets.Any())
+{
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-dark">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-question-circle me-2"></i>Assets Missing Warranty Information (@Model.NoWarrantyAssets.Count)
+                        <span class="badge bg-light text-dark ms-2">Update Required</span>
+                    </h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Asset Tag</th>
+                                    <th>Type</th>
+                                    <th>Brand/Model</th>
+                                    <th>Department</th>
+                                    <th>Age</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var asset in Model.NoWarrantyAssets.Take(15))
+                                {
+                                    var age = (DateTime.Now - asset.CreatedAt).Days;
+                                    <tr>
+                                        <td><strong>@asset.AssetTag</strong></td>
+                                        <td><span class="badge bg-secondary">@asset.Type</span></td>
+                                        <td>@asset.Brand @asset.Model</td>
+                                        <td>@(asset.Department?.Name ?? "Unassigned")</td>
+                                        <td>
+                                            <span class="badge bg-@(age > 365 ? "warning" : "light text-dark")">
+                                                @age days old
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a asp-page="/Assets/Edit" asp-route-id="@asset.Id" class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-pencil me-1"></i>Add Warranty
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    @if (Model.NoWarrantyAssets.Count > 15)
+                    {
+                        <div class="card-footer text-center">
+                            <small class="text-muted">Showing 15 of @Model.NoWarrantyAssets.Count assets</small>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Empty State -->
+@if (Model.TotalAlertsCount == 0 && !Model.NoWarrantyAssets.Any())
+{
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <i class="bi bi-shield-check display-1 text-success opacity-75 mb-4"></i>
+                    <h4 class="text-success">All Clear!</h4>
+                    <p class="text-muted">No warranty alerts found with the current filters.</p>
+                    <a asp-page="./Assets" class="btn btn-outline-primary">
+                        <i class="bi bi-arrow-left me-1"></i>Back to Asset Reports
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        function exportWarrantyReport(type) {
+            // This will be implemented with proper export functionality
+            alert(`Exporting ${type} warranty report...`);
+        }
+    </script>
+}

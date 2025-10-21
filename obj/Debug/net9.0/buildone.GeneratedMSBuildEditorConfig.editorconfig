@@ -1,0 +1,229 @@
+is_global = true
+build_property.TargetFramework = net9.0
+build_property.TargetFramework = net9.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = buildone
+build_property.RootNamespace = buildone
+build_property.ProjectDir = C:\Users\victo\Desktop\buildone\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\victo\Desktop\buildone
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Account/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Account/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Admin/SeedData.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cU2VlZERhdGEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Assets/AssetsList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXNzZXRzXEFzc2V0c0xpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Assets/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXNzZXRzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Assets/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXNzZXRzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Assets/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXNzZXRzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Assets/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXNzZXRzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/DbTest.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGJUZXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Departments/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVwYXJ0bWVudHNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Departments/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVwYXJ0bWVudHNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Employees/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW1wbG95ZWVzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Employees/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW1wbG95ZWVzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Employees/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW1wbG95ZWVzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Employees/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW1wbG95ZWVzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Employees/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW1wbG95ZWVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Imaging/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW1hZ2luZ1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Imaging/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW1hZ2luZ1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Imaging/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW1hZ2luZ1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Imaging/Queue.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW1hZ2luZ1xRdWV1ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Reports/Assets.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwb3J0c1xBc3NldHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Reports/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwb3J0c1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Reports/WarrantyAlerts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwb3J0c1xXYXJyYW50eUFsZXJ0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Shared/_LoginLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9Mb2dpbkxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/RoleManagement/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZU1hbmFnZW1lbnRcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/RoleManagement/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZU1hbmFnZW1lbnRcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/RoleManagement/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZU1hbmFnZW1lbnRcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/RoleManagement/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZU1hbmFnZW1lbnRcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/RoleManagement/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZU1hbmFnZW1lbnRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/SystemSettings/Database.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3lzdGVtU2V0dGluZ3NcRGF0YWJhc2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/SystemSettings/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3lzdGVtU2V0dGluZ3NcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/SystemSettings/Security.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3lzdGVtU2V0dGluZ3NcU2VjdXJpdHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/UserManagement/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlck1hbmFnZW1lbnRcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/UserManagement/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlck1hbmFnZW1lbnRcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/UserManagement/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlck1hbmFnZW1lbnRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/UserManagement/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlck1hbmFnZW1lbnRcUmVzZXRQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-csmgg54d03

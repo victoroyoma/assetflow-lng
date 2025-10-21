@@ -1,0 +1,517 @@
+@page
+@model buildone.Pages.Imaging.QueueModel
+@{
+    ViewData["Title"] = "Imaging Job Queue";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3 mb-0">
+            <i class="fas fa-clock me-2 text-primary"></i>Imaging Job Queue
+        </h1>
+        <p class="text-muted mb-0">Monitor and manage imaging job workflows</p>
+    </div>
+    <div class="d-flex gap-2">
+        <a asp-page="./Create" class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>New Job
+        </a>
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown">
+                <i class="fas fa-download me-2"></i>Export
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" asp-page-handler="ExportCsv"><i class="fas fa-file-csv me-2"></i>Export to CSV</a></li>
+                <li><a class="dropdown-item" asp-page-handler="GenerateReport"><i class="fas fa-file-alt me-2"></i>Generate Report</a></li>
+            </ul>
+        </div>
+        <button type="button" class="btn btn-outline-secondary" onclick="location.reload()">
+            <i class="fas fa-sync-alt me-2"></i>Refresh
+        </button>
+    </div>
+</div>
+
+<!-- Alert Messages -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle me-2"></i>@TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-triangle me-2"></i>@TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<!-- Statistics Cards -->
+<div class="row mb-4">
+    <div class="col-md-2">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body text-center">
+                <i class="fas fa-tasks fs-3 text-primary mb-2"></i>
+                <h5 class="mb-1">@Model.Statistics.TotalJobs</h5>
+                <small class="text-muted">Total Jobs</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body text-center">
+                <i class="fas fa-hourglass-half fs-3 text-warning mb-2"></i>
+                <h5 class="mb-1">@Model.Statistics.PendingJobs</h5>
+                <small class="text-muted">Pending</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body text-center">
+                <i class="fas fa-play-circle fs-3 text-primary mb-2"></i>
+                <h5 class="mb-1">@Model.Statistics.InProgressJobs</h5>
+                <small class="text-muted">In Progress</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body text-center">
+                <i class="fas fa-check-circle fs-3 text-success mb-2"></i>
+                <h5 class="mb-1">@Model.Statistics.CompletedToday</h5>
+                <small class="text-muted">Today</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body text-center">
+                <i class="fas fa-exclamation-triangle fs-3 text-danger mb-2"></i>
+                <h5 class="mb-1">@Model.Statistics.OverdueJobs</h5>
+                <small class="text-muted">Overdue</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body text-center">
+                <i class="fas fa-clock fs-3 text-info mb-2"></i>
+                <h5 class="mb-1">@Model.Statistics.AverageCompletionTime.ToString("F1")h</h5>
+                <small class="text-muted">Avg Time</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filters -->
+<div class="card mb-4 border-0 shadow-sm">
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-md-3">
+                <label class="form-label">Search Jobs</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                    <input asp-for="SearchTerm" class="form-control" placeholder="Search by asset, technician..." />
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Status</label>
+                <select asp-for="StatusFilter" class="form-select">
+                    <option value="">All Statuses</option>
+                    <option value="Pending">Pending</option>
+                    <option value="InProgress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Failed">Failed</option>
+                    <option value="Cancelled">Cancelled</option>
+                    <option value="Scheduled">Scheduled</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Priority</label>
+                <select asp-for="PriorityFilter" class="form-select">
+                    <option value="">All Priorities</option>
+                    <option value="Urgent">Urgent</option>
+                    <option value="High">High</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Technician</label>
+                <select asp-for="TechnicianFilter" asp-items="Model.Technicians" class="form-select">
+                    <option value="">All Technicians</option>
+                </select>
+            </div>
+            <div class="col-md-3 d-flex align-items-end gap-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-filter me-2"></i>Filter
+                </button>
+                <a asp-page="./Queue" class="btn btn-outline-secondary">
+                    <i class="fas fa-times me-2"></i>Clear
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Job Queue Table -->
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-light">
+        <h5 class="card-title mb-0">
+            <i class="fas fa-list me-2"></i>Job Queue (@Model.Jobs.Count() jobs)
+        </h5>
+    </div>
+    <div class="card-body p-0">
+        @if (Model.Jobs.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Priority</th>
+                            <th>Asset</th>
+                            <th>Imaging Type</th>
+                            <th>Status</th>
+                            <th>Technician</th>
+                            <th>Scheduled</th>
+                            <th>Progress</th>
+                            <th width="180">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var job in Model.Jobs)
+                        {
+                            <tr class="@Model.GetPriorityClass(job)">
+                                <td>
+                                    <span class="badge bg-@Model.GetPriorityColor(job.Priority)">
+                                        <i class="fas @Model.GetPriorityIcon(job.Priority) me-1"></i>@job.Priority
+                                    </span>
+                                    @if (job.IsOverdue)
+                                    {
+                                        <br><small class="text-danger"><i class="fas fa-clock me-1"></i>Overdue!</small>
+                                    }
+                                </td>
+                                <td>
+                                    <div>
+                                        <div class="fw-medium">@job.Asset.AssetDescription</div>
+                                        <small class="text-muted">
+                                            <span class="badge bg-light text-dark">@job.Asset.AssetTag</span>
+                                        </small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge bg-info">@job.ImagingType</span>
+                                    @if (!string.IsNullOrEmpty(job.ImageVersion))
+                                    {
+                                        <br><small class="text-muted">v@job.ImageVersion</small>
+                                    }
+                                </td>
+                                <td>
+                                    <span class="badge bg-@Model.GetStatusColor(job.Status)">
+                                        @job.Status
+                                    </span>
+                                </td>
+                                <td>
+                                    @if (job.Technician != null)
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-user-cog me-2 text-muted"></i>
+                                            <span>@job.Technician.FullName</span>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">
+                                            <i class="fas fa-user-slash me-1"></i>Unassigned
+                                        </span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (job.ScheduledAt.HasValue)
+                                    {
+                                        <div>
+                                            <div>@job.ScheduledAt.Value.ToString("MMM dd, HH:mm")</div>
+                                            @if (job.IsOverdue)
+                                            {
+                                                <small class="text-danger">
+                                                    <i class="fas fa-clock me-1"></i>Overdue
+                                                </small>
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">Not scheduled</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (job.Status == buildone.Data.Enums.JobStatus.InProgress && job.StartedAt.HasValue)
+                                    {
+                                        <div>
+                                            <small class="text-muted">
+                                                Started: @job.StartedAt.Value.ToString("HH:mm")
+                                            </small>
+                                            <div class="progress mt-1" style="height: 4px;">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                                     style="width: 50%"></div>
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (job.Status == buildone.Data.Enums.JobStatus.Completed && job.Duration.HasValue)
+                                    {
+                                        <small class="text-success">
+                                            <i class="fas fa-check me-1"></i>
+                                            @job.Duration.Value.ToString(@"hh\:mm")
+                                        </small>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">-</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-1">
+                                        @if (job.Status == buildone.Data.Enums.JobStatus.Pending)
+                                        {
+                                            <button type="button" 
+                                                    class="btn btn-sm btn-outline-success d-flex align-items-center justify-content-center" 
+                                                    style="width: 32px; height: 32px;"
+                                                    onclick="startJob(@job.Id)" 
+                                                    title="Start Job"
+                                                    data-bs-toggle="tooltip">
+                                                <i class="fas fa-play"></i>
+                                            </button>
+                                        }
+                                        
+                                        @if (job.Status == buildone.Data.Enums.JobStatus.InProgress)
+                                        {
+                                            <button type="button" 
+                                                    class="btn btn-sm btn-outline-success d-flex align-items-center justify-content-center" 
+                                                    style="width: 32px; height: 32px;"
+                                                    onclick="completeJob(@job.Id)" 
+                                                    title="Complete Job"
+                                                    data-bs-toggle="tooltip">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button type="button" 
+                                                    class="btn btn-sm btn-outline-danger d-flex align-items-center justify-content-center" 
+                                                    style="width: 32px; height: 32px;"
+                                                    onclick="failJob(@job.Id)" 
+                                                    title="Mark as Failed"
+                                                    data-bs-toggle="tooltip">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        }
+                                        
+                                        @if (job.Technician == null && job.Status != buildone.Data.Enums.JobStatus.Completed)
+                                        {
+                                            <button type="button" 
+                                                    class="btn btn-sm btn-outline-info d-flex align-items-center justify-content-center" 
+                                                    style="width: 32px; height: 32px;"
+                                                    onclick="assignTechnician(@job.Id)" 
+                                                    title="Assign Technician"
+                                                    data-bs-toggle="tooltip">
+                                                <i class="fas fa-user-plus"></i>
+                                            </button>
+                                        }
+                                        
+                                        <a asp-page="./Details" asp-route-id="@job.Id" 
+                                           class="btn btn-sm btn-outline-secondary d-flex align-items-center justify-content-center" 
+                                           style="width: 32px; height: 32px;"
+                                           title="View Details"
+                                           data-bs-toggle="tooltip">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-5">
+                <i class="fas fa-inbox display-4 text-muted"></i>
+                <h5 class="text-muted mt-3">No Jobs in Queue</h5>
+                <p class="text-muted">There are no imaging jobs matching the current filters.</p>
+                <a asp-page="./Create" class="btn btn-primary">
+                    <i class="fas fa-plus me-2"></i>Create First Job
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Action Modals -->
+
+<!-- Start Job Modal -->
+<div class="modal fade" id="startJobModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Start Imaging Job</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" asp-page-handler="StartJob">
+                <div class="modal-body">
+                    <p>Select a technician to start this imaging job:</p>
+                    <div class="mb-3">
+                        <label class="form-label">Technician</label>
+                        <select name="technicianId" class="form-select" required>
+                            <option value="">Select technician...</option>
+                            @foreach (var technician in Model.Technicians)
+                            {
+                                <option value="@technician.Value">@technician.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <input type="hidden" name="jobId" id="startJobId" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-play me-2"></i>Start Job
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Complete Job Modal -->
+<div class="modal fade" id="completeJobModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Complete Imaging Job</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" asp-page-handler="CompleteJob">
+                <div class="modal-body">
+                    <p>Mark this job as completed:</p>
+                    <div class="mb-3">
+                        <label class="form-label">Completion Notes (Optional)</label>
+                        <textarea name="notes" class="form-control" rows="3" 
+                                  placeholder="Add any notes about the completion..."></textarea>
+                    </div>
+                    <input type="hidden" name="jobId" id="completeJobId" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-check me-2"></i>Complete Job
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Fail Job Modal -->
+<div class="modal fade" id="failJobModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Mark Job as Failed</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" asp-page-handler="FailJob">
+                <div class="modal-body">
+                    <p>Mark this job as failed:</p>
+                    <div class="mb-3">
+                        <label class="form-label">Failure Reason</label>
+                        <textarea name="notes" class="form-control" rows="3" 
+                                  placeholder="Describe why the job failed..." required></textarea>
+                    </div>
+                    <input type="hidden" name="jobId" id="failJobId" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-times me-2"></i>Mark as Failed
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Assign Technician Modal -->
+<div class="modal fade" id="assignTechnicianModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Assign Technician</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" asp-page-handler="AssignTechnician">
+                <div class="modal-body">
+                    <p>Assign a technician to this job:</p>
+                    <div class="mb-3">
+                        <label class="form-label">Technician</label>
+                        <select name="technicianId" class="form-select" required>
+                            <option value="">Select technician...</option>
+                            @foreach (var technician in Model.Technicians)
+                            {
+                                <option value="@technician.Value">@technician.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <input type="hidden" name="jobId" id="assignJobId" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-user-plus me-2"></i>Assign Technician
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function startJob(jobId) {
+            document.getElementById('startJobId').value = jobId;
+            var modal = new bootstrap.Modal(document.getElementById('startJobModal'));
+            modal.show();
+        }
+
+        function completeJob(jobId) {
+            document.getElementById('completeJobId').value = jobId;
+            var modal = new bootstrap.Modal(document.getElementById('completeJobModal'));
+            modal.show();
+        }
+
+        function failJob(jobId) {
+            document.getElementById('failJobId').value = jobId;
+            var modal = new bootstrap.Modal(document.getElementById('failJobModal'));
+            modal.show();
+        }
+
+        function assignTechnician(jobId) {
+            document.getElementById('assignJobId').value = jobId;
+            var modal = new bootstrap.Modal(document.getElementById('assignTechnicianModal'));
+            modal.show();
+        }
+
+        // Auto-refresh every 30 seconds
+        setTimeout(function() {
+            location.reload();
+        }, 30000);
+
+        // Auto-hide alerts after 5 seconds
+        setTimeout(function() {
+            var alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function(alert) {
+                var bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            });
+        }, 5000);
+    </script>
+}

@@ -1,0 +1,165 @@
+@model buildone.Models.SecuritySettings
+
+@{
+    ViewData["Title"] = "Security Settings";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="fas fa-shield-alt me-2"></i>System Settings
+                        </h5>
+                        <div class="btn-group" role="group">
+                            <a asp-action="Index" class="btn btn-outline-light btn-sm">General</a>
+                            <a asp-action="Security" class="btn btn-light btn-sm active">Security</a>
+                            <a asp-action="Database" class="btn btn-outline-light btn-sm">Database</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>@TempData["SuccessMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-circle me-2"></i>@TempData["ErrorMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    <form asp-action="Security" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- Password Requirements -->
+                                <h6 class="border-bottom pb-2 mb-3">
+                                    <i class="fas fa-key me-2"></i>Password Requirements
+                                </h6>
+
+                                <div class="mb-3">
+                                    <label asp-for="PasswordMinLength" class="form-label">Minimum Password Length</label>
+                                    <input asp-for="PasswordMinLength" class="form-control" type="number" min="6" max="20" />
+                                    <span asp-validation-for="PasswordMinLength" class="text-danger"></span>
+                                    <small class="form-text text-muted">Set between 6 and 20 characters</small>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input asp-for="RequireDigit" class="form-check-input" />
+                                        <label asp-for="RequireDigit" class="form-check-label">Require at least one digit (0-9)</label>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input asp-for="RequireLowercase" class="form-check-input" />
+                                        <label asp-for="RequireLowercase" class="form-check-label">Require at least one lowercase letter (a-z)</label>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input asp-for="RequireUppercase" class="form-check-input" />
+                                        <label asp-for="RequireUppercase" class="form-check-label">Require at least one uppercase letter (A-Z)</label>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input asp-for="RequireNonAlphanumeric" class="form-check-input" />
+                                        <label asp-for="RequireNonAlphanumeric" class="form-check-label">Require at least one special character (!@@#$%^&*)</label>
+                                    </div>
+                                </div>
+
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    <strong>Example:</strong> With current settings, valid passwords must:
+                                    <ul class="mb-0 mt-2">
+                                        <li>Be at least @Model.PasswordMinLength characters long</li>
+                                        @if (Model.RequireDigit) { <li>Contain at least one number</li> }
+                                        @if (Model.RequireLowercase) { <li>Contain at least one lowercase letter</li> }
+                                        @if (Model.RequireUppercase) { <li>Contain at least one uppercase letter</li> }
+                                        @if (Model.RequireNonAlphanumeric) { <li>Contain at least one special character</li> }
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <!-- Account Lockout Settings -->
+                                <h6 class="border-bottom pb-2 mb-3">
+                                    <i class="fas fa-lock me-2"></i>Account Lockout Settings
+                                </h6>
+
+                                <div class="mb-3">
+                                    <label asp-for="MaxFailedAccessAttempts" class="form-label">Maximum Failed Login Attempts</label>
+                                    <input asp-for="MaxFailedAccessAttempts" class="form-control" type="number" min="3" max="10" />
+                                    <span asp-validation-for="MaxFailedAccessAttempts" class="text-danger"></span>
+                                    <small class="form-text text-muted">Number of failed attempts before account is locked</small>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="LockoutTimeSpanMinutes" class="form-label">Lockout Duration (minutes)</label>
+                                    <input asp-for="LockoutTimeSpanMinutes" class="form-control" type="number" min="5" max="1440" />
+                                    <span asp-validation-for="LockoutTimeSpanMinutes" class="text-danger"></span>
+                                    <small class="form-text text-muted">How long accounts remain locked after too many failed attempts</small>
+                                </div>
+
+                                <!-- Session Settings -->
+                                <h6 class="border-bottom pb-2 mb-3 mt-4">
+                                    <i class="fas fa-clock me-2"></i>Session Settings
+                                </h6>
+
+                                <div class="mb-3">
+                                    <label asp-for="SessionTimeoutMinutes" class="form-label">Session Timeout (minutes)</label>
+                                    <input asp-for="SessionTimeoutMinutes" class="form-control" type="number" min="15" max="480" />
+                                    <span asp-validation-for="SessionTimeoutMinutes" class="text-danger"></span>
+                                    <small class="form-text text-muted">Inactive users will be logged out after this time</small>
+                                </div>
+
+                                <div class="alert alert-warning">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    <strong>Warning:</strong> Changes to security settings will affect all users immediately. 
+                                    Stricter requirements may cause issues for existing users with weak passwords.
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4" />
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-1"></i>Back to General Settings
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i>Save Security Settings
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Auto-dismiss alerts after 5 seconds
+        setTimeout(function() {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function(alert) {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            });
+        }, 5000);
+    </script>
+}

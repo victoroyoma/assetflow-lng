@@ -1,0 +1,513 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\victo\\source\\repos\\buildone\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\pages\\dbtest.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:pages\\dbtest.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\pages\\dbtest.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:pages\\dbtest.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\pages\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:pages\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\pages\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:pages\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\pages\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:pages\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\pages\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:pages\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\pages\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:pages\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\pages\\error.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:pages\\error.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\pages\\products\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:pages\\products\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\pages\\products\\delete.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:pages\\products\\delete.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\pages\\products\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:pages\\products\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\pages\\products\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:pages\\products\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\pages\\products\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:pages\\products\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\pages\\products\\create.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:pages\\products\\create.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\pages\\products\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:pages\\products\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\pages\\products\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:pages\\products\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\services\\iproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:services\\iproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\data\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:data\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\buildone.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:buildone.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|c:\\users\\victo\\source\\repos\\buildone\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{97E112B8-1B58-43AF-9133-B8BAB1E908AC}|buildone.csproj|solutionrelative:models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DbTest.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\DbTest.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\DbTest.cshtml.cs",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\DbTest.cshtml.cs",
+              "RelativeToolTip": "Pages\\DbTest.cshtml.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T02:58:45.591Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DbTest.cshtml",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\DbTest.cshtml",
+              "RelativeDocumentMoniker": "Pages\\DbTest.cshtml",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\DbTest.cshtml",
+              "RelativeToolTip": "Pages\\DbTest.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABUAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-16T02:58:34.918Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "Pages\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\_ViewImports.cshtml",
+              "RelativeToolTip": "Pages\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-16T02:44:16.73Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "Pages\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\_ViewStart.cshtml",
+              "RelativeToolTip": "Pages\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-16T02:31:44.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Pages\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-16T02:31:50.319Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Index.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Index.cshtml",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Index.cshtml",
+              "RelativeToolTip": "Pages\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-16T02:04:43.937Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Index.cshtml.cs",
+              "RelativeToolTip": "Pages\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T02:03:59.692Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-16T02:17:48.36Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAiwAAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T01:58:04.582Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-16T02:48:36.786Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Error.cshtml",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Error.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Error.cshtml",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Error.cshtml",
+              "RelativeToolTip": "Pages\\Error.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-16T02:48:28.337Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Error.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Error.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Error.cshtml.cs",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Error.cshtml.cs",
+              "RelativeToolTip": "Pages\\Error.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T02:48:19.576Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "site.js",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\wwwroot\\js\\site.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\site.js",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\wwwroot\\js\\site.js",
+              "RelativeToolTip": "wwwroot\\js\\site.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-09-16T02:47:14.796Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Edit.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Products\\Edit.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Products\\Edit.cshtml.cs",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Products\\Edit.cshtml.cs",
+              "RelativeToolTip": "Pages\\Products\\Edit.cshtml.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAuwEAAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T02:31:05.346Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Products\\Create.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Products\\Create.cshtml",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Products\\Create.cshtml",
+              "RelativeToolTip": "Pages\\Products\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-16T02:30:40.833Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Products\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Products\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Products\\Edit.cshtml",
+              "RelativeToolTip": "Pages\\Products\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-16T02:31:11.937Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Delete.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Products\\Delete.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Products\\Delete.cshtml.cs",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Products\\Delete.cshtml.cs",
+              "RelativeToolTip": "Pages\\Products\\Delete.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T02:31:17.347Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Create.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Products\\Create.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Products\\Create.cshtml.cs",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Products\\Create.cshtml.cs",
+              "RelativeToolTip": "Pages\\Products\\Create.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T02:29:50.47Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Products\\Delete.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Products\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Products\\Delete.cshtml",
+              "RelativeToolTip": "Pages\\Products\\Delete.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-16T02:31:24.023Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Products\\Index.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Products\\Index.cshtml",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Products\\Index.cshtml",
+              "RelativeToolTip": "Pages\\Products\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-16T02:30:10.602Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Products\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Products\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Pages\\Products\\Index.cshtml.cs",
+              "RelativeToolTip": "Pages\\Products\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T02:30:15.372Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "ProductService.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Services\\ProductService.cs",
+              "RelativeDocumentMoniker": "Services\\ProductService.cs",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Services\\ProductService.cs",
+              "RelativeToolTip": "Services\\ProductService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T02:45:27.447Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "IProductService.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Services\\IProductService.cs",
+              "RelativeDocumentMoniker": "Services\\IProductService.cs",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Services\\IProductService.cs",
+              "RelativeToolTip": "Services\\IProductService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T02:45:21.478Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Data\\Product.cs",
+              "RelativeDocumentMoniker": "Data\\Product.cs",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Data\\Product.cs",
+              "RelativeToolTip": "Data\\Product.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAwwCYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T02:18:34.043Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAewDUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T02:18:58.584Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "buildone",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\buildone.csproj",
+              "RelativeDocumentMoniker": "buildone.csproj",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\buildone.csproj",
+              "RelativeToolTip": "buildone.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-09-16T02:04:34.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-16T01:57:53.76Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T01:57:43.213Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\victo\\source\\repos\\buildone\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\victo\\source\\repos\\buildone\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T01:57:37.388Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

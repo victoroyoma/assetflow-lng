@@ -1,0 +1,186 @@
+@page
+@model buildone.Pages.Imaging.CreateModel
+@{
+    ViewData["Title"] = "Create Imaging Job";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-plus-circle text-primary"></i> Create Imaging Job</h2>
+                <a asp-page="./Queue" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Queue
+                </a>
+            </div>
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-triangle"></i> @TempData["ErrorMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-desktop"></i> Imaging Job Details</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="ImagingJob.AssetId" class="form-label"></label>
+                                    <select asp-for="ImagingJob.AssetId" class="form-select" asp-items="@(new SelectList(Model.AvailableAssets, "Id", "AssetTag"))">
+                                        <option value="">-- Select Asset --</option>
+                                    </select>
+                                    <span asp-validation-for="ImagingJob.AssetId" class="text-danger"></span>
+                                    @if (!Model.AvailableAssets.Any())
+                                    {
+                                        <div class="form-text text-warning">
+                                            <i class="fas fa-exclamation-triangle"></i> No assets available for imaging. All assets may have active imaging jobs.
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="ImagingJob.TechnicianId" class="form-label"></label>
+                                    <select asp-for="ImagingJob.TechnicianId" class="form-select" asp-items="@(new SelectList(Model.Technicians, "Id", "FullName"))">
+                                        <option value="">-- Assign Later --</option>
+                                    </select>
+                                    <span asp-validation-for="ImagingJob.TechnicianId" class="text-danger"></span>
+                                    <div class="form-text">Leave blank to assign a technician later</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="ImagingJob.ImagingType" class="form-label"></label>
+                                    <select asp-for="ImagingJob.ImagingType" class="form-select" asp-items="Html.GetEnumSelectList<ImagingType>()">
+                                    </select>
+                                    <span asp-validation-for="ImagingJob.ImagingType" class="text-danger"></span>
+                                    <div class="form-text">
+                                        <small>
+                                            <strong>Fresh:</strong> Complete new installation<br>
+                                            <strong>Wipe and Load:</strong> Format and reinstall<br>
+                                            <strong>Bare Metal:</strong> Hardware-level installation
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="ImagingJob.ImageVersion" class="form-label"></label>
+                                    <input asp-for="ImagingJob.ImageVersion" class="form-control" placeholder="e.g., Windows11-2024.1">
+                                    <span asp-validation-for="ImagingJob.ImageVersion" class="text-danger"></span>
+                                    <div class="form-text">Specify the image version to be used</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="ImagingJob.Priority" class="form-label"></label>
+                                    <select asp-for="ImagingJob.Priority" class="form-select" asp-items="Html.GetEnumSelectList<buildone.Data.Enums.JobPriority>()">
+                                    </select>
+                                    <span asp-validation-for="ImagingJob.Priority" class="text-danger"></span>
+                                    <div class="form-text">
+                                        <small>
+                                            <strong>Urgent:</strong> Critical - handle immediately<br>
+                                            <strong>High:</strong> Important - prioritize<br>
+                                            <strong>Normal:</strong> Standard priority<br>
+                                            <strong>Low:</strong> Can be deferred
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="ImagingJob.ScheduledAt" class="form-label"></label>
+                                    <input asp-for="ImagingJob.ScheduledAt" class="form-control" type="datetime-local">
+                                    <span asp-validation-for="ImagingJob.ScheduledAt" class="text-danger"></span>
+                                    <div class="form-text">Leave blank for immediate scheduling</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="ImagingJob.DueDate" class="form-label"></label>
+                                    <input asp-for="ImagingJob.DueDate" class="form-control" type="datetime-local">
+                                    <span asp-validation-for="ImagingJob.DueDate" class="text-danger"></span>
+                                    <div class="form-text">Optional due date for tracking</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="ImagingJob.Notes" class="form-label"></label>
+                                    <textarea asp-for="ImagingJob.Notes" class="form-control" rows="4" placeholder="Add any special instructions or notes..."></textarea>
+                                    <span asp-validation-for="ImagingJob.Notes" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-between">
+                                    <a asp-page="./Queue" class="btn btn-secondary">
+                                        <i class="fas fa-times"></i> Cancel
+                                    </a>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save"></i> Create Imaging Job
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Available Assets Info -->
+            @if (Model.AvailableAssets.Any())
+            {
+                <div class="card mt-4">
+                    <div class="card-header bg-info text-white">
+                        <h6 class="mb-0"><i class="fas fa-info-circle"></i> Available Assets (@Model.AvailableAssets.Count)</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach (var asset in Model.AvailableAssets.Take(6))
+                            {
+                                <div class="col-md-4 mb-2">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-desktop text-muted me-2"></i>
+                                        <div>
+                                            <strong>@asset.AssetTag</strong> - @asset.PcId<br>
+                                            <small class="text-muted">@asset.Brand @asset.Model</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.AvailableAssets.Count > 6)
+                            {
+                                <div class="col-12">
+                                    <small class="text-muted">... and @(Model.AvailableAssets.Count - 6) more assets</small>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function() {
+            // Auto-focus on asset selection
+            $('#ImagingJob_AssetId').focus();
+            
+            // Set default datetime to current time + 1 hour if not set
+            var scheduledInput = $('#ImagingJob_ScheduledAt');
+            if (!scheduledInput.val()) {
+                var now = new Date();
+                now.setHours(now.getHours() + 1);
+                var formattedDate = now.toISOString().slice(0, 16);
+                scheduledInput.val(formattedDate);
+            }
+        });
+    </script>
+}
