@@ -1,42 +1,53 @@
-@page
+@page "{id:int?}"
 @model buildone.Pages.Employees.DetailsModel
 @{
-    ViewData["Title"] = $"Employee Details - {Model.Employee.FullName}";
+    ViewData["Title"] = $"Employee Details - {Model.Employee?.FullName ?? "Unknown"}";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h1 class="h3 mb-0">
-            <i class="bi bi-person me-2 text-primary"></i>@Model.Employee.FullName
-        </h1>
-        <p class="text-muted mb-0">Employee details and asset assignments</p>
-    </div>
-    <div>
-        <a asp-page="./Edit" asp-route-id="@Model.Employee.Id" class="btn btn-outline-primary me-2">
-            <i class="bi bi-pencil me-2"></i>Edit Employee
-        </a>
-        <a asp-page="./Index" class="btn btn-outline-secondary">
-            <i class="bi bi-arrow-left me-2"></i>Back to Employees
-        </a>
-    </div>
-</div>
-
-<!-- Alert Messages -->
-@if (TempData["SuccessMessage"] != null)
+@if (Model.Employee == null)
 {
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <i class="bi bi-check-circle me-2"></i>@TempData["SuccessMessage"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <div class="alert alert-warning">
+        <i class="bi bi-exclamation-triangle me-2"></i>Employee not found.
     </div>
+    <a asp-page="./Index" class="btn btn-primary">
+        <i class="bi bi-arrow-left me-2"></i>Back to Employees
+    </a>
 }
-
-@if (TempData["ErrorMessage"] != null)
+else
 {
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <i class="bi bi-exclamation-triangle me-2"></i>@TempData["ErrorMessage"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0">
+                <i class="bi bi-person me-2 text-primary"></i>@Model.Employee.FullName
+            </h1>
+            <p class="text-muted mb-0">Employee details and asset assignments</p>
+        </div>
+        <div>
+            <a asp-page="./Edit" asp-route-id="@Model.Employee.Id" class="btn btn-outline-primary me-2">
+                <i class="bi bi-pencil me-2"></i>Edit Employee
+            </a>
+            <a asp-page="./Index" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-2"></i>Back to Employees
+            </a>
+        </div>
     </div>
-}
+
+    <!-- Alert Messages -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle me-2"></i>@TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle me-2"></i>@TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
 
 <div class="row">
     <div class="col-lg-8">
@@ -243,6 +254,8 @@
         </div>
     </div>
 </div>
+
+}
 
 @section Scripts {
     <script>

@@ -458,7 +458,6 @@ C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\Microsoft.OpenApi.dll
 C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\victo\Desktop\buildone\obj\Debug\net9.0\compressed\6jdcpseux2-bnzylfkkpg.gz
 C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -528,7 +527,6 @@ C:\Users\victo\Desktop\buildone\obj\Debug\net9.0\compressed\a3ygkwa5zy-2z0ns9nrw
 C:\Users\victo\Desktop\buildone\obj\Debug\net9.0\compressed\nezrqnk58p-muycvpuwrr.gz
 C:\Users\victo\Desktop\buildone\obj\Debug\net9.0\compressed\v0zgfp0y55-87fc7y1x7t.gz
 C:\Users\victo\Desktop\buildone\obj\Debug\net9.0\compressed\yfc7ypekbg-mlv21k5csn.gz
-C:\Users\victo\Desktop\buildone\obj\Debug\net9.0\compressed\xnmug6gfkp-48qfz41b93.gz
 C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\buildone.xml
 C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\AutoMapper.dll
 C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
@@ -545,3 +543,6 @@ C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\Serilog.Sinks.Console.dll
 C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\Serilog.Sinks.Debug.dll
 C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\Serilog.Sinks.File.dll
 C:\Users\victo\Desktop\buildone\obj\Debug\net9.0\buildone.xml
+C:\Users\victo\Desktop\buildone\obj\Debug\net9.0\buildone.sourcelink.json
+C:\Users\victo\Desktop\buildone\obj\Debug\net9.0\compressed\xnmug6gfkp-pxmpuzzyk1.gz
+C:\Users\victo\Desktop\buildone\obj\Debug\net9.0\compressed\6jdcpseux2-k7tcqqtrhj.gz

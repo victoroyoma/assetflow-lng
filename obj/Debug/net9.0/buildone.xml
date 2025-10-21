@@ -45,8 +45,15 @@
         </member>
         <member name="M:buildone.Controllers.NotificationsController.GetNotifications">
             <summary>
-            Temporary endpoint returning empty notifications until full implementation
+            Gets recent notifications including warranty alerts, job updates, and system events
             </summary>
+        </member>
+        <member name="M:buildone.Controllers.SearchController.Search(System.String)">
+            <summary>
+            Global search across assets, employees, and departments
+            </summary>
+            <param name="q">Search query</param>
+            <returns>Search results grouped by category</returns>
         </member>
         <member name="T:buildone.DTOs.ApiResponse`1">
             <summary>

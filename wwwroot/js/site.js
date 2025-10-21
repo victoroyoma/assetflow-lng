@@ -116,9 +116,14 @@ const AssetFlow = {
         // Show loading state
         this.showLoading('Searching...');
         
-        // Simulate API call - replace with actual search endpoint
+        // Call actual search endpoint
         fetch(`/api/search?q=${encodeURIComponent(query)}`)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 this.hideLoading();
                 this.displaySearchResults(data);
@@ -131,8 +136,127 @@ const AssetFlow = {
     },
 
     displaySearchResults: function(results) {
-        // Implementation for search results display
         console.log('Search results:', results);
+        
+        // Create search results modal
+        let modal = document.getElementById('searchResultsModal');
+        if (!modal) {
+            const modalHtml = `
+                <div class="modal fade" id="searchResultsModal" tabindex="-1" aria-labelledby="searchResultsModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="searchResultsModalLabel">
+                                    <i class="fas fa-search me-2"></i>Search Results
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="searchResultsContent">
+                                <!-- Results will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            modal = document.getElementById('searchResultsModal');
+        }
+
+        const content = document.getElementById('searchResultsContent');
+        
+        if (results.totalResults === 0) {
+            content.innerHTML = `
+                <div class="text-center py-5">
+                    <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">No results found for "${results.query}"</h5>
+                    <p class="text-muted">Try different search terms</p>
+                </div>
+            `;
+        } else {
+            let html = `
+                <div class="mb-3">
+                    <small class="text-muted">Found ${results.totalResults} result(s) for "${results.query}"</small>
+                </div>
+            `;
+
+            // Display Assets
+            if (results.results.assets && results.results.assets.length > 0) {
+                html += '<h6 class="mb-3"><i class="fas fa-laptop me-2 text-primary"></i>Assets</h6>';
+                html += '<div class="list-group mb-4">';
+                results.results.assets.forEach(item => {
+                    html += `
+                        <a href="${item.url}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1"><i class="fas ${item.icon} me-2 text-primary"></i>${item.title}</h6>
+                                <small class="text-muted">${item.description}</small>
+                            </div>
+                            <small class="text-muted">${item.subtitle}</small>
+                        </a>
+                    `;
+                });
+                html += '</div>';
+            }
+
+            // Display Employees
+            if (results.results.employees && results.results.employees.length > 0) {
+                html += '<h6 class="mb-3"><i class="fas fa-user me-2 text-success"></i>Employees</h6>';
+                html += '<div class="list-group mb-4">';
+                results.results.employees.forEach(item => {
+                    html += `
+                        <a href="${item.url}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1"><i class="fas ${item.icon} me-2 text-success"></i>${item.title}</h6>
+                                <small class="text-muted">${item.description}</small>
+                            </div>
+                            <small class="text-muted">${item.subtitle}</small>
+                        </a>
+                    `;
+                });
+                html += '</div>';
+            }
+
+            // Display Departments
+            if (results.results.departments && results.results.departments.length > 0) {
+                html += '<h6 class="mb-3"><i class="fas fa-building me-2 text-info"></i>Departments</h6>';
+                html += '<div class="list-group mb-4">';
+                results.results.departments.forEach(item => {
+                    html += `
+                        <a href="${item.url}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1"><i class="fas ${item.icon} me-2 text-info"></i>${item.title}</h6>
+                                <small class="text-muted">${item.description}</small>
+                            </div>
+                            <small class="text-muted">${item.subtitle}</small>
+                        </a>
+                    `;
+                });
+                html += '</div>';
+            }
+
+            // Display Imaging Jobs
+            if (results.results.imagingJobs && results.results.imagingJobs.length > 0) {
+                html += '<h6 class="mb-3"><i class="fas fa-compact-disc me-2 text-warning"></i>Imaging Jobs</h6>';
+                html += '<div class="list-group mb-4">';
+                results.results.imagingJobs.forEach(item => {
+                    html += `
+                        <a href="${item.url}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1"><i class="fas ${item.icon} me-2 text-warning"></i>${item.title}</h6>
+                                <small class="text-muted">${item.description}</small>
+                            </div>
+                            <small class="text-muted">${item.subtitle}</small>
+                        </a>
+                    `;
+                });
+                html += '</div>';
+            }
+
+            content.innerHTML = html;
+        }
+
+        // Show modal
+        const bsModal = new bootstrap.Modal(modal);
+        bsModal.show();
     },
 
     // ========================================================================
@@ -176,11 +300,68 @@ const AssetFlow = {
             badge.textContent = count;
             badge.style.display = count > 0 ? 'flex' : 'none';
         }
+        
+        // Also update the header badge in dropdown
+        const dropdownBadge = document.querySelector('.notification-dropdown .dropdown-header .badge');
+        if (dropdownBadge) {
+            dropdownBadge.textContent = count;
+        }
     },
 
     updateNotificationList: function(notifications) {
-        // Implementation for updating notification dropdown
-        console.log('Notifications:', notifications);
+        const dropdown = document.querySelector('.notification-dropdown');
+        if (!dropdown) return;
+
+        // Build notifications HTML
+        let html = `
+            <li class="dropdown-header">
+                <strong>Notifications</strong>
+                <span class="badge bg-primary">${notifications.length}</span>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+        `;
+
+        if (notifications.length === 0) {
+            html += `
+                <li class="notification-item">
+                    <div class="dropdown-item text-center text-muted py-4">
+                        <i class="fas fa-bell-slash fa-2x mb-2"></i>
+                        <p class="mb-0">No notifications</p>
+                    </div>
+                </li>
+            `;
+        } else {
+            notifications.forEach(notif => {
+                const bgColorClass = notif.iconColor === 'warning' ? 'bg-warning' :
+                                    notif.iconColor === 'danger' ? 'bg-danger' :
+                                    notif.iconColor === 'success' ? 'bg-success' :
+                                    notif.iconColor === 'info' ? 'bg-info' : 'bg-secondary';
+                
+                const unreadClass = notif.isRead ? '' : 'unread-notification';
+                
+                html += `
+                    <li class="notification-item ${unreadClass}">
+                        <a class="dropdown-item" href="${notif.url || '#'}">
+                            <div class="notification-icon ${bgColorClass}">
+                                <i class="fas ${notif.icon}"></i>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-title">${notif.title}</div>
+                                <div class="notification-text">${notif.message}</div>
+                                <div class="notification-time">${notif.time}</div>
+                            </div>
+                        </a>
+                    </li>
+                `;
+            });
+        }
+
+        html += `
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-center" href="/Notifications">View all notifications</a></li>
+        `;
+
+        dropdown.innerHTML = html;
     },
 
     // ========================================================================

@@ -426,6 +426,11 @@ body {
     padding: 0;
 }
 
+.notification-item.unread-notification {
+    background-color: rgba(37, 99, 235, 0.05);
+    border-left: 3px solid var(--primary-color);
+}
+
 .notification-item .dropdown-item {
     display: flex;
     align-items: flex-start;
@@ -436,6 +441,10 @@ body {
 
 .notification-item .dropdown-item:hover {
     background-color: var(--gray-50);
+}
+
+.notification-item.unread-notification .dropdown-item:hover {
+    background-color: rgba(37, 99, 235, 0.1);
 }
 
 .notification-icon {

@@ -1,0 +1,118 @@
+2025-10-21 17:16:23.868 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-21 17:16:28.651 +01:00 [INF] Database initialized successfully
+2025-10-21 17:16:28.664 +01:00 [INF] BuildOne started successfully
+2025-10-21 17:18:33.082 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-21 17:18:33.256 +01:00 [INF] HTTP GET / responded 302 in 172.8430 ms
+2025-10-21 17:18:33.798 +01:00 [INF] HTTP GET /Account/Login responded 200 in 472.1032 ms
+2025-10-21 17:18:33.931 +01:00 [INF] HTTP GET /js/site.js responded 200 in 9.7632 ms
+2025-10-21 17:18:33.931 +01:00 [INF] HTTP GET /css/site.css responded 200 in 15.6057 ms
+2025-10-21 17:18:33.977 +01:00 [INF] HTTP GET /lib/bootstrap/dist/css/bootstrap.min.css responded 200 in 76.5504 ms
+2025-10-21 17:18:34.019 +01:00 [INF] HTTP GET /lib/jquery-validation/dist/jquery.validate.min.js responded 200 in 90.4526 ms
+2025-10-21 17:18:34.064 +01:00 [INF] HTTP GET /lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js responded 200 in 54.3041 ms
+2025-10-21 17:18:34.065 +01:00 [INF] HTTP GET /lib/bootstrap/dist/js/bootstrap.bundle.min.js responded 200 in 142.1624 ms
+2025-10-21 17:18:34.121 +01:00 [INF] HTTP GET /lib/jquery/dist/jquery.min.js responded 200 in 201.7842 ms
+2025-10-21 17:18:34.347 +01:00 [INF] HTTP GET /api/notifications responded 200 in 36.9621 ms
+2025-10-21 17:18:35.939 +01:00 [INF] HTTP GET /favicon.ico responded 200 in 23.8909 ms
+2025-10-21 17:18:40.802 +01:00 [INF] HTTP POST /Account/Login responded 302 in 838.4978 ms
+2025-10-21 17:18:40.859 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-21 17:18:41.524 +01:00 [INF] HTTP GET / responded 200 in 702.3724 ms
+2025-10-21 17:18:41.804 +01:00 [INF] HTTP GET /api/notifications responded 200 in 9.4637 ms
+2025-10-21 17:19:41.451 +01:00 [INF] HTTP GET /Employees responded 200 in 227.8273 ms
+2025-10-21 17:19:41.645 +01:00 [INF] HTTP GET /api/notifications responded 200 in 0.8703 ms
+2025-10-21 17:24:41.827 +01:00 [INF] HTTP GET /api/notifications responded 200 in 2.7759 ms
+2025-10-21 17:25:37.575 +01:00 [INF] HTTP GET /api/notifications responded 200 in 3.1623 ms
+2025-10-21 17:25:57.434 +01:00 [INF] HTTP GET /api/notifications responded 200 in 3.7233 ms
+2025-10-21 17:26:01.892 +01:00 [INF] HTTP GET /Admin/SeedData responded 200 in 154.3232 ms
+2025-10-21 17:26:02.189 +01:00 [INF] HTTP GET /api/notifications responded 200 in 1.4432 ms
+2025-10-21 17:26:27.434 +01:00 [INF] Bulk data seeding initiated by admin@buildone.com
+2025-10-21 17:26:27.462 +01:00 [INF] Starting comprehensive bulk data seeding...
+2025-10-21 17:26:27.618 +01:00 [INF] Starting bulk data seeding process...
+2025-10-21 17:26:27.642 +01:00 [INF] Departments already exist, skipping department seeding
+2025-10-21 17:26:27.647 +01:00 [INF] Seeded 4 departments
+2025-10-21 17:26:27.814 +01:00 [INF] Seeded 10 employees
+2025-10-21 17:26:28.635 +01:00 [INF] Seeded 400 assets
+2025-10-21 17:26:29.231 +01:00 [INF] Seeded 400 imaging jobs
+2025-10-21 17:26:29.235 +01:00 [INF] Bulk data seeding completed successfully!
+2025-10-21 17:26:29.237 +01:00 [INF] Summary: 4 departments, 10 employees, 400 assets, 400 imaging jobs
+2025-10-21 17:26:29.243 +01:00 [INF] Comprehensive bulk data seeding completed successfully!
+2025-10-21 17:26:29.256 +01:00 [INF] HTTP POST /Admin/SeedData responded 302 in 1832.4893 ms
+2025-10-21 17:26:29.290 +01:00 [INF] HTTP GET /Admin/SeedData responded 200 in 16.2081 ms
+2025-10-21 17:26:29.496 +01:00 [INF] HTTP GET /api/notifications responded 200 in 0.6528 ms
+2025-10-21 17:26:38.008 +01:00 [INF] HTTP GET /Employees responded 200 in 54.1087 ms
+2025-10-21 17:26:38.183 +01:00 [INF] HTTP GET /api/notifications responded 200 in 3.5161 ms
+2025-10-21 17:26:45.261 +01:00 [INF] HTTP GET /Departments responded 200 in 114.9855 ms
+2025-10-21 17:26:45.439 +01:00 [INF] HTTP GET /api/notifications responded 200 in 0.7653 ms
+2025-10-21 17:26:49.012 +01:00 [INF] HTTP GET /Assets responded 200 in 333.1759 ms
+2025-10-21 17:26:50.522 +01:00 [INF] HTTP GET /api/notifications responded 200 in 1.3696 ms
+2025-10-21 17:27:02.764 +01:00 [INF] HTTP GET /Imaging responded 200 in 110.6840 ms
+2025-10-21 17:27:02.930 +01:00 [INF] HTTP GET /api/notifications responded 200 in 0.6921 ms
+2025-10-21 17:27:35.487 +01:00 [INF] HTTP GET /api/search responded 404 in 3.1324 ms
+2025-10-21 17:27:40.757 +01:00 [INF] HTTP GET /api/search responded 404 in 0.7397 ms
+2025-10-21 17:27:41.833 +01:00 [INF] HTTP GET /api/search responded 404 in 0.6068 ms
+2025-10-21 17:27:42.276 +01:00 [INF] HTTP GET /api/search responded 404 in 1.6621 ms
+2025-10-21 17:27:47.040 +01:00 [INF] HTTP GET /api/search responded 404 in 1.1354 ms
+2025-10-21 17:28:05.221 +01:00 [INF] HTTP GET /Reports responded 200 in 165.8915 ms
+2025-10-21 17:28:09.386 +01:00 [INF] HTTP GET /api/notifications responded 200 in 0.7894 ms
+2025-10-21 17:28:20.886 +01:00 [INF] HTTP GET /Departments responded 200 in 17.2772 ms
+2025-10-21 17:28:21.087 +01:00 [INF] HTTP GET /api/notifications responded 200 in 1.0377 ms
+2025-10-21 17:28:33.066 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-21 17:28:33.184 +01:00 [INF] HTTP GET / responded 200 in 120.1761 ms
+2025-10-21 17:28:33.361 +01:00 [INF] HTTP GET /api/notifications responded 200 in 0.6271 ms
+2025-10-21 17:32:10.103 +01:00 [INF] HTTP GET /api/notifications responded 200 in 169.6700 ms
+2025-10-21 17:33:17.240 +01:00 [INF] HTTP GET /api/notifications responded 200 in 3.9735 ms
+2025-10-21 17:33:33.379 +01:00 [INF] HTTP GET /api/notifications responded 200 in 1.9159 ms
+2025-10-21 17:35:13.897 +01:00 [INF] HTTP GET /api/notifications responded 200 in 0.9432 ms
+2025-10-21 17:37:13.327 +01:00 [INF] HTTP GET /api/notifications responded 200 in 2.7086 ms
+2025-10-21 17:37:19.472 +01:00 [INF] HTTP GET /css/site.css responded 200 in 1.1946 ms
+2025-10-21 17:37:19.684 +01:00 [INF] HTTP GET /Assets responded 200 in 555.8885 ms
+2025-10-21 17:37:21.627 +01:00 [INF] HTTP GET /js/site.js responded 200 in 1.1300 ms
+2025-10-21 17:37:21.667 +01:00 [INF] HTTP GET /api/notifications responded 200 in 1.3845 ms
+2025-10-21 17:37:35.654 +01:00 [INF] HTTP GET /api/search responded 404 in 0.6514 ms
+2025-10-21 17:37:37.961 +01:00 [INF] HTTP GET /api/search responded 404 in 0.7303 ms
+2025-10-21 17:38:40.727 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-21 17:38:42.151 +01:00 [INF] Database initialized successfully
+2025-10-21 17:38:42.157 +01:00 [INF] BuildOne started successfully
+2025-10-21 17:39:14.069 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-21 17:39:15.546 +01:00 [INF] HTTP GET /api/notifications responded 200 in 1480.4629 ms
+2025-10-21 17:39:20.879 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-21 17:39:21.591 +01:00 [INF] HTTP GET / responded 200 in 756.9239 ms
+2025-10-21 17:39:21.697 +01:00 [INF] HTTP GET /css/site.css responded 304 in 5.2384 ms
+2025-10-21 17:39:21.704 +01:00 [INF] HTTP GET /js/site.js responded 304 in 0.8006 ms
+2025-10-21 17:39:21.933 +01:00 [INF] HTTP GET /api/notifications responded 200 in 49.4808 ms
+2025-10-21 17:39:36.150 +01:00 [INF] HTTP GET /css/site.css responded 304 in 0.3155 ms
+2025-10-21 17:39:36.256 +01:00 [INF] HTTP GET /Assets responded 200 in 530.1448 ms
+2025-10-21 17:39:37.953 +01:00 [INF] HTTP GET /js/site.js responded 304 in 0.3276 ms
+2025-10-21 17:39:37.986 +01:00 [INF] HTTP GET /api/notifications responded 200 in 13.2100 ms
+2025-10-21 17:39:52.188 +01:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-10-21 17:39:52.360 +01:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-10-21 17:39:52.446 +01:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-10-21 17:39:52.496 +01:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-10-21 17:39:52.583 +01:00 [INF] HTTP GET /api/search responded 200 in 489.8036 ms
+2025-10-21 17:39:53.835 +01:00 [INF] HTTP GET /api/search responded 200 in 34.1209 ms
+2025-10-21 17:40:04.886 +01:00 [INF] HTTP GET /css/site.css responded 304 in 0.2640 ms
+2025-10-21 17:40:05.014 +01:00 [INF] HTTP GET /Assets responded 200 in 291.4002 ms
+2025-10-21 17:40:06.769 +01:00 [INF] HTTP GET /js/site.js responded 304 in 0.2528 ms
+2025-10-21 17:40:06.946 +01:00 [INF] HTTP GET /api/notifications responded 200 in 41.1263 ms
+2025-10-21 17:40:09.886 +01:00 [INF] HTTP GET /api/search responded 200 in 21.9198 ms
+2025-10-21 17:40:11.324 +01:00 [INF] HTTP GET /api/search responded 200 in 26.0941 ms
+2025-10-21 17:40:44.221 +01:00 [INF] HTTP GET /Employees/Details/1007 responded 404 in 3.3752 ms
+2025-10-21 17:42:45.038 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-21 17:42:46.445 +01:00 [INF] Database initialized successfully
+2025-10-21 17:42:46.450 +01:00 [INF] BuildOne started successfully
+2025-10-21 17:45:38.828 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-21 17:45:40.193 +01:00 [INF] Database initialized successfully
+2025-10-21 17:45:40.199 +01:00 [INF] BuildOne started successfully
+2025-10-21 17:45:50.061 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-21 17:45:50.249 +01:00 [INF] Loading employee details for ID: 1007
+2025-10-21 17:45:50.666 +01:00 [INF] Successfully loaded employee: Charles Garcia (ID: 1007)
+2025-10-21 17:45:50.872 +01:00 [INF] HTTP GET /Employees/Details/1007 responded 200 in 811.3763 ms
+2025-10-21 17:45:50.992 +01:00 [INF] HTTP GET /css/site.css responded 304 in 7.3981 ms
+2025-10-21 17:45:50.992 +01:00 [INF] HTTP GET /js/site.js responded 304 in 7.4129 ms
+2025-10-21 17:45:51.871 +01:00 [INF] HTTP GET /api/notifications responded 200 in 605.7747 ms
+2025-10-21 17:46:05.672 +01:00 [INF] HTTP GET /Assets/Details/1015 responded 200 in 561.0772 ms
+2025-10-21 17:46:05.870 +01:00 [INF] HTTP GET /api/notifications responded 200 in 26.5887 ms
+2025-10-21 17:46:32.224 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-21 17:46:33.542 +01:00 [INF] Database initialized successfully
+2025-10-21 17:46:33.548 +01:00 [INF] BuildOne started successfully
+2025-10-21 17:46:36.103 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-21 17:46:37.440 +01:00 [INF] HTTP GET /api/notifications responded 200 in 1329.6404 ms

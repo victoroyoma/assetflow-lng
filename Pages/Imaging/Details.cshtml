@@ -1,7 +1,7 @@
-@page
+@page "{id:int?}"
 @model buildone.Pages.Imaging.DetailsModel
 @{
-    ViewData["Title"] = $"Imaging Job #{Model.Job.Id}";
+    ViewData["Title"] = $"Imaging Job #{Model.Job?.Id ?? 0}";
 }
 
 <div class="container-fluid">
