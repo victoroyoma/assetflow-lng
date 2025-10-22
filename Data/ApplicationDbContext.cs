@@ -17,6 +17,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
     public DbSet<ImagingJob> ImagingJobs { get; set; }
     public DbSet<AssetHistory> AssetHistory { get; set; }
     public DbSet<JobComment> JobComments { get; set; }
+    public DbSet<Inventory> Inventories { get; set; }
+    public DbSet<InventoryTransaction> InventoryTransactions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

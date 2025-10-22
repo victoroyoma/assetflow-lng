@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using buildone.Services;
 using buildone.Data;
 using buildone.Data.Enums;
+using buildone.Models;
 
 namespace buildone.Pages.Employees
 {
@@ -19,8 +20,15 @@ namespace buildone.Pages.Employees
             _departmentService = departmentService;
         }
 
-        public IList<Employee> Employees { get; set; } = default!;
+        public PaginatedList<Employee> Employees { get; set; } = null!;
         public IList<Department> Departments { get; set; } = default!;
+
+        // Pagination properties
+        [BindProperty(SupportsGet = true)]
+        public int PageIndex { get; set; } = 1;
+
+        [BindProperty(SupportsGet = true)]
+        public int PageSize { get; set; } = 25;
 
         [BindProperty(SupportsGet = true)]
         public string? SearchTerm { get; set; }
@@ -57,7 +65,12 @@ namespace buildone.Pages.Employees
                     filteredEmployees = filteredEmployees.Where(e => e.DepartmentId == deptId);
                 }
 
-                Employees = filteredEmployees.OrderBy(e => e.FullName).ToList();
+                // Apply pagination
+                Employees = PaginatedList<Employee>.Create(
+                    filteredEmployees.OrderBy(e => e.FullName),
+                    PageIndex,
+                    PageSize
+                );
 
                 // Calculate statistics from all employees (not filtered)
                 TotalEmployees = allEmployees.Count();
@@ -67,6 +80,7 @@ namespace buildone.Pages.Employees
             catch (Exception)
             {
                 TempData["ErrorMessage"] = "Error loading employees. Please try again.";
+                Employees = PaginatedList<Employee>.Create(new List<Employee>(), 1, PageSize);
             }
         }
 

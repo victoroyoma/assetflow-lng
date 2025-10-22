@@ -1,0 +1,233 @@
+2025-10-22 04:46:38.928 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-22 04:46:40.975 +01:00 [INF] Database initialized successfully
+2025-10-22 04:46:40.980 +01:00 [INF] BuildOne started successfully
+2025-10-22 04:46:50.678 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-22 04:46:50.795 +01:00 [INF] HTTP GET / responded 302 in 120.9725 ms
+2025-10-22 04:46:51.254 +01:00 [INF] HTTP GET /Account/Login responded 200 in 409.8776 ms
+2025-10-22 04:46:51.380 +01:00 [INF] HTTP GET /js/site.js responded 304 in 9.5371 ms
+2025-10-22 04:46:51.380 +01:00 [INF] HTTP GET /css/site.css responded 304 in 9.5231 ms
+2025-10-22 04:46:51.664 +01:00 [INF] HTTP GET /api/notifications responded 302 in 7.0602 ms
+2025-10-22 04:46:51.741 +01:00 [INF] HTTP GET /Account/Login responded 200 in 20.7650 ms
+2025-10-22 04:46:57.728 +01:00 [INF] HTTP POST /Account/Login responded 302 in 697.0086 ms
+2025-10-22 04:46:57.774 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-22 04:46:58.528 +01:00 [INF] HTTP GET / responded 200 in 777.0714 ms
+2025-10-22 04:46:59.363 +01:00 [INF] HTTP GET /api/notifications responded 200 in 614.3411 ms
+2025-10-22 04:47:04.423 +01:00 [INF] HTTP GET /Inventory responded 200 in 270.1680 ms
+2025-10-22 04:47:04.662 +01:00 [INF] HTTP GET /api/notifications responded 200 in 12.7488 ms
+2025-10-22 04:49:18.040 +01:00 [INF] HTTP GET /Inventory/Create responded 200 in 59.0175 ms
+2025-10-22 04:49:18.304 +01:00 [INF] HTTP GET /api/notifications responded 200 in 57.1227 ms
+2025-10-22 04:53:12.662 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-22 04:53:14.164 +01:00 [INF] Database initialized successfully
+2025-10-22 04:53:14.170 +01:00 [INF] BuildOne started successfully
+2025-10-22 04:53:24.483 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-22 04:53:24.571 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-22 04:53:25.237 +01:00 [INF] HTTP GET / responded 200 in 754.2679 ms
+2025-10-22 04:53:25.893 +01:00 [INF] HTTP GET /api/notifications responded 200 in 380.2867 ms
+2025-10-22 04:53:31.048 +01:00 [INF] HTTP GET /Inventory responded 200 in 135.4390 ms
+2025-10-22 04:53:31.225 +01:00 [INF] HTTP GET /api/notifications responded 200 in 16.6320 ms
+2025-10-22 04:53:34.485 +01:00 [INF] HTTP GET /Inventory/Create responded 200 in 178.7791 ms
+2025-10-22 04:53:34.701 +01:00 [INF] HTTP GET /api/notifications responded 200 in 10.4267 ms
+2025-10-22 04:53:43.668 +01:00 [INF] HTTP GET /Admin/SeedData responded 200 in 66.5742 ms
+2025-10-22 04:53:43.865 +01:00 [INF] HTTP GET /api/notifications responded 200 in 13.9666 ms
+2025-10-22 04:53:59.510 +01:00 [INF] HTTP GET /Inventory responded 200 in 46.9738 ms
+2025-10-22 04:53:59.753 +01:00 [INF] HTTP GET /api/notifications responded 200 in 30.8153 ms
+2025-10-22 04:54:27.948 +01:00 [INF] HTTP GET /Inventory/Create responded 200 in 7.8060 ms
+2025-10-22 04:54:28.154 +01:00 [INF] HTTP GET /api/notifications responded 200 in 10.2905 ms
+2025-10-22 04:57:05.058 +01:00 [INF] HTTP POST /Inventory/Create responded 302 in 360.2605 ms
+2025-10-22 04:57:05.145 +01:00 [INF] HTTP GET /Inventory responded 200 in 69.1396 ms
+2025-10-22 04:57:05.492 +01:00 [INF] HTTP GET /api/notifications responded 200 in 40.7772 ms
+2025-10-22 04:57:28.090 +01:00 [INF] HTTP GET /Inventory/Details responded 200 in 124.1287 ms
+2025-10-22 04:57:28.331 +01:00 [INF] HTTP GET /api/notifications responded 200 in 47.8236 ms
+2025-10-22 04:57:50.295 +01:00 [INF] HTTP GET /Inventory responded 200 in 36.1423 ms
+2025-10-22 04:57:50.472 +01:00 [INF] HTTP GET /api/notifications responded 200 in 8.1897 ms
+2025-10-22 05:02:50.583 +01:00 [INF] HTTP GET /api/notifications responded 200 in 101.3028 ms
+2025-10-22 05:06:50.860 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-22 05:06:52.287 +01:00 [INF] Database initialized successfully
+2025-10-22 05:06:52.290 +01:00 [INF] BuildOne started successfully
+2025-10-22 05:06:57.461 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-22 05:06:57.993 +01:00 [INF] HTTP GET /Inventory/Edit responded 200 in 529.4057 ms
+2025-10-22 05:06:58.949 +01:00 [INF] HTTP GET /api/notifications responded 200 in 652.3537 ms
+2025-10-22 05:07:18.679 +01:00 [INF] HTTP POST /Inventory/Edit responded 302 in 173.2209 ms
+2025-10-22 05:07:18.754 +01:00 [INF] HTTP GET /Inventory/Details responded 200 in 66.3405 ms
+2025-10-22 05:07:18.967 +01:00 [INF] HTTP GET /api/notifications responded 200 in 43.9970 ms
+2025-10-22 05:09:35.669 +01:00 [INF] Inventory 1 withdrawal. User: admin@buildone.com, Quantity: 15, Remaining: 85
+2025-10-22 05:09:35.723 +01:00 [INF] HTTP POST /api/inventory/withdraw/1 responded 200 in 284.7780 ms
+2025-10-22 05:09:38.370 +01:00 [INF] HTTP GET /Inventory/Details responded 200 in 20.5404 ms
+2025-10-22 05:09:38.742 +01:00 [INF] HTTP GET /api/notifications responded 200 in 35.4983 ms
+2025-10-22 05:09:43.490 +01:00 [INF] HTTP GET /Inventory responded 200 in 286.6499 ms
+2025-10-22 05:09:43.711 +01:00 [INF] HTTP GET /api/notifications responded 200 in 18.0825 ms
+2025-10-22 05:10:03.752 +01:00 [INF] HTTP GET /Inventory/Details responded 200 in 12.4687 ms
+2025-10-22 05:10:04.006 +01:00 [INF] HTTP GET /api/notifications responded 200 in 85.5156 ms
+2025-10-22 05:10:39.966 +01:00 [INF] HTTP GET /Reports responded 200 in 343.4996 ms
+2025-10-22 05:10:40.205 +01:00 [INF] HTTP GET /api/notifications responded 200 in 26.9151 ms
+2025-10-22 05:10:59.585 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-22 05:10:59.703 +01:00 [INF] HTTP GET / responded 200 in 132.9665 ms
+2025-10-22 05:10:59.877 +01:00 [INF] HTTP GET /api/notifications responded 200 in 37.1720 ms
+2025-10-22 05:11:05.745 +01:00 [INF] HTTP GET /Reports responded 200 in 86.5157 ms
+2025-10-22 05:11:05.963 +01:00 [INF] HTTP GET /api/notifications responded 200 in 13.9211 ms
+2025-10-22 05:11:08.261 +01:00 [INF] HTTP GET /Reports/Assets responded 200 in 119.1644 ms
+2025-10-22 05:11:08.460 +01:00 [INF] HTTP GET /api/notifications responded 200 in 5.1334 ms
+2025-10-22 05:11:27.115 +01:00 [INF] HTTP GET /Reports responded 200 in 107.1930 ms
+2025-10-22 05:11:27.358 +01:00 [INF] HTTP GET /api/notifications responded 200 in 31.8034 ms
+2025-10-22 05:16:27.437 +01:00 [INF] HTTP GET /api/notifications responded 200 in 92.1207 ms
+2025-10-22 05:21:27.961 +01:00 [INF] HTTP GET /api/notifications responded 200 in 139.5784 ms
+2025-10-22 05:26:27.918 +01:00 [INF] HTTP GET /api/notifications responded 200 in 87.2913 ms
+2025-10-22 05:29:14.971 +01:00 [INF] HTTP GET /api/notifications responded 200 in 57.5423 ms
+2025-10-22 05:31:27.416 +01:00 [INF] HTTP GET /api/notifications responded 200 in 71.8837 ms
+2025-10-22 05:36:27.418 +01:00 [INF] HTTP GET /api/notifications responded 200 in 80.7849 ms
+2025-10-22 05:41:27.467 +01:00 [INF] HTTP GET /api/notifications responded 200 in 121.3276 ms
+2025-10-22 05:43:53.388 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-22 05:43:53.547 +01:00 [FTL] Application failed to start
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\victo\Desktop\buildone\Program.cs:line 205
+2025-10-22 05:44:28.187 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-22 05:44:28.343 +01:00 [FTL] Application failed to start
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\victo\Desktop\buildone\Program.cs:line 205
+2025-10-22 05:51:44.435 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-22 05:51:45.845 +01:00 [INF] Database initialized successfully
+2025-10-22 05:51:45.850 +01:00 [INF] BuildOne started successfully
+2025-10-22 05:52:09.981 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-22 05:52:10.320 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-22 05:52:11.192 +01:00 [INF] HTTP GET / responded 200 in 1206.0542 ms
+2025-10-22 05:52:11.962 +01:00 [INF] HTTP GET /api/notifications responded 200 in 382.7031 ms
+2025-10-22 05:52:21.717 +01:00 [INF] HTTP GET /Reports responded 200 in 646.8004 ms
+2025-10-22 05:52:22.050 +01:00 [INF] HTTP GET /api/notifications responded 200 in 15.1099 ms
+2025-10-22 05:56:42.543 +01:00 [INF] HTTP GET /Inventory responded 200 in 137.2141 ms
+2025-10-22 05:56:42.596 +01:00 [INF] HTTP GET /css/site.css responded 304 in 5.4869 ms
+2025-10-22 05:56:42.617 +01:00 [INF] HTTP GET /js/site.js responded 304 in 1.3501 ms
+2025-10-22 05:56:42.795 +01:00 [INF] HTTP GET /api/notifications responded 200 in 42.4524 ms
+2025-10-22 05:56:46.282 +01:00 [INF] HTTP GET /Inventory/Edit responded 200 in 228.1786 ms
+2025-10-22 05:56:46.463 +01:00 [INF] HTTP GET /api/notifications responded 200 in 8.7724 ms
+2025-10-22 06:01:46.575 +01:00 [INF] HTTP GET /api/notifications responded 200 in 99.7919 ms
+2025-10-22 06:06:13.951 +01:00 [INF] HTTP POST /Inventory/Edit responded 302 in 267.1304 ms
+2025-10-22 06:06:14.085 +01:00 [INF] HTTP GET /Inventory/Details responded 200 in 121.2754 ms
+2025-10-22 06:06:14.499 +01:00 [INF] HTTP GET /api/notifications responded 200 in 45.0000 ms
+2025-10-22 06:06:29.721 +01:00 [INF] HTTP GET /Reports responded 200 in 120.8097 ms
+2025-10-22 06:06:29.953 +01:00 [INF] HTTP GET /api/notifications responded 200 in 29.9988 ms
+2025-10-22 06:06:48.668 +01:00 [INF] HTTP GET /Reports/WarrantyAlerts responded 200 in 116.5169 ms
+2025-10-22 06:06:48.911 +01:00 [INF] HTTP GET /api/notifications responded 200 in 29.3097 ms
+2025-10-22 06:06:58.369 +01:00 [INF] HTTP GET /Reports/InventoryReport responded 200 in 43.0173 ms
+2025-10-22 06:06:58.511 +01:00 [INF] HTTP GET /api/notifications responded 200 in 5.8508 ms
+2025-10-22 06:08:03.603 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-22 06:08:03.677 +01:00 [INF] HTTP GET / responded 200 in 75.5836 ms
+2025-10-22 06:08:04.101 +01:00 [INF] HTTP GET /api/notifications responded 200 in 39.0659 ms
+2025-10-22 06:12:40.456 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-22 06:12:41.885 +01:00 [INF] Database initialized successfully
+2025-10-22 06:12:41.889 +01:00 [INF] BuildOne started successfully
+2025-10-22 06:12:50.852 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-22 06:12:51.151 +01:00 [INF] HTTP GET /Admin/SeedData responded 200 in 299.7230 ms
+2025-10-22 06:12:52.028 +01:00 [INF] HTTP GET /api/notifications responded 200 in 591.4233 ms
+2025-10-22 06:13:01.538 +01:00 [INF] Bulk data seeding initiated by admin@buildone.com
+2025-10-22 06:13:01.563 +01:00 [INF] Starting comprehensive bulk data seeding...
+2025-10-22 06:13:01.690 +01:00 [INF] Starting bulk data seeding process...
+2025-10-22 06:13:01.745 +01:00 [INF] Departments already exist, skipping department seeding
+2025-10-22 06:13:01.748 +01:00 [INF] Seeded 4 departments
+2025-10-22 06:13:01.751 +01:00 [INF] Sufficient employees already exist, returning existing employees
+2025-10-22 06:13:01.755 +01:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-10-22 06:13:01.802 +01:00 [INF] Seeded 10 employees
+2025-10-22 06:13:01.809 +01:00 [INF] Sufficient assets already exist, returning existing assets
+2025-10-22 06:13:01.812 +01:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-10-22 06:13:01.916 +01:00 [INF] Seeded 400 assets
+2025-10-22 06:13:01.928 +01:00 [INF] Sufficient imaging jobs already exist, skipping
+2025-10-22 06:13:01.932 +01:00 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-10-22 06:13:02.038 +01:00 [INF] Seeded 400 imaging jobs
+2025-10-22 06:13:03.217 +01:00 [INF] Seeded 64 inventory items
+2025-10-22 06:13:03.220 +01:00 [INF] Bulk data seeding completed successfully!
+2025-10-22 06:13:03.222 +01:00 [INF] Summary: 4 departments, 10 employees, 400 assets, 400 imaging jobs, 64 inventory items
+2025-10-22 06:13:03.228 +01:00 [INF] Comprehensive bulk data seeding completed successfully!
+2025-10-22 06:13:03.245 +01:00 [INF] HTTP POST /Admin/SeedData responded 302 in 1751.3729 ms
+2025-10-22 06:13:03.298 +01:00 [INF] HTTP GET /Admin/SeedData responded 200 in 32.6295 ms
+2025-10-22 06:13:03.499 +01:00 [INF] HTTP GET /api/notifications responded 200 in 34.4831 ms
+2025-10-22 06:13:15.058 +01:00 [INF] HTTP GET /Inventory responded 200 in 254.3280 ms
+2025-10-22 06:13:15.259 +01:00 [INF] HTTP GET /api/notifications responded 200 in 6.6915 ms
+2025-10-22 06:14:22.783 +01:00 [INF] HTTP GET /Inventory responded 200 in 89.2925 ms
+2025-10-22 06:14:23.094 +01:00 [INF] HTTP GET /api/notifications responded 200 in 24.0250 ms
+2025-10-22 06:14:29.629 +01:00 [INF] HTTP GET /Inventory responded 200 in 49.2222 ms
+2025-10-22 06:14:29.856 +01:00 [INF] HTTP GET /api/notifications responded 200 in 39.4911 ms
+2025-10-22 06:14:36.213 +01:00 [INF] HTTP GET /Inventory responded 200 in 19.5255 ms
+2025-10-22 06:14:36.372 +01:00 [INF] HTTP GET /api/notifications responded 200 in 9.7084 ms
+2025-10-22 06:18:55.778 +01:00 [INF] HTTP GET /Inventory/Details responded 200 in 96.4969 ms
+2025-10-22 06:18:56.114 +01:00 [INF] HTTP GET /api/notifications responded 200 in 34.3548 ms
+2025-10-22 06:19:18.352 +01:00 [INF] HTTP GET /Inventory responded 200 in 68.8087 ms
+2025-10-22 06:24:18.717 +01:00 [INF] HTTP GET /api/notifications responded 200 in 186.6572 ms
+2025-10-22 06:30:40.281 +01:00 [INF] HTTP GET /api/notifications responded 200 in 327.7164 ms
+2025-10-22 06:30:40.355 +01:00 [INF] HTTP GET /api/notifications responded 200 in 33.5436 ms
+2025-10-22 06:33:57.570 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-22 06:33:57.859 +01:00 [INF] HTTP GET / responded 200 in 306.9125 ms
+2025-10-22 06:33:58.313 +01:00 [INF] HTTP GET /api/notifications responded 200 in 32.2684 ms
+2025-10-22 06:39:05.804 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-22 06:39:07.574 +01:00 [INF] Database initialized successfully
+2025-10-22 06:39:07.579 +01:00 [INF] BuildOne started successfully
+2025-10-22 06:39:41.785 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-22 06:39:41.877 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-22 06:39:42.868 +01:00 [INF] HTTP GET / responded 200 in 1082.6664 ms
+2025-10-22 06:39:43.621 +01:00 [INF] HTTP GET /api/notifications responded 200 in 401.2416 ms
+2025-10-22 06:39:50.114 +01:00 [INF] HTTP GET /Assets responded 200 in 361.7933 ms
+2025-10-22 06:39:50.282 +01:00 [INF] HTTP GET /api/notifications responded 200 in 15.3548 ms
+2025-10-22 06:39:59.253 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-22 06:39:59.339 +01:00 [INF] HTTP GET / responded 200 in 91.9728 ms
+2025-10-22 06:39:59.513 +01:00 [INF] HTTP GET /api/notifications responded 200 in 6.3615 ms
+2025-10-22 06:40:16.662 +01:00 [INF] HTTP GET /Inventory responded 200 in 270.7923 ms
+2025-10-22 06:40:16.874 +01:00 [INF] HTTP GET /api/notifications responded 200 in 29.1578 ms
+2025-10-22 06:45:47.335 +01:00 [INF] HTTP GET /api/notifications responded 200 in 271.3604 ms
+2025-10-22 06:45:47.399 +01:00 [INF] HTTP GET /api/notifications responded 200 in 46.6568 ms
+2025-10-22 06:45:56.240 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-22 06:45:56.367 +01:00 [INF] HTTP GET / responded 200 in 129.6003 ms
+2025-10-22 06:45:56.714 +01:00 [INF] HTTP GET /api/notifications responded 200 in 43.1408 ms
+2025-10-22 06:46:03.699 +01:00 [INF] HTTP GET /Inventory responded 200 in 54.7383 ms
+2025-10-22 06:46:03.916 +01:00 [INF] HTTP GET /api/notifications responded 200 in 6.4199 ms
+2025-10-22 06:46:08.430 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-22 06:46:08.475 +01:00 [INF] HTTP GET / responded 200 in 45.6878 ms
+2025-10-22 06:46:08.648 +01:00 [INF] HTTP GET /api/notifications responded 200 in 5.3134 ms
+2025-10-22 06:46:43.660 +01:00 [INF] HTTP GET /api/notifications responded 200 in 19.4693 ms
+2025-10-22 06:48:35.732 +01:00 [INF] HTTP GET /api/notifications responded 200 in 62.3404 ms
+2025-10-22 06:49:56.041 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-22 06:49:57.474 +01:00 [INF] Database initialized successfully
+2025-10-22 06:49:57.479 +01:00 [INF] BuildOne started successfully
+2025-10-22 06:50:11.211 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-22 06:50:11.369 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-22 06:50:12.133 +01:00 [INF] HTTP GET / responded 200 in 932.7560 ms
+2025-10-22 06:50:13.014 +01:00 [INF] HTTP GET /api/notifications responded 200 in 444.8809 ms
+2025-10-22 06:50:26.796 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-22 06:50:27.016 +01:00 [INF] HTTP GET / responded 200 in 266.4572 ms
+2025-10-22 06:50:27.229 +01:00 [INF] HTTP GET /api/notifications responded 200 in 38.6001 ms
+2025-10-22 06:50:34.728 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-22 06:50:34.788 +01:00 [INF] HTTP GET / responded 200 in 67.4868 ms
+2025-10-22 06:50:35.019 +01:00 [INF] HTTP GET /api/notifications responded 200 in 14.7246 ms
+2025-10-22 06:50:37.758 +01:00 [INF] HTTP GET /Assets responded 200 in 282.2430 ms
+2025-10-22 06:50:37.917 +01:00 [INF] HTTP GET /api/notifications responded 200 in 6.0585 ms
+2025-10-22 06:51:01.387 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-22 06:51:01.455 +01:00 [INF] HTTP GET / responded 200 in 68.3594 ms
+2025-10-22 06:51:01.689 +01:00 [INF] HTTP GET /api/notifications responded 200 in 12.3403 ms
+2025-10-22 06:51:06.999 +01:00 [INF] HTTP GET /Assets responded 200 in 46.9973 ms
+2025-10-22 06:51:07.465 +01:00 [INF] HTTP GET /api/notifications responded 200 in 10.4953 ms
+2025-10-22 06:51:16.179 +01:00 [INF] HTTP GET /Inventory responded 200 in 149.7106 ms
+2025-10-22 06:51:16.358 +01:00 [INF] HTTP GET /api/notifications responded 200 in 11.4936 ms
+2025-10-22 06:51:21.163 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-22 06:51:21.239 +01:00 [INF] HTTP GET / responded 200 in 77.7232 ms
+2025-10-22 06:51:21.492 +01:00 [INF] HTTP GET /api/notifications responded 200 in 67.7698 ms
+2025-10-22 06:51:24.756 +01:00 [INF] HTTP GET /Assets responded 200 in 68.5971 ms
+2025-10-22 06:51:25.132 +01:00 [INF] HTTP GET /api/notifications responded 200 in 30.6218 ms
+2025-10-22 06:51:30.224 +01:00 [INF] HTTP GET /Inventory responded 200 in 61.7684 ms
+2025-10-22 06:51:30.431 +01:00 [INF] HTTP GET /api/notifications responded 200 in 5.2437 ms
+2025-10-22 06:56:07.940 +01:00 [INF] HTTP GET /api/notifications responded 200 in 524.0818 ms
+2025-10-22 06:56:30.492 +01:00 [INF] HTTP GET /api/notifications responded 200 in 55.9620 ms
+2025-10-22 06:56:42.348 +01:00 [INF] HTTP GET /Inventory responded 200 in 52.0342 ms
+2025-10-22 06:56:42.911 +01:00 [INF] HTTP GET /api/notifications responded 200 in 8.6898 ms
+2025-10-22 06:56:51.565 +01:00 [INF] HTTP GET /Inventory responded 200 in 45.0643 ms
+2025-10-22 06:56:51.747 +01:00 [INF] HTTP GET /api/notifications responded 200 in 8.2582 ms
+2025-10-22 07:37:11.376 +01:00 [INF] HTTP GET /api/notifications responded 200 in 795.5704 ms
+2025-10-22 07:37:14.057 +01:00 [INF] HTTP GET /api/notifications responded 200 in 311.7723 ms

@@ -89,9 +89,12 @@ public class BulkDataSeedingService : IBulkDataSeedingService
             var imagingJobs = await SeedImagingJobsAsync(assets, employees);
             _logger.LogInformation("Seeded {Count} imaging jobs", imagingJobs.Count);
 
+            var inventory = await SeedInventoryAsync();
+            _logger.LogInformation("Seeded {Count} inventory items", inventory.Count);
+
             _logger.LogInformation("Bulk data seeding completed successfully!");
-            _logger.LogInformation("Summary: {Depts} departments, {Emps} employees, {Assets} assets, {Jobs} imaging jobs",
-                departments.Count, employees.Count, assets.Count, imagingJobs.Count);
+            _logger.LogInformation("Summary: {Depts} departments, {Emps} employees, {Assets} assets, {Jobs} imaging jobs, {Inv} inventory items",
+                departments.Count, employees.Count, assets.Count, imagingJobs.Count, inventory.Count);
         }
         catch (Exception ex)
         {
@@ -385,6 +388,268 @@ public class BulkDataSeedingService : IBulkDataSeedingService
     private string GeneratePhoneNumber()
     {
         return $"+1-{_random.Next(200, 999)}-{_random.Next(100, 999)}-{_random.Next(1000, 9999)}";
+    }
+
+    private async Task<List<Data.Inventory>> SeedInventoryAsync()
+    {
+        var existingInventoryCount = await _context.Inventories.CountAsync();
+        
+        if (existingInventoryCount >= 80)
+        {
+            _logger.LogInformation("Sufficient inventory items already exist, skipping inventory seeding");
+            return await _context.Inventories.Take(80).ToListAsync();
+        }
+
+        var items = new Dictionary<string, (string Category, string Unit, int MinQty, int MaxQty, int? WarrantyMonths)>
+        {
+            // Computer Accessories (with warranty)
+            ["Logitech MX Master 3 Mouse"] = ("Computer Accessories", "pcs", 20, 100, 12),
+            ["Dell USB Keyboard KB216"] = ("Computer Accessories", "pcs", 25, 120, 12),
+            ["HP Wired Keyboard and Mouse Combo"] = ("Computer Accessories", "pcs", 30, 80, 12),
+            ["Adjustable Laptop Stand"] = ("Computer Accessories", "pcs", 10, 50, 24),
+            ["Logitech C920 Webcam"] = ("Computer Accessories", "pcs", 15, 40, 24),
+            ["Jabra Evolve 40 Headset"] = ("Computer Accessories", "pcs", 20, 60, 24),
+            ["Dell UltraSharp 24 Monitor"] = ("Computer Accessories", "pcs", 10, 35, 36),
+            ["HP E24 G4 Monitor"] = ("Computer Accessories", "pcs", 8, 30, 36),
+            ["Dell WD19 Docking Station"] = ("Computer Accessories", "pcs", 8, 25, 36),
+            ["Kensington Laptop Lock"] = ("Computer Accessories", "pcs", 30, 100, 12),
+            ["Cable Management Kit"] = ("Computer Accessories", "set", 15, 60, null),
+            ["Ergonomic Mouse Pad"] = ("Computer Accessories", "pcs", 40, 150, null),
+            
+            // Office Supplies (no warranty)
+            ["A4 Printer Paper (Ream 500 sheets)"] = ("Office Supplies", "pack", 100, 300, null),
+            ["HP LaserJet Toner 85A"] = ("Office Supplies", "pcs", 15, 50, null),
+            ["Canon Ink Cartridge Set"] = ("Office Supplies", "set", 20, 60, null),
+            ["Heavy Duty Stapler"] = ("Office Supplies", "pcs", 25, 70, null),
+            ["Spiral Notepad A4"] = ("Office Supplies", "pack", 50, 150, null),
+            ["Ballpoint Pen Box (50pcs)"] = ("Office Supplies", "box", 60, 180, null),
+            ["File Folders (Letter Size)"] = ("Office Supplies", "pack", 40, 120, null),
+            ["Sticky Notes Assorted"] = ("Office Supplies", "pack", 80, 200, null),
+            ["Desk Organizer"] = ("Office Supplies", "pcs", 20, 60, null),
+            
+            // Cables & Adapters (with warranty)
+            ["Belkin HDMI Cable 2M"] = ("Cables & Adapters", "pcs", 40, 120, 12),
+            ["Anker USB-C Cable 6ft"] = ("Cables & Adapters", "pcs", 60, 150, 18),
+            ["Cable Matters DisplayPort Cable"] = ("Cables & Adapters", "pcs", 30, 90, 12),
+            ["Apple USB-C to HDMI Adapter"] = ("Cables & Adapters", "pcs", 25, 80, 12),
+            ["Monoprice Cat6 Ethernet Cable 10ft"] = ("Cables & Adapters", "pcs", 80, 200, 12),
+            ["Universal Power Cable"] = ("Cables & Adapters", "pcs", 50, 120, 6),
+            ["USB-C to USB-A Adapter"] = ("Cables & Adapters", "pcs", 70, 180, 12),
+            ["VGA to HDMI Converter"] = ("Cables & Adapters", "pcs", 15, 50, 12),
+            
+            // Storage Devices (with warranty)
+            ["Samsung T7 External SSD 1TB"] = ("Storage Devices", "pcs", 15, 45, 36),
+            ["SanDisk Ultra USB 3.0 64GB"] = ("Storage Devices", "pcs", 40, 120, 24),
+            ["WD My Passport 2TB External HDD"] = ("Storage Devices", "pcs", 20, 60, 36),
+            ["SanDisk Ultra 128GB SD Card"] = ("Storage Devices", "pcs", 30, 90, 24),
+            ["Crucial MX500 1TB SSD"] = ("Storage Devices", "pcs", 10, 40, 60),
+            ["Kingston DataTraveler 32GB"] = ("Storage Devices", "pcs", 50, 150, 12),
+            
+            // Networking Equipment (with warranty)
+            ["TP-Link Archer AX50 Wi-Fi Router"] = ("Networking Equipment", "pcs", 8, 25, 36),
+            ["Netgear GS308 8-Port Switch"] = ("Networking Equipment", "pcs", 10, 30, 36),
+            ["Ubiquiti UniFi AP AC Lite"] = ("Networking Equipment", "pcs", 8, 20, 24),
+            ["TP-Link TL-SG1016D 16-Port Switch"] = ("Networking Equipment", "pcs", 5, 15, 36),
+            ["Netgear Nighthawk Mesh System"] = ("Networking Equipment", "set", 5, 15, 24),
+            
+            // Hardware Components (with warranty)
+            ["Corsair Vengeance DDR4 16GB RAM"] = ("Hardware Components", "pcs", 15, 50, 60),
+            ["Samsung 970 EVO Plus 500GB NVMe"] = ("Hardware Components", "pcs", 20, 60, 60),
+            ["Cooler Master Hyper 212"] = ("Hardware Components", "pcs", 10, 35, 24),
+            ["EVGA 650W Power Supply"] = ("Hardware Components", "pcs", 8, 30, 120),
+            ["Kingston A400 480GB SATA SSD"] = ("Hardware Components", "pcs", 15, 50, 36),
+            
+            // Software Licenses (with subscription period)
+            ["Microsoft Office 365 Business (Annual)"] = ("Software Licenses", "license", 10, 50, 12),
+            ["Norton 360 Antivirus (Annual)"] = ("Software Licenses", "license", 20, 80, 12),
+            ["Adobe Creative Cloud (Annual)"] = ("Software Licenses", "license", 5, 25, 12),
+            ["Zoom Pro License (Annual)"] = ("Software Licenses", "license", 15, 60, 12),
+            ["Slack Business License (Annual)"] = ("Software Licenses", "license", 10, 40, 12),
+            
+            // Peripherals (with warranty)
+            ["Zebra DS4308 Barcode Scanner"] = ("Peripherals", "pcs", 8, 30, 36),
+            ["Dymo LabelWriter 450"] = ("Peripherals", "pcs", 5, 20, 36),
+            ["Wacom Intuos Pro Tablet"] = ("Peripherals", "pcs", 5, 15, 24),
+            ["Logitech MeetUp Conference Cam"] = ("Peripherals", "pcs", 3, 10, 24),
+            ["Brother HL-L2350DW Printer"] = ("Peripherals", "pcs", 5, 20, 12),
+            ["Epson WorkForce Scanner"] = ("Peripherals", "pcs", 8, 25, 24),
+            
+            // Additional Categories
+            ["UPS 650VA Backup Battery"] = ("Power Management", "pcs", 10, 40, 36),
+            ["Surge Protector 6-Outlet"] = ("Power Management", "pcs", 30, 100, 24),
+            ["USB Hub 7-Port"] = ("Computer Accessories", "pcs", 20, 70, 12),
+            ["Wireless Presenter Remote"] = ("Peripherals", "pcs", 15, 50, 12),
+            ["Desktop Phone Holder"] = ("Office Supplies", "pcs", 25, 80, null),
+            ["Monitor Privacy Screen"] = ("Computer Accessories", "pcs", 15, 50, null),
+            ["Cleaning Kit for Electronics"] = ("Office Supplies", "kit", 30, 100, null),
+            ["Cable Ties Assorted Pack"] = ("Office Supplies", "pack", 50, 150, null)
+        };
+
+        var inventory = new List<Data.Inventory>();
+        var suppliers = new[] 
+        { 
+            "TechSupply Co.", "OfficeMax Pro", "CompuStore International", 
+            "DataVend Solutions", "IT Hardware Plus", "Global Tech Supplies",
+            "Digital Warehouse", "Prime Electronics", "Business Essentials Inc."
+        };
+
+        foreach (var item in items)
+        {
+            var config = item.Value;
+            var currentQty = _random.Next(0, config.MaxQty + 30);
+            
+            // Determine stock status
+            StockStatus status;
+            if (currentQty == 0)
+                status = StockStatus.OutOfStock;
+            else if (currentQty <= config.MinQty)
+                status = StockStatus.LowStock;
+            else if (currentQty >= config.MaxQty)
+                status = StockStatus.Overstocked;
+            else if (currentQty >= (config.MaxQty * 0.8))
+                status = StockStatus.FullyStocked;
+            else
+                status = StockStatus.InStock;
+
+            // Generate warranty dates if applicable
+            DateTime? warrantyStartDate = null;
+            DateTime? warrantyEndDate = null;
+            if (config.WarrantyMonths.HasValue && currentQty > 0)
+            {
+                warrantyStartDate = DateTime.UtcNow.AddDays(-_random.Next(30, 180));
+                warrantyEndDate = warrantyStartDate.Value.AddMonths(config.WarrantyMonths.Value);
+            }
+
+            var inventoryItem = new Data.Inventory
+            {
+                ItemName = item.Key,
+                SKU = $"INV-{Guid.NewGuid().ToString().Substring(0, 8).ToUpper()}",
+                Description = GetItemDescription(item.Key, config.Category),
+                Category = config.Category,
+                CurrentQuantity = currentQty,
+                MinimumQuantity = config.MinQty,
+                MaximumQuantity = config.MaxQty,
+                Unit = config.Unit,
+                StockStatus = status,
+                StorageLocation = $"Warehouse {(char)('A' + _random.Next(0, 5))}, Section {_random.Next(1, 6)}, Shelf {_random.Next(1, 12)}",
+                Supplier = suppliers[_random.Next(suppliers.Length)],
+                WarrantyPeriodMonths = config.WarrantyMonths,
+                WarrantyStartDate = warrantyStartDate,
+                WarrantyEndDate = warrantyEndDate,
+                LastRestocked = currentQty > 0 ? DateTime.UtcNow.AddDays(-_random.Next(1, 120)) : null,
+                CreatedDate = DateTime.UtcNow.AddDays(-_random.Next(180, 450)),
+                LastUpdated = DateTime.UtcNow,
+                UpdatedBy = "System"
+            };
+
+            inventory.Add(inventoryItem);
+        }
+
+        await _context.Inventories.AddRangeAsync(inventory);
+        await _context.SaveChangesAsync();
+
+        // Create transaction history with various transaction types
+        var transactions = new List<InventoryTransaction>();
+        var transactionTypes = new[] { "Initial Stock", "Restock", "Withdrawal", "Adjustment" };
+        var remarks = new[]
+        {
+            "Initial inventory setup",
+            "Quarterly restock from supplier",
+            "Issued to IT department",
+            "Issued to HR for new employee setup",
+            "Emergency restock due to high demand",
+            "Inventory count adjustment",
+            "Damaged items removed",
+            "Returned to supplier",
+            "Deployed to remote office",
+            "Transferred to warehouse B"
+        };
+
+        foreach (var item in inventory.Where(i => i.CurrentQuantity > 0).Take(50))
+        {
+            // Initial stock transaction
+            var initialTransaction = new InventoryTransaction
+            {
+                InventoryId = item.Id,
+                TransactionType = "Initial Stock",
+                Quantity = item.CurrentQuantity,
+                PreviousQuantity = 0,
+                NewQuantity = item.CurrentQuantity,
+                Remarks = "Initial inventory setup - system migration",
+                Reference = $"PO-{_random.Next(10000, 99999)}",
+                PerformedBy = "System",
+                TransactionDate = item.CreatedDate
+            };
+            transactions.Add(initialTransaction);
+
+            // Add 2-5 random transactions for some items
+            if (_random.Next(0, 100) < 60) // 60% chance of having additional transactions
+            {
+                var numTransactions = _random.Next(2, 6);
+                var runningQty = item.CurrentQuantity;
+
+                for (int i = 0; i < numTransactions; i++)
+                {
+                    var transType = transactionTypes[_random.Next(1, transactionTypes.Length)]; // Skip "Initial Stock"
+                    var previousQty = runningQty;
+                    int quantityChange;
+
+                    if (transType == "Restock")
+                    {
+                        quantityChange = _random.Next(10, 50);
+                        runningQty += quantityChange;
+                    }
+                    else if (transType == "Withdrawal")
+                    {
+                        quantityChange = -_random.Next(5, Math.Min(20, runningQty));
+                        runningQty += quantityChange; // quantityChange is negative
+                    }
+                    else // Adjustment
+                    {
+                        quantityChange = _random.Next(-10, 15);
+                        runningQty += quantityChange;
+                    }
+
+                    runningQty = Math.Max(0, runningQty); // Ensure non-negative
+
+                    var transaction = new InventoryTransaction
+                    {
+                        InventoryId = item.Id,
+                        TransactionType = transType,
+                        Quantity = quantityChange,
+                        PreviousQuantity = previousQty,
+                        NewQuantity = runningQty,
+                        Remarks = remarks[_random.Next(remarks.Length)],
+                        Reference = transType == "Restock" ? $"PO-{_random.Next(10000, 99999)}" : null,
+                        PerformedBy = _random.Next(0, 100) < 70 ? $"user{_random.Next(1, 10)}@company.com" : "System",
+                        TransactionDate = item.CreatedDate.AddDays(_random.Next(1, 120))
+                    };
+                    transactions.Add(transaction);
+                }
+            }
+        }
+
+        await _context.InventoryTransactions.AddRangeAsync(transactions);
+        await _context.SaveChangesAsync();
+
+        return inventory;
+    }
+
+    private string GetItemDescription(string itemName, string category)
+    {
+        return category switch
+        {
+            "Computer Accessories" => $"Professional-grade {itemName.ToLower()} designed for business productivity and reliability.",
+            "Office Supplies" => $"Essential office supply - {itemName.ToLower()} for everyday business operations.",
+            "Cables & Adapters" => $"High-quality {itemName.ToLower()} ensuring reliable connectivity and data transfer.",
+            "Storage Devices" => $"Reliable {itemName.ToLower()} for secure data storage and backup solutions.",
+            "Networking Equipment" => $"Enterprise-grade {itemName.ToLower()} for robust network infrastructure.",
+            "Hardware Components" => $"Premium {itemName.ToLower()} for system upgrades and maintenance.",
+            "Software Licenses" => $"Licensed {itemName} subscription for business productivity and security.",
+            "Peripherals" => $"Professional {itemName.ToLower()} for enhanced workflow efficiency.",
+            "Power Management" => $"Reliable {itemName.ToLower()} for power protection and continuity.",
+            _ => $"Quality {itemName.ToLower()} for business use."
+        };
     }
 
     private string GenerateRandomNote()

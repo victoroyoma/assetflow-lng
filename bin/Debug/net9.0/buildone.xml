@@ -293,6 +293,30 @@
         <member name="M:buildone.Migrations.AddJobQueueEnhancements.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:buildone.Migrations.AddInventoryModule">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddInventoryModule.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddInventoryModule.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddInventoryModule.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:buildone.Migrations.AddInventoryWarrantyFields">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddInventoryWarrantyFields.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddInventoryWarrantyFields.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddInventoryWarrantyFields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:buildone.Validators.CreateAssetValidator">
             <summary>
             Validator for asset creation

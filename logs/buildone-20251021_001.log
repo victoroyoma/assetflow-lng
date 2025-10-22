@@ -1,0 +1,123 @@
+2025-10-21 18:16:41.917 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-21 18:26:34.478 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-21 18:26:35.956 +01:00 [INF] Database initialized successfully
+2025-10-21 18:26:35.962 +01:00 [INF] BuildOne started successfully
+2025-10-21 18:26:39.844 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-21 18:26:41.280 +01:00 [INF] HTTP GET /Assets responded 200 in 1434.4118 ms
+2025-10-21 18:26:41.395 +01:00 [INF] HTTP GET /js/site.js responded 304 in 9.0962 ms
+2025-10-21 18:26:41.395 +01:00 [INF] HTTP GET /css/site.css responded 304 in 9.1053 ms
+2025-10-21 18:26:42.515 +01:00 [INF] HTTP GET /api/notifications responded 200 in 692.7569 ms
+2025-10-21 18:26:47.918 +01:00 [INF] HTTP GET /Assets responded 200 in 172.8889 ms
+2025-10-21 18:26:48.112 +01:00 [INF] HTTP GET /api/notifications responded 200 in 32.5408 ms
+2025-10-21 18:28:12.729 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-21 18:28:13.031 +01:00 [INF] HTTP GET / responded 200 in 321.8526 ms
+2025-10-21 18:28:13.321 +01:00 [INF] HTTP GET /api/notifications responded 200 in 46.2288 ms
+2025-10-21 18:29:39.604 +01:00 [INF] HTTP GET /Assets responded 200 in 68.0087 ms
+2025-10-21 18:29:40.062 +01:00 [INF] HTTP GET /api/notifications responded 200 in 40.5747 ms
+2025-10-21 18:30:10.540 +01:00 [INF] HTTP GET /api/notifications responded 200 in 36.1298 ms
+2025-10-21 18:31:01.437 +01:00 [INF] HTTP GET /Imaging responded 200 in 246.5050 ms
+2025-10-21 18:31:01.822 +01:00 [INF] HTTP GET /api/notifications responded 200 in 53.6250 ms
+2025-10-21 18:31:17.425 +01:00 [INF] HTTP GET /Imaging/Create responded 200 in 314.6467 ms
+2025-10-21 18:31:17.724 +01:00 [INF] HTTP GET /api/notifications responded 200 in 47.7200 ms
+2025-10-21 18:32:10.590 +01:00 [INF] Imaging job created with ID 1403
+2025-10-21 18:32:10.598 +01:00 [INF] HTTP POST /Imaging/Create responded 302 in 668.3838 ms
+2025-10-21 18:32:10.862 +01:00 [INF] HTTP GET /Imaging/Queue responded 200 in 245.3140 ms
+2025-10-21 18:32:10.961 +01:00 [INF] HTTP GET /css/site.css responded 304 in 0.8107 ms
+2025-10-21 18:32:13.023 +01:00 [INF] HTTP GET /js/site.js responded 304 in 0.3115 ms
+2025-10-21 18:32:13.087 +01:00 [INF] HTTP GET /api/notifications responded 200 in 35.3618 ms
+2025-10-21 18:32:33.985 +01:00 [INF] Imaging job 1232 started by technician 6
+2025-10-21 18:32:34.155 +01:00 [INF] Asset updated with ID 1232
+2025-10-21 18:32:34.246 +01:00 [INF] HTTP POST /Imaging/Queue responded 302 in 447.7238 ms
+2025-10-21 18:32:34.379 +01:00 [INF] HTTP GET /Imaging/Queue responded 200 in 111.8152 ms
+2025-10-21 18:32:36.432 +01:00 [INF] HTTP GET /api/notifications responded 200 in 32.3430 ms
+2025-10-21 18:33:06.519 +01:00 [INF] HTTP GET /Imaging/Queue responded 200 in 97.3920 ms
+2025-10-21 18:33:08.505 +01:00 [INF] HTTP GET /api/notifications responded 200 in 56.1191 ms
+2025-10-21 18:33:26.114 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-21 18:33:26.207 +01:00 [INF] HTTP GET / responded 200 in 93.5666 ms
+2025-10-21 18:33:26.430 +01:00 [INF] HTTP GET /api/notifications responded 200 in 7.1724 ms
+2025-10-21 18:33:38.678 +01:00 [INF] HTTP GET /Reports responded 200 in 204.7515 ms
+2025-10-21 18:33:39.064 +01:00 [INF] HTTP GET /api/notifications responded 200 in 39.9895 ms
+2025-10-21 18:38:06.294 +01:00 [INF] HTTP GET /Reports/Assets responded 200 in 137.5156 ms
+2025-10-21 18:38:06.444 +01:00 [INF] HTTP GET /css/site.css responded 304 in 0.4152 ms
+2025-10-21 18:38:06.466 +01:00 [INF] HTTP GET /js/site.js responded 304 in 0.6348 ms
+2025-10-21 18:38:06.690 +01:00 [INF] HTTP GET /api/notifications responded 200 in 44.4684 ms
+2025-10-21 18:38:12.695 +01:00 [INF] HTTP GET /Reports responded 200 in 86.4491 ms
+2025-10-21 18:38:12.943 +01:00 [INF] HTTP GET /api/notifications responded 200 in 33.1595 ms
+2025-10-21 18:38:56.389 +01:00 [INF] HTTP GET /Assets responded 200 in 32.4059 ms
+2025-10-21 18:38:56.891 +01:00 [INF] HTTP GET /api/notifications responded 200 in 26.0758 ms
+2025-10-21 18:39:12.132 +01:00 [INF] HTTP GET /Reports responded 200 in 97.5423 ms
+2025-10-21 18:39:12.607 +01:00 [INF] HTTP GET /api/notifications responded 200 in 207.9866 ms
+2025-10-21 18:39:17.441 +01:00 [INF] HTTP GET /Reports/Assets responded 200 in 43.7537 ms
+2025-10-21 18:39:17.821 +01:00 [INF] HTTP GET /api/notifications responded 200 in 40.2305 ms
+2025-10-21 18:39:25.396 +01:00 [INF] HTTP GET /Reports/Assets responded 200 in 31.9016 ms
+2025-10-21 18:39:25.588 +01:00 [INF] HTTP GET /api/notifications responded 200 in 11.8984 ms
+2025-10-21 18:39:32.232 +01:00 [INF] HTTP GET /Reports responded 200 in 78.6475 ms
+2025-10-21 18:39:32.480 +01:00 [INF] HTTP GET /api/notifications responded 200 in 6.1334 ms
+2025-10-21 18:44:32.875 +01:00 [INF] HTTP GET /api/notifications responded 200 in 46.2381 ms
+2025-10-21 18:46:38.548 +01:00 [INF] HTTP GET /api/notifications responded 200 in 151.9517 ms
+2025-10-21 18:50:48.749 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-21 18:50:48.879 +01:00 [FTL] Application failed to start
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\victo\Desktop\buildone\Program.cs:line 205
+2025-10-21 18:51:08.673 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-21 18:51:08.827 +01:00 [FTL] Application failed to start
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\victo\Desktop\buildone\Program.cs:line 205
+2025-10-21 18:59:02.168 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-21 18:59:03.485 +01:00 [INF] Database initialized successfully
+2025-10-21 18:59:03.489 +01:00 [INF] BuildOne started successfully
+2025-10-21 18:59:05.399 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-21 18:59:06.827 +01:00 [INF] HTTP GET /api/notifications responded 200 in 1420.1142 ms
+2025-10-21 18:59:12.820 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-21 18:59:13.422 +01:00 [INF] HTTP GET / responded 200 in 647.2375 ms
+2025-10-21 18:59:13.510 +01:00 [INF] HTTP GET /css/site.css responded 304 in 3.9756 ms
+2025-10-21 18:59:13.510 +01:00 [INF] HTTP GET /js/site.js responded 304 in 3.9718 ms
+2025-10-21 18:59:13.851 +01:00 [INF] HTTP GET /api/notifications responded 200 in 74.8573 ms
+2025-10-21 18:59:18.186 +01:00 [INF] HTTP GET /Inventory responded 200 in 222.5716 ms
+2025-10-21 18:59:18.347 +01:00 [INF] HTTP GET /api/notifications responded 200 in 14.8878 ms
+2025-10-21 19:01:37.632 +01:00 [INF] HTTP GET /api/notifications responded 200 in 72.2144 ms
+2025-10-21 19:01:40.990 +01:00 [INF] HTTP GET /Inventory responded 200 in 34.7252 ms
+2025-10-21 19:01:41.182 +01:00 [INF] HTTP GET /api/notifications responded 200 in 8.9377 ms
+2025-10-21 19:01:46.863 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-21 19:01:46.952 +01:00 [INF] HTTP GET / responded 200 in 92.9249 ms
+2025-10-21 19:01:47.366 +01:00 [INF] HTTP GET /api/notifications responded 200 in 11.8911 ms
+2025-10-21 19:01:50.691 +01:00 [INF] HTTP GET /Inventory responded 200 in 16.8984 ms
+2025-10-21 19:01:50.857 +01:00 [INF] HTTP GET /api/notifications responded 200 in 5.3755 ms
+2025-10-21 19:02:03.812 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-21 19:02:05.130 +01:00 [INF] Database initialized successfully
+2025-10-21 19:02:05.133 +01:00 [INF] BuildOne started successfully
+2025-10-21 19:02:13.632 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-21 19:02:14.722 +01:00 [INF] HTTP GET /api/notifications responded 200 in 1084.0890 ms
+2025-10-21 19:02:21.432 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-21 19:02:22.089 +01:00 [INF] HTTP GET / responded 200 in 706.9939 ms
+2025-10-21 19:02:22.317 +01:00 [INF] HTTP GET /api/notifications responded 200 in 59.4736 ms
+2025-10-21 19:02:25.499 +01:00 [INF] HTTP GET /Inventory responded 200 in 202.9786 ms
+2025-10-21 19:02:25.672 +01:00 [INF] HTTP GET /api/notifications responded 200 in 9.6781 ms
+2025-10-21 19:02:36.157 +01:00 [ERR] HTTP GET /Inventory/Create responded 500 in 2.1367 ms
+System.InvalidOperationException: The AuthorizationPolicy named: 'AdminOnly' was not found.
+   at Microsoft.AspNetCore.Authorization.AuthorizationPolicy.CombineAsync(IAuthorizationPolicyProvider policyProvider, IEnumerable`1 authorizeData, IEnumerable`1 policies)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-10-21 19:02:36.192 +01:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The AuthorizationPolicy named: 'AdminOnly' was not found.
+   at Microsoft.AspNetCore.Authorization.AuthorizationPolicy.CombineAsync(IAuthorizationPolicyProvider policyProvider, IEnumerable`1 authorizeData, IEnumerable`1 policies)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-10-21 19:02:42.570 +01:00 [INF] HTTP GET /Inventory responded 200 in 25.9411 ms

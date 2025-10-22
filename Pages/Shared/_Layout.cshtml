@@ -128,6 +128,27 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="#inventorySubmenu" data-bs-toggle="collapse" aria-expanded="false">
+                        <i class="fas fa-boxes me-2"></i>
+                        <span class="nav-text">Inventory</span>
+                        <i class="fas fa-chevron-down ms-auto nav-arrow"></i>
+                    </a>
+                    <div class="collapse" id="inventorySubmenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link sub-link" asp-area="" asp-page="/Inventory/Index">
+                                    <i class="fas fa-list me-2"></i>All Items
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-link" asp-area="" asp-page="/Inventory/Create">
+                                    <i class="fas fa-plus me-2"></i>Add Item
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#reportsSubmenu" data-bs-toggle="collapse" aria-expanded="false">
                         <i class="fas fa-chart-bar me-2"></i>
                         <span class="nav-text">Reports</span>
@@ -148,6 +169,11 @@
                             <li class="nav-item">
                                 <a class="nav-link sub-link" asp-page="/Reports/WarrantyAlerts">
                                     <i class="fas fa-shield-alt me-2"></i>Warranty Alerts
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-link" asp-page="/Reports/InventoryReport">
+                                    <i class="fas fa-box-open me-2"></i>Inventory Report
                                 </a>
                             </li>
                         </ul>

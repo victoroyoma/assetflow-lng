@@ -114,6 +114,75 @@
     </div>
 </div>
 
+<!-- Inventory Statistics Row -->
+<div class="row mb-4">
+    <div class="col-12">
+        <h5 class="mb-3">
+            <i class="bi bi-box-seam me-2"></i>Inventory Status
+        </h5>
+    </div>
+    
+    <div class="col-xl-2 col-md-4 col-sm-6 mb-3">
+        <div class="card border-primary h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-boxes text-primary display-6 mb-2"></i>
+                <h4 class="card-title mb-1">@Model.TotalInventoryItems</h4>
+                <p class="card-text text-muted small mb-0">Total Items</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-2 col-md-4 col-sm-6 mb-3">
+        <div class="card border-danger h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-exclamation-octagon text-danger display-6 mb-2"></i>
+                <h4 class="card-title mb-1">@Model.OutOfStockItems</h4>
+                <p class="card-text text-muted small mb-0">Out of Stock</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-2 col-md-4 col-sm-6 mb-3">
+        <div class="card border-warning h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-exclamation-triangle text-warning display-6 mb-2"></i>
+                <h4 class="card-title mb-1">@Model.LowStockItems</h4>
+                <p class="card-text text-muted small mb-0">Low Stock</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-2 col-md-4 col-sm-6 mb-3">
+        <div class="card border-success h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-shield-check text-success display-6 mb-2"></i>
+                <h4 class="card-title mb-1">@Model.ItemsWithWarranty</h4>
+                <p class="card-text text-muted small mb-0">Under Warranty</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-2 col-md-4 col-sm-6 mb-3">
+        <div class="card border-warning h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-shield-exclamation text-warning display-6 mb-2"></i>
+                <h4 class="card-title mb-1">@Model.WarrantyExpiringSoon</h4>
+                <p class="card-text text-muted small mb-0">Expiring Soon</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-2 col-md-4 col-sm-6 mb-3">
+        <div class="card border-secondary h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-shield-x text-secondary display-6 mb-2"></i>
+                <h4 class="card-title mb-1">@Model.ExpiredWarranties</h4>
+                <p class="card-text text-muted small mb-0">Expired Warranty</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Charts and Analytics Row -->
 <div class="row mb-4">
     <!-- Asset Status Chart -->

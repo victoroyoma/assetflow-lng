@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using buildone.Services;
 using buildone.Data;
 using buildone.Data.Enums;
+using buildone.Models;
 
 namespace buildone.Pages.Assets
 {
@@ -30,9 +31,16 @@ namespace buildone.Pages.Assets
             _imagingJobService = imagingJobService;
         }
 
-        public IList<Asset> Assets { get; set; } = new List<Asset>();
+        public PaginatedList<Asset> Assets { get; set; } = null!;
         public IList<Department> Departments { get; set; } = new List<Department>();
         public IList<Employee> Employees { get; set; } = new List<Employee>();
+
+        // Pagination properties
+        [BindProperty(SupportsGet = true)]
+        public int PageIndex { get; set; } = 1;
+
+        [BindProperty(SupportsGet = true)]
+        public int PageSize { get; set; } = 25;
 
         // Filter properties
         [BindProperty(SupportsGet = true)]
@@ -93,7 +101,12 @@ namespace buildone.Pages.Assets
                     filteredAssets = filteredAssets.Where(a => a.DepartmentId == deptId);
                 }
 
-                Assets = filteredAssets.OrderBy(a => a.AssetTag).ToList();
+                // Apply pagination
+                Assets = PaginatedList<Asset>.Create(
+                    filteredAssets.OrderBy(a => a.AssetTag),
+                    PageIndex,
+                    PageSize
+                );
 
                 // Calculate statistics from all assets (not filtered)
                 TotalAssets = allAssets.Count();
@@ -107,7 +120,7 @@ namespace buildone.Pages.Assets
                 Console.WriteLine($"Error loading assets: {ex.Message}");
                 
                 // Initialize empty collections to prevent null reference exceptions
-                Assets = new List<Asset>();
+                Assets = PaginatedList<Asset>.Create(new List<Asset>(), 1, PageSize);
                 Departments = new List<Department>();
                 Employees = new List<Employee>();
                 TotalAssets = 0;

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using buildone.Data;
+using Microsoft.EntityFrameworkCore;
+using buildone.Data.Enums;
 
 namespace buildone.Controllers
 {
@@ -12,15 +14,37 @@ namespace buildone.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager)
+        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _logger = logger;
             _userManager = userManager;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            // Fetch inventory statistics
+            var inventoryStats = new
+            {
+                TotalItems = await _context.Inventories.CountAsync(),
+                TotalQuantity = await _context.Inventories.SumAsync(i => i.CurrentQuantity),
+                OutOfStock = await _context.Inventories.CountAsync(i => i.StockStatus == StockStatus.OutOfStock),
+                LowStock = await _context.Inventories.CountAsync(i => i.StockStatus == StockStatus.LowStock),
+                InStock = await _context.Inventories.CountAsync(i => i.StockStatus == StockStatus.InStock),
+                FullyStocked = await _context.Inventories.CountAsync(i => i.StockStatus == StockStatus.FullyStocked),
+                ExpiringSoon = await _context.Inventories.CountAsync(i => 
+                    i.WarrantyEndDate.HasValue && 
+                    i.WarrantyEndDate.Value <= DateTime.UtcNow.AddMonths(3) &&
+                    i.WarrantyEndDate.Value >= DateTime.UtcNow),
+                Expired = await _context.Inventories.CountAsync(i => 
+                    i.WarrantyEndDate.HasValue && 
+                    i.WarrantyEndDate.Value < DateTime.UtcNow)
+            };
+
+            ViewBag.InventoryStats = inventoryStats;
+            
             return View();
         }
 

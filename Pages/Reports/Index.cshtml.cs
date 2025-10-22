@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using buildone.Services;
 using buildone.Data;
 using buildone.Data.Enums;
@@ -12,17 +13,20 @@ namespace buildone.Pages.Reports
         private readonly IEmployeeService _employeeService;
         private readonly IDepartmentService _departmentService;
         private readonly IImagingJobService _imagingJobService;
+        private readonly ApplicationDbContext _context;
 
         public IndexModel(
             IAssetService assetService,
             IEmployeeService employeeService,
             IDepartmentService departmentService,
-            IImagingJobService imagingJobService)
+            IImagingJobService imagingJobService,
+            ApplicationDbContext context)
         {
             _assetService = assetService;
             _employeeService = employeeService;
             _departmentService = departmentService;
             _imagingJobService = imagingJobService;
+            _context = context;
         }
 
         // Dashboard KPIs
@@ -42,6 +46,14 @@ namespace buildone.Pages.Reports
         public int InProgressJobs { get; set; }
         public int CompletedJobs { get; set; }
         public int FailedJobs { get; set; }
+
+        // Inventory KPIs
+        public int TotalInventoryItems { get; set; }
+        public int LowStockItems { get; set; }
+        public int OutOfStockItems { get; set; }
+        public int ItemsWithWarranty { get; set; }
+        public int WarrantyExpiringSoon { get; set; }
+        public int ExpiredWarranties { get; set; }
 
         // Recent Activity
         public IList<Asset> RecentAssets { get; set; } = new List<Asset>();
@@ -141,6 +153,15 @@ namespace buildone.Pages.Reports
                                j.CompletedAt.Value.Year == DateTime.Now.Year);
 
                 AssetUtilizationRate = TotalAssets > 0 ? (double)AssignedAssets / TotalAssets * 100 : 0;
+
+                // Calculate Inventory KPIs
+                var allInventoryItems = await _context.Inventories.ToListAsync();
+                TotalInventoryItems = allInventoryItems.Count;
+                LowStockItems = allInventoryItems.Count(i => i.IsLowStock && !i.IsOutOfStock);
+                OutOfStockItems = allInventoryItems.Count(i => i.IsOutOfStock);
+                ItemsWithWarranty = allInventoryItems.Count(i => i.HasWarranty);
+                WarrantyExpiringSoon = allInventoryItems.Count(i => i.IsWarrantyExpiringSoon);
+                ExpiredWarranties = allInventoryItems.Count(i => i.IsWarrantyExpired);
             }
             catch (Exception ex)
             {

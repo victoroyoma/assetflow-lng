@@ -1,5 +1,6 @@
 using buildone.Data;
 using buildone.Services;
+using buildone.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -14,18 +15,33 @@ namespace buildone.Pages.Departments
             _departmentService = departmentService;
         }
 
-        public IEnumerable<Department> Departments { get; set; } = new List<Department>();
+        public PaginatedList<Department> Departments { get; set; } = null!;
+
+        // Pagination properties
+        [BindProperty(SupportsGet = true)]
+        public int PageIndex { get; set; } = 1;
+
+        [BindProperty(SupportsGet = true)]
+        public int PageSize { get; set; } = 10;
 
         public async Task<IActionResult> OnGetAsync()
         {
             try
             {
-                Departments = await _departmentService.GetAllDepartmentsWithEmployeesAsync();
+                var allDepartments = (await _departmentService.GetAllDepartmentsWithEmployeesAsync()).AsQueryable();
+                
+                Departments = PaginatedList<Department>.Create(
+                    allDepartments.OrderBy(d => d.Name),
+                    PageIndex,
+                    PageSize
+                );
+                
                 return Page();
             }
             catch (Exception)
             {
                 TempData["ErrorMessage"] = "Error loading departments. Please try again.";
+                Departments = PaginatedList<Department>.Create(new List<Department>(), 1, PageSize);
                 return Page();
             }
         }

@@ -1,0 +1,183 @@
+@page
+@model buildone.Pages.Inventory.CreateModel
+@{
+    ViewData["Title"] = "Add New Inventory Item";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-plus-circle me-2"></i>Add New Inventory Item
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <!-- Item Information -->
+                        <h5 class="border-bottom pb-2 mb-3">Item Information</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-8">
+                                <label asp-for="Inventory.ItemName" class="form-label"></label>
+                                <input asp-for="Inventory.ItemName" class="form-control" required />
+                                <span asp-validation-for="Inventory.ItemName" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Inventory.SKU" class="form-label"></label>
+                                <input asp-for="Inventory.SKU" class="form-control" />
+                                <span asp-validation-for="Inventory.SKU" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Inventory.Description" class="form-label"></label>
+                            <textarea asp-for="Inventory.Description" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Inventory.Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Inventory.Category" class="form-label"></label>
+                                <input asp-for="Inventory.Category" class="form-control" list="categoryList" required />
+                                <datalist id="categoryList">
+                                    <option value="Computer Accessories"></option>
+                                    <option value="Office Supplies"></option>
+                                    <option value="Cables & Adapters"></option>
+                                    <option value="Storage Devices"></option>
+                                    <option value="Networking Equipment"></option>
+                                    <option value="Hardware Components"></option>
+                                    <option value="Software Licenses"></option>
+                                    <option value="Peripherals"></option>
+                                </datalist>
+                                <span asp-validation-for="Inventory.Category" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Inventory.Unit" class="form-label"></label>
+                                <select asp-for="Inventory.Unit" class="form-select">
+                                    <option value="pcs">Pieces (pcs)</option>
+                                    <option value="box">Box</option>
+                                    <option value="pack">Pack</option>
+                                    <option value="unit">Unit</option>
+                                    <option value="set">Set</option>
+                                    <option value="roll">Roll</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Stock Levels -->
+                        <h5 class="border-bottom pb-2 mb-3 mt-4">Stock Levels</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label asp-for="Inventory.CurrentQuantity" class="form-label"></label>
+                                <input asp-for="Inventory.CurrentQuantity" type="number" class="form-control" min="0" value="0" required />
+                                <span asp-validation-for="Inventory.CurrentQuantity" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Inventory.MinimumQuantity" class="form-label"></label>
+                                <input asp-for="Inventory.MinimumQuantity" type="number" class="form-control" min="0" value="10" required />
+                                <span asp-validation-for="Inventory.MinimumQuantity" class="text-danger"></span>
+                                <small class="text-muted">Alert when stock falls below this</small>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Inventory.MaximumQuantity" class="form-label"></label>
+                                <input asp-for="Inventory.MaximumQuantity" type="number" class="form-control" min="1" value="100" required />
+                                <span asp-validation-for="Inventory.MaximumQuantity" class="text-danger"></span>
+                                <small class="text-muted">Target stock level</small>
+                            </div>
+                        </div>
+
+                        <!-- Location & Supplier -->
+                        <h5 class="border-bottom pb-2 mb-3 mt-4">Location & Supplier</h5>
+                        <div class="mb-3">
+                            <label asp-for="Inventory.StorageLocation" class="form-label"></label>
+                            <input asp-for="Inventory.StorageLocation" class="form-control" placeholder="e.g., Warehouse A, Shelf 3" />
+                            <span asp-validation-for="Inventory.StorageLocation" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Inventory.Supplier" class="form-label"></label>
+                            <input asp-for="Inventory.Supplier" class="form-control" placeholder="Primary supplier name" />
+                            <span asp-validation-for="Inventory.Supplier" class="text-danger"></span>
+                        </div>
+
+                        <!-- Warranty Information -->
+                        <h5 class="border-bottom pb-2 mb-3 mt-4">Warranty Information</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Inventory.WarrantyStartDate" class="form-label"></label>
+                                <input asp-for="Inventory.WarrantyStartDate" type="date" class="form-control" />
+                                <span asp-validation-for="Inventory.WarrantyStartDate" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Inventory.WarrantyPeriodMonths" class="form-label"></label>
+                                <input asp-for="Inventory.WarrantyPeriodMonths" type="number" class="form-control" min="0" placeholder="e.g., 12, 24, 36" />
+                                <span asp-validation-for="Inventory.WarrantyPeriodMonths" class="text-danger"></span>
+                                <small class="text-muted">Number of months from start date</small>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Inventory.WarrantyEndDate" class="form-label"></label>
+                                <input asp-for="Inventory.WarrantyEndDate" type="date" class="form-control" readonly />
+                                <span asp-validation-for="Inventory.WarrantyEndDate" class="text-danger"></span>
+                                <small class="text-muted">Auto-calculated from start date and period</small>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Inventory.WarrantyProvider" class="form-label"></label>
+                                <input asp-for="Inventory.WarrantyProvider" class="form-control" placeholder="e.g., Manufacturer, Third-party provider" />
+                                <span asp-validation-for="Inventory.WarrantyProvider" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-page="./Index" class="btn btn-secondary">
+                                <i class="fas fa-times me-2"></i>Cancel
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save me-2"></i>Create Inventory Item
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Auto-calculate warranty end date
+        function calculateWarrantyEndDate() {
+            const startDateInput = document.querySelector('input[name="Inventory.WarrantyStartDate"]');
+            const periodInput = document.querySelector('input[name="Inventory.WarrantyPeriodMonths"]');
+            const endDateInput = document.querySelector('input[name="Inventory.WarrantyEndDate"]');
+
+            const startDate = startDateInput.value;
+            const period = parseInt(periodInput.value);
+
+            if (startDate && period && period > 0) {
+                const start = new Date(startDate);
+                start.setMonth(start.getMonth() + period);
+                endDateInput.value = start.toISOString().split('T')[0];
+            } else {
+                endDateInput.value = '';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const startDateInput = document.querySelector('input[name="Inventory.WarrantyStartDate"]');
+            const periodInput = document.querySelector('input[name="Inventory.WarrantyPeriodMonths"]');
+
+            if (startDateInput && periodInput) {
+                startDateInput.addEventListener('change', calculateWarrantyEndDate);
+                periodInput.addEventListener('input', calculateWarrantyEndDate);
+            }
+        });
+    </script>
+}

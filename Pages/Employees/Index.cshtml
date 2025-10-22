@@ -258,6 +258,19 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- Pagination -->
+            ViewData["PageIndex"] = Model.Employees.PageIndex;
+            ViewData["TotalPages"] = Model.Employees.TotalPages;
+            ViewData["TotalCount"] = Model.Employees.TotalCount;
+            ViewData["PageSize"] = Model.Employees.PageSize;
+            
+            @if (Model.Employees.TotalPages > 1)
+            {
+                <div class="card-footer bg-light">
+                    <partial name="_Pagination" />
+                </div>
+            }
         }
         else
         {

@@ -92,6 +92,68 @@
 
     <!-- Jobs Table -->
     <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white border-bottom">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <form method="get">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            <input type="text" 
+                                   class="form-control" 
+                                   name="SearchTerm" 
+                                   value="@Model.SearchTerm" 
+                                   placeholder="Search by asset tag, image version...">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form method="get">
+                        <select class="form-select" name="JobStatusFilter" onchange="this.form.submit()">
+                            <option value="">All Statuses</option>
+                            @{
+                                var jobStatuses = new[] { "Pending", "Scheduled", "InProgress", "Completed", "Failed", "Cancelled" };
+                                var jobStatusLabels = new Dictionary<string, string>
+                                {
+                                    ["Pending"] = "Pending",
+                                    ["Scheduled"] = "Scheduled",
+                                    ["InProgress"] = "In Progress",
+                                    ["Completed"] = "Completed",
+                                    ["Failed"] = "Failed",
+                                    ["Cancelled"] = "Cancelled"
+                                };
+                                foreach (var status in jobStatuses)
+                                {
+                                    <option value="@status" selected="@(Model.JobStatusFilter == status)">@jobStatusLabels[status]</option>
+                                }
+                            }
+                        </select>
+                        <input type="hidden" name="SearchTerm" value="@Model.SearchTerm" />
+                        <input type="hidden" name="PriorityFilter" value="@Model.PriorityFilter" />
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form method="get">
+                        <select class="form-select" name="PriorityFilter" onchange="this.form.submit()">
+                            <option value="">All Priorities</option>
+                            @{
+                                var priorities = new[] { "Low", "Normal", "High", "Urgent" };
+                                foreach (var priority in priorities)
+                                {
+                                    <option value="@priority" selected="@(Model.PriorityFilter == priority)">@priority</option>
+                                }
+                            }
+                        </select>
+                        <input type="hidden" name="SearchTerm" value="@Model.SearchTerm" />
+                        <input type="hidden" name="JobStatusFilter" value="@Model.JobStatusFilter" />
+                    </form>
+                </div>
+                <div class="col-md-2">
+                    <a asp-page="/Imaging/Index" class="btn btn-outline-secondary w-100">
+                        <i class="fas fa-times me-1"></i>Clear
+                    </a>
+                </div>
+            </div>
+        </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-hover">
@@ -178,6 +240,20 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- Pagination -->
+            @{
+                ViewData["PageIndex"] = Model.Jobs.PageIndex;
+                ViewData["TotalPages"] = Model.Jobs.TotalPages;
+                ViewData["TotalCount"] = Model.Jobs.TotalCount;
+                ViewData["PageSize"] = Model.Jobs.PageSize;
+            }
+            @if (Model.Jobs.TotalPages > 1)
+            {
+                <div class="card-footer bg-light">
+                    <partial name="_Pagination" />
+                </div>
+            }
         </div>
     </div>
 </div>
