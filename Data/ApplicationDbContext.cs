@@ -19,6 +19,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
     public DbSet<JobComment> JobComments { get; set; }
     public DbSet<Inventory> Inventories { get; set; }
     public DbSet<InventoryTransaction> InventoryTransactions { get; set; }
+    public DbSet<JobAttachment> JobAttachments { get; set; }
+    public DbSet<AssetAttachment> AssetAttachments { get; set; }
+    public DbSet<MaintenanceHistory> MaintenanceHistory { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -136,7 +139,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
             entity.HasIndex(e => e.Status);
             entity.HasIndex(e => e.ScheduledAt);
             entity.HasIndex(e => e.ImagingType);
+            entity.HasIndex(e => e.JobType);
             entity.HasIndex(e => new { e.AssetId, e.Status });
+            entity.HasIndex(e => new { e.JobType, e.Status });
             
             // Configure relationship with Asset
             entity.HasOne(ij => ij.Asset)
@@ -208,6 +213,41 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
             entity.HasIndex(e => e.CreatedAt);
         });
 
+        // Configure MaintenanceHistory entity
+        modelBuilder.Entity<MaintenanceHistory>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.MaintenanceType).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.Description).IsRequired().HasMaxLength(2000);
+            entity.Property(e => e.ActionsTaken).HasMaxLength(2000);
+            entity.Property(e => e.PartsReplaced).HasMaxLength(1000);
+            entity.Property(e => e.Recommendations).HasMaxLength(1000);
+            entity.Property(e => e.PerformedBy).IsRequired().HasMaxLength(50);
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
+            
+            // Indexes for performance
+            entity.HasIndex(e => e.JobId);
+            entity.HasIndex(e => e.AssetId);
+            entity.HasIndex(e => e.MaintenanceDate);
+            entity.HasIndex(e => new { e.AssetId, e.MaintenanceDate });
+            
+            // Configure relationships
+            entity.HasOne(mh => mh.Job)
+                .WithMany()
+                .HasForeignKey(mh => mh.JobId)
+                .OnDelete(DeleteBehavior.Cascade);
+                
+            entity.HasOne(mh => mh.Asset)
+                .WithMany()
+                .HasForeignKey(mh => mh.AssetId)
+                .OnDelete(DeleteBehavior.Restrict);
+                
+            entity.HasOne(mh => mh.Technician)
+                .WithMany()
+                .HasForeignKey(mh => mh.TechnicianId)
+                .OnDelete(DeleteBehavior.SetNull);
+        });
+
         // Seed Departments - keeping minimal data for proper system function
         modelBuilder.Entity<Department>().HasData(
             new Department { Id = 1, Name = "Information Technology", Code = "IT" },
@@ -243,16 +283,16 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
             new Asset { Id = 10, AssetTag = "WORKSTATION001", PcId = "PC010", Brand = "HP", Model = "Z4 G4", SerialNumber = "HP990011", ImagingType = Data.Enums.ImagingType.Fresh, DeploymentType = Data.Enums.DeploymentType.AutomaticDeployment, Status = Data.Enums.AssetStatus.Retired, Notes = "End of life - scheduled for disposal", WarrantyExpiry = new DateTime(2024, 6, 1), CreatedAt = new DateTime(2023, 6, 1, 0, 0, 0, DateTimeKind.Utc) }
         );
 
-        // Seed ImagingJobs
+        // Seed ImagingJobs (now includes both Imaging and Maintenance jobs)
         modelBuilder.Entity<ImagingJob>().HasData(
-            new ImagingJob { Id = 1, AssetId = 1, TechnicianId = 1, ImagingType = Data.Enums.ImagingType.Fresh, ImageVersion = "Windows11-2024.1", Status = Data.Enums.JobStatus.Completed, ScheduledAt = new DateTime(2024, 1, 2, 9, 0, 0, DateTimeKind.Utc), StartedAt = new DateTime(2024, 1, 2, 9, 15, 0, DateTimeKind.Utc), CompletedAt = new DateTime(2024, 1, 2, 11, 30, 0, DateTimeKind.Utc), Notes = "Successfully imaged with standard corporate image", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
-            new ImagingJob { Id = 2, AssetId = 2, TechnicianId = 2, ImagingType = Data.Enums.ImagingType.WipeAndLoad, ImageVersion = "DevEnvironment-2024.1", Status = Data.Enums.JobStatus.InProgress, ScheduledAt = new DateTime(2024, 1, 3, 10, 0, 0, DateTimeKind.Utc), StartedAt = new DateTime(2024, 1, 3, 10, 5, 0, DateTimeKind.Utc), Notes = "Installing development tools and environment", CreatedAt = new DateTime(2024, 1, 2, 0, 0, 0, DateTimeKind.Utc) },
-            new ImagingJob { Id = 3, AssetId = 3, ImagingType = Data.Enums.ImagingType.BareMetal, ImageVersion = "Windows11-2024.1", Status = Data.Enums.JobStatus.Pending, ScheduledAt = new DateTime(2024, 1, 5, 14, 0, 0, DateTimeKind.Utc), Notes = "Waiting for hardware preparation", CreatedAt = new DateTime(2024, 1, 3, 0, 0, 0, DateTimeKind.Utc) },
-            new ImagingJob { Id = 4, AssetId = 4, TechnicianId = 1, ImagingType = Data.Enums.ImagingType.Fresh, ImageVersion = "HROffice-2024.1", Status = Data.Enums.JobStatus.Completed, ScheduledAt = new DateTime(2024, 1, 8, 8, 0, 0, DateTimeKind.Utc), StartedAt = new DateTime(2024, 1, 8, 8, 10, 0, DateTimeKind.Utc), CompletedAt = new DateTime(2024, 1, 8, 10, 45, 0, DateTimeKind.Utc), Notes = "HR suite with specialized applications", CreatedAt = new DateTime(2024, 1, 7, 0, 0, 0, DateTimeKind.Utc) },
-            new ImagingJob { Id = 5, AssetId = 5, TechnicianId = 2, ImagingType = Data.Enums.ImagingType.WipeAndLoad, ImageVersion = "FinanceSecure-2024.1", Status = Data.Enums.JobStatus.Completed, ScheduledAt = new DateTime(2024, 1, 10, 9, 0, 0, DateTimeKind.Utc), StartedAt = new DateTime(2024, 1, 10, 9, 5, 0, DateTimeKind.Utc), CompletedAt = new DateTime(2024, 1, 10, 12, 30, 0, DateTimeKind.Utc), Notes = "Financial software with enhanced security", CreatedAt = new DateTime(2024, 1, 9, 0, 0, 0, DateTimeKind.Utc) },
-            new ImagingJob { Id = 6, AssetId = 6, TechnicianId = 1, ImagingType = Data.Enums.ImagingType.BareMetal, ImageVersion = "Workstation-2024.1", Status = Data.Enums.JobStatus.Scheduled, ScheduledAt = new DateTime(2024, 1, 15, 13, 0, 0, DateTimeKind.Utc), Notes = "High-performance image with CAD software", CreatedAt = new DateTime(2024, 1, 12, 0, 0, 0, DateTimeKind.Utc) },
-            new ImagingJob { Id = 7, AssetId = 8, TechnicianId = 2, ImagingType = Data.Enums.ImagingType.WipeAndLoad, ImageVersion = "Windows11-2024.1", Status = Data.Enums.JobStatus.Failed, ScheduledAt = new DateTime(2024, 1, 12, 11, 0, 0, DateTimeKind.Utc), StartedAt = new DateTime(2024, 1, 12, 11, 10, 0, DateTimeKind.Utc), CompletedAt = new DateTime(2024, 1, 12, 11, 45, 0, DateTimeKind.Utc), Notes = "Hardware failure detected during imaging", CreatedAt = new DateTime(2024, 1, 11, 0, 0, 0, DateTimeKind.Utc) },
-            new ImagingJob { Id = 8, AssetId = 9, TechnicianId = 1, ImagingType = Data.Enums.ImagingType.BareMetal, ImageVersion = "BasicOffice-2024.1", Status = Data.Enums.JobStatus.Cancelled, ScheduledAt = new DateTime(2024, 1, 18, 14, 0, 0, DateTimeKind.Utc), Notes = "Cancelled due to change in requirements", CreatedAt = new DateTime(2024, 1, 16, 0, 0, 0, DateTimeKind.Utc) }
+            new ImagingJob { Id = 1, AssetId = 1, TechnicianId = 1, JobType = Data.Enums.JobType.Imaging, ImagingType = Data.Enums.ImagingType.Fresh, ImageVersion = "Windows11-2024.1", Status = Data.Enums.JobStatus.Completed, ScheduledAt = new DateTime(2024, 1, 2, 9, 0, 0, DateTimeKind.Utc), StartedAt = new DateTime(2024, 1, 2, 9, 15, 0, DateTimeKind.Utc), CompletedAt = new DateTime(2024, 1, 2, 11, 30, 0, DateTimeKind.Utc), Notes = "Successfully imaged with standard corporate image", CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new ImagingJob { Id = 2, AssetId = 2, TechnicianId = 2, JobType = Data.Enums.JobType.Imaging, ImagingType = Data.Enums.ImagingType.WipeAndLoad, ImageVersion = "DevEnvironment-2024.1", Status = Data.Enums.JobStatus.InProgress, ScheduledAt = new DateTime(2024, 1, 3, 10, 0, 0, DateTimeKind.Utc), StartedAt = new DateTime(2024, 1, 3, 10, 5, 0, DateTimeKind.Utc), Notes = "Installing development tools and environment", CreatedAt = new DateTime(2024, 1, 2, 0, 0, 0, DateTimeKind.Utc) },
+            new ImagingJob { Id = 3, AssetId = 3, JobType = Data.Enums.JobType.Imaging, ImagingType = Data.Enums.ImagingType.BareMetal, ImageVersion = "Windows11-2024.1", Status = Data.Enums.JobStatus.Pending, ScheduledAt = new DateTime(2024, 1, 5, 14, 0, 0, DateTimeKind.Utc), Notes = "Waiting for hardware preparation", CreatedAt = new DateTime(2024, 1, 3, 0, 0, 0, DateTimeKind.Utc) },
+            new ImagingJob { Id = 4, AssetId = 4, TechnicianId = 1, JobType = Data.Enums.JobType.Imaging, ImagingType = Data.Enums.ImagingType.Fresh, ImageVersion = "HROffice-2024.1", Status = Data.Enums.JobStatus.Completed, ScheduledAt = new DateTime(2024, 1, 8, 8, 0, 0, DateTimeKind.Utc), StartedAt = new DateTime(2024, 1, 8, 8, 10, 0, DateTimeKind.Utc), CompletedAt = new DateTime(2024, 1, 8, 10, 45, 0, DateTimeKind.Utc), Notes = "HR suite with specialized applications", CreatedAt = new DateTime(2024, 1, 7, 0, 0, 0, DateTimeKind.Utc) },
+            new ImagingJob { Id = 5, AssetId = 5, TechnicianId = 2, JobType = Data.Enums.JobType.Imaging, ImagingType = Data.Enums.ImagingType.WipeAndLoad, ImageVersion = "FinanceSecure-2024.1", Status = Data.Enums.JobStatus.Completed, ScheduledAt = new DateTime(2024, 1, 10, 9, 0, 0, DateTimeKind.Utc), StartedAt = new DateTime(2024, 1, 10, 9, 5, 0, DateTimeKind.Utc), CompletedAt = new DateTime(2024, 1, 10, 12, 30, 0, DateTimeKind.Utc), Notes = "Financial software with enhanced security", CreatedAt = new DateTime(2024, 1, 9, 0, 0, 0, DateTimeKind.Utc) },
+            new ImagingJob { Id = 6, AssetId = 6, TechnicianId = 1, JobType = Data.Enums.JobType.Imaging, ImagingType = Data.Enums.ImagingType.BareMetal, ImageVersion = "Workstation-2024.1", Status = Data.Enums.JobStatus.Scheduled, ScheduledAt = new DateTime(2024, 1, 15, 13, 0, 0, DateTimeKind.Utc), Notes = "High-performance image with CAD software", CreatedAt = new DateTime(2024, 1, 12, 0, 0, 0, DateTimeKind.Utc) },
+            new ImagingJob { Id = 7, AssetId = 8, TechnicianId = 2, JobType = Data.Enums.JobType.Maintenance, ImagingType = null, ImageVersion = null, Status = Data.Enums.JobStatus.InProgress, ScheduledAt = new DateTime(2024, 1, 12, 11, 0, 0, DateTimeKind.Utc), StartedAt = new DateTime(2024, 1, 12, 11, 10, 0, DateTimeKind.Utc), Notes = "Hardware upgrade and maintenance", CreatedAt = new DateTime(2024, 1, 11, 0, 0, 0, DateTimeKind.Utc) },
+            new ImagingJob { Id = 8, AssetId = 9, TechnicianId = 1, JobType = Data.Enums.JobType.Imaging, ImagingType = Data.Enums.ImagingType.BareMetal, ImageVersion = "BasicOffice-2024.1", Status = Data.Enums.JobStatus.Cancelled, ScheduledAt = new DateTime(2024, 1, 18, 14, 0, 0, DateTimeKind.Utc), Notes = "Cancelled due to change in requirements", CreatedAt = new DateTime(2024, 1, 16, 0, 0, 0, DateTimeKind.Utc) }
         );
         */
     }

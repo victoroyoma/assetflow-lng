@@ -1,14 +1,18 @@
 @page
 @model buildone.Pages.Imaging.CreateModel
 @{
-    ViewData["Title"] = "Create Imaging Job";
+    ViewData["Title"] = Model.ImagingJob?.JobType == buildone.Data.Enums.JobType.Maintenance ? "Create Maintenance Job" : "Create Imaging Job";
+    var isMaintenanceJob = Model.ImagingJob?.JobType == buildone.Data.Enums.JobType.Maintenance;
 }
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2><i class="fas fa-plus-circle text-primary"></i> Create Imaging Job</h2>
+                <h2>
+                    <i class="fas @(isMaintenanceJob ? "fa-tools text-warning" : "fa-plus-circle text-primary")"></i> 
+                    @(isMaintenanceJob ? "Create Maintenance Job" : "Create Imaging Job")
+                </h2>
                 <a asp-page="./Queue" class="btn btn-secondary">
                     <i class="fas fa-arrow-left"></i> Back to Queue
                 </a>
@@ -23,12 +27,15 @@
             }
 
             <div class="card">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0"><i class="fas fa-desktop"></i> Imaging Job Details</h5>
+                <div class="card-header @(isMaintenanceJob ? "bg-warning text-dark" : "bg-primary text-white")">
+                    <h5 class="mb-0"><i class="fas @(isMaintenanceJob ? "fa-tools" : "fa-desktop")"></i> Job Details</h5>
                 </div>
                 <div class="card-body">
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        
+                        <!-- Hidden field for Job Type -->
+                        <input type="hidden" asp-for="ImagingJob.JobType" />
 
                         <div class="row">
                             <div class="col-md-6">
@@ -41,7 +48,7 @@
                                     @if (!Model.AvailableAssets.Any())
                                     {
                                         <div class="form-text text-warning">
-                                            <i class="fas fa-exclamation-triangle"></i> No assets available for imaging. All assets may have active imaging jobs.
+                                            <i class="fas fa-exclamation-triangle"></i> No assets available for @(isMaintenanceJob ? "maintenance" : "imaging"). All assets may have active jobs.
                                         </div>
                                     }
                                 </div>
@@ -55,28 +62,34 @@
                                     <div class="form-text">Leave blank to assign a technician later</div>
                                 </div>
 
-                                <div class="mb-3">
-                                    <label asp-for="ImagingJob.ImagingType" class="form-label"></label>
-                                    <select asp-for="ImagingJob.ImagingType" class="form-select" asp-items="Html.GetEnumSelectList<ImagingType>()">
-                                    </select>
-                                    <span asp-validation-for="ImagingJob.ImagingType" class="text-danger"></span>
-                                    <div class="form-text">
-                                        <small>
-                                            <strong>Fresh:</strong> Complete new installation<br>
-                                            <strong>Wipe and Load:</strong> Format and reinstall<br>
-                                            <strong>Bare Metal:</strong> Hardware-level installation
-                                        </small>
+                                @if (!isMaintenanceJob)
+                                {
+                                    <div class="mb-3">
+                                        <label asp-for="ImagingJob.ImagingType" class="form-label"></label>
+                                        <select asp-for="ImagingJob.ImagingType" class="form-select" asp-items="Html.GetEnumSelectList<buildone.Data.Enums.ImagingType>()">
+                                        </select>
+                                        <span asp-validation-for="ImagingJob.ImagingType" class="text-danger"></span>
+                                        <div class="form-text">
+                                            <small>
+                                                <strong>Fresh:</strong> Complete new installation<br>
+                                                <strong>Wipe and Load:</strong> Format and reinstall<br>
+                                                <strong>Bare Metal:</strong> Hardware-level installation
+                                            </small>
+                                        </div>
                                     </div>
-                                </div>
+                                }
                             </div>
 
                             <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label asp-for="ImagingJob.ImageVersion" class="form-label"></label>
-                                    <input asp-for="ImagingJob.ImageVersion" class="form-control" placeholder="e.g., Windows11-2024.1">
-                                    <span asp-validation-for="ImagingJob.ImageVersion" class="text-danger"></span>
-                                    <div class="form-text">Specify the image version to be used</div>
-                                </div>
+                                @if (!isMaintenanceJob)
+                                {
+                                    <div class="mb-3">
+                                        <label asp-for="ImagingJob.ImageVersion" class="form-label"></label>
+                                        <input asp-for="ImagingJob.ImageVersion" class="form-control" placeholder="e.g., Windows11-2024.1">
+                                        <span asp-validation-for="ImagingJob.ImageVersion" class="text-danger"></span>
+                                        <div class="form-text">Specify the image version to be used</div>
+                                    </div>
+                                }
 
                                 <div class="mb-3">
                                     <label asp-for="ImagingJob.Priority" class="form-label"></label>
@@ -115,6 +128,51 @@
                             </div>
                         </div>
 
+                        @if (isMaintenanceJob)
+                        {
+                            <!-- Maintenance Job: File Attachments Section -->
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="card border-warning">
+                                        <div class="card-header bg-warning bg-opacity-10">
+                                            <h6 class="mb-0">
+                                                <i class="fas fa-paperclip me-2"></i>Attachments (Images & Documents)
+                                            </h6>
+                                            <small class="text-muted">Add photos of the issue, repair documents, or reference materials</small>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="mb-3">
+                                                <label for="maintenanceFiles" class="form-label">
+                                                    <i class="fas fa-upload me-1"></i>Upload Files
+                                                </label>
+                                                <input type="file" 
+                                                       class="form-control" 
+                                                       id="maintenanceFiles" 
+                                                       name="attachmentFiles" 
+                                                       multiple 
+                                                       accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt">
+                                                <div class="form-text">
+                                                    <i class="fas fa-info-circle"></i> 
+                                                    Supported: Images (JPG, PNG, GIF), Documents (PDF, Word, Excel, TXT). Max 10MB per file.
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- File Preview Area -->
+                                            <div id="filePreviewArea" class="mt-3" style="display: none;">
+                                                <label class="form-label">Selected Files:</label>
+                                                <div id="filePreviewList" class="list-group"></div>
+                                            </div>
+
+                                            <div class="alert alert-info mt-3 mb-0">
+                                                <i class="fas fa-lightbulb me-2"></i>
+                                                <strong>Tip:</strong> Include before/after photos, diagnostic reports, or parts documentation for better record keeping.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
                         <div class="row mt-4">
                             <div class="col-12">
                                 <div class="d-flex justify-content-between">
@@ -122,7 +180,7 @@
                                         <i class="fas fa-times"></i> Cancel
                                     </a>
                                     <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-save"></i> Create Imaging Job
+                                        <i class="fas fa-save"></i> Create Job
                                     </button>
                                 </div>
                             </div>
@@ -181,6 +239,95 @@
                 var formattedDate = now.toISOString().slice(0, 16);
                 scheduledInput.val(formattedDate);
             }
+
+            // File upload preview for maintenance jobs
+            $('#maintenanceFiles').on('change', function(e) {
+                const files = e.target.files;
+                const previewArea = $('#filePreviewArea');
+                const previewList = $('#filePreviewList');
+                
+                if (files.length > 0) {
+                    previewArea.show();
+                    previewList.empty();
+                    
+                    Array.from(files).forEach((file, index) => {
+                        const fileSize = (file.size / 1024).toFixed(2); // KB
+                        const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2); // MB
+                        const sizeText = fileSize > 1024 ? `${fileSizeMB} MB` : `${fileSize} KB`;
+                        
+                        let icon = 'fa-file';
+                        let iconColor = 'text-secondary';
+                        
+                        if (file.type.startsWith('image/')) {
+                            icon = 'fa-file-image';
+                            iconColor = 'text-primary';
+                        } else if (file.type.includes('pdf')) {
+                            icon = 'fa-file-pdf';
+                            iconColor = 'text-danger';
+                        } else if (file.type.includes('word')) {
+                            icon = 'fa-file-word';
+                            iconColor = 'text-info';
+                        } else if (file.type.includes('excel') || file.type.includes('spreadsheet')) {
+                            icon = 'fa-file-excel';
+                            iconColor = 'text-success';
+                        }
+                        
+                        const fileItem = `
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas ${icon} ${iconColor} me-2"></i>
+                                    <strong>${file.name}</strong>
+                                    <small class="text-muted ms-2">(${sizeText})</small>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-outline-danger remove-file" data-index="${index}">
+                                    <i class="fas fa-times"></i> Remove
+                                </button>
+                            </div>
+                        `;
+                        previewList.append(fileItem);
+                    });
+                } else {
+                    previewArea.hide();
+                }
+            });
+
+            // Remove file from selection
+            $(document).on('click', '.remove-file', function() {
+                const input = document.getElementById('maintenanceFiles');
+                const dt = new DataTransfer();
+                const files = input.files;
+                const indexToRemove = parseInt($(this).data('index'));
+                
+                for (let i = 0; i < files.length; i++) {
+                    if (i !== indexToRemove) {
+                        dt.items.add(files[i]);
+                    }
+                }
+                
+                input.files = dt.files;
+                $(input).trigger('change');
+            });
+
+            // Form validation for file sizes
+            $('form').on('submit', function(e) {
+                const files = document.getElementById('maintenanceFiles')?.files;
+                if (files && files.length > 0) {
+                    const maxSize = 10 * 1024 * 1024; // 10MB
+                    let hasOversizedFile = false;
+                    
+                    Array.from(files).forEach(file => {
+                        if (file.size > maxSize) {
+                            hasOversizedFile = true;
+                            alert(`File "${file.name}" exceeds the 10MB size limit. Please choose a smaller file.`);
+                        }
+                    });
+                    
+                    if (hasOversizedFile) {
+                        e.preventDefault();
+                        return false;
+                    }
+                }
+            });
         });
     </script>
 }

@@ -357,6 +357,54 @@ namespace buildone.Migrations
                     b.ToTable("Assets");
                 });
 
+            modelBuilder.Entity("buildone.Data.AssetAttachment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AssetId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<long>("FileSizeBytes")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UploadedBy")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AssetId");
+
+                    b.ToTable("AssetAttachments");
+                });
+
             modelBuilder.Entity("buildone.Data.AssetHistory", b =>
                 {
                     b.Property<int>("Id")
@@ -528,7 +576,10 @@ namespace buildone.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("ImagingType")
+                    b.Property<int?>("ImagingType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("JobType")
                         .HasColumnType("int");
 
                     b.Property<string>("Notes")
@@ -557,6 +608,8 @@ namespace buildone.Migrations
 
                     b.HasIndex("ImagingType");
 
+                    b.HasIndex("JobType");
+
                     b.HasIndex("ScheduledAt");
 
                     b.HasIndex("Status");
@@ -565,7 +618,9 @@ namespace buildone.Migrations
 
                     b.HasIndex("AssetId", "Status");
 
-                    b.ToTable("ImagingJobs");
+                    b.HasIndex("JobType", "Status");
+
+                    b.ToTable("Jobs");
                 });
 
             modelBuilder.Entity("buildone.Data.Inventory", b =>
@@ -700,6 +755,54 @@ namespace buildone.Migrations
                     b.ToTable("InventoryTransactions");
                 });
 
+            modelBuilder.Entity("buildone.Data.JobAttachment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<long>("FileSizeBytes")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("JobId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UploadedBy")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JobId");
+
+                    b.ToTable("JobAttachments");
+                });
+
             modelBuilder.Entity("buildone.Data.JobComment", b =>
                 {
                     b.Property<int>("Id")
@@ -736,6 +839,100 @@ namespace buildone.Migrations
                     b.HasIndex("ImagingJobId");
 
                     b.ToTable("JobComments");
+                });
+
+            modelBuilder.Entity("buildone.Data.MaintenanceHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ActionsTaken")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<int>("AssetId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AttachmentCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CompletionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<bool>("HasAttachments")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("JobId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("LaborHours")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("MaintenanceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MaintenanceType")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime?>("NextMaintenanceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("PartsCost")
+                        .HasMaxLength(1000)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("PartsReplaced")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("PerformedBy")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Recommendations")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("StatusAfter")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StatusBefore")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TechnicianId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AssetId");
+
+                    b.HasIndex("JobId");
+
+                    b.HasIndex("MaintenanceDate");
+
+                    b.HasIndex("TechnicianId");
+
+                    b.HasIndex("AssetId", "MaintenanceDate");
+
+                    b.ToTable("MaintenanceHistory");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -816,6 +1013,17 @@ namespace buildone.Migrations
                     b.Navigation("Department");
                 });
 
+            modelBuilder.Entity("buildone.Data.AssetAttachment", b =>
+                {
+                    b.HasOne("buildone.Data.Asset", "Asset")
+                        .WithMany("Attachments")
+                        .HasForeignKey("AssetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Asset");
+                });
+
             modelBuilder.Entity("buildone.Data.AssetHistory", b =>
                 {
                     b.HasOne("buildone.Data.Employee", "Actor")
@@ -873,6 +1081,17 @@ namespace buildone.Migrations
                     b.Navigation("Inventory");
                 });
 
+            modelBuilder.Entity("buildone.Data.JobAttachment", b =>
+                {
+                    b.HasOne("buildone.Data.ImagingJob", "Job")
+                        .WithMany("Attachments")
+                        .HasForeignKey("JobId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Job");
+                });
+
             modelBuilder.Entity("buildone.Data.JobComment", b =>
                 {
                     b.HasOne("buildone.Data.Employee", "Employee")
@@ -892,8 +1111,36 @@ namespace buildone.Migrations
                     b.Navigation("ImagingJob");
                 });
 
+            modelBuilder.Entity("buildone.Data.MaintenanceHistory", b =>
+                {
+                    b.HasOne("buildone.Data.Asset", "Asset")
+                        .WithMany()
+                        .HasForeignKey("AssetId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("buildone.Data.ImagingJob", "Job")
+                        .WithMany()
+                        .HasForeignKey("JobId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("buildone.Data.Employee", "Technician")
+                        .WithMany()
+                        .HasForeignKey("TechnicianId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Asset");
+
+                    b.Navigation("Job");
+
+                    b.Navigation("Technician");
+                });
+
             modelBuilder.Entity("buildone.Data.Asset", b =>
                 {
+                    b.Navigation("Attachments");
+
                     b.Navigation("History");
 
                     b.Navigation("ImagingJobs");
@@ -917,6 +1164,8 @@ namespace buildone.Migrations
 
             modelBuilder.Entity("buildone.Data.ImagingJob", b =>
                 {
+                    b.Navigation("Attachments");
+
                     b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618

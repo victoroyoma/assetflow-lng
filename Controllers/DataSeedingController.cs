@@ -12,15 +12,18 @@ public class DataSeedingController : ControllerBase
 {
     private readonly IDataSeedingService _dataSeedingService;
     private readonly IBulkDataSeedingService _bulkDataSeedingService;
+    private readonly IExcelDataSeedingService _excelDataSeedingService;
     private readonly ILogger<DataSeedingController> _logger;
 
     public DataSeedingController(
         IDataSeedingService dataSeedingService,
         IBulkDataSeedingService bulkDataSeedingService,
+        IExcelDataSeedingService excelDataSeedingService,
         ILogger<DataSeedingController> logger)
     {
         _dataSeedingService = dataSeedingService;
         _bulkDataSeedingService = bulkDataSeedingService;
+        _excelDataSeedingService = excelDataSeedingService;
         _logger = logger;
     }
 
@@ -130,6 +133,45 @@ public class DataSeedingController : ControllerBase
                 error = "Failed to retrieve statistics", 
                 details = ex.Message 
             });
+        }
+    }
+
+    /// <summary>
+    /// Seeds data from an uploaded Excel (.xlsx) file. Accepts a multipart/form-data file upload.
+    /// Supports sheets named: Departments, Employees, Assets, Inventory. Sheets not present will be skipped.
+    /// </summary>
+    [HttpPost("seed-from-excel")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> SeedFromExcel([FromForm] IFormFile file)
+    {
+        if (file == null || file.Length == 0)
+        {
+            return BadRequest(new { error = "No file uploaded or file is empty." });
+        }
+
+        try
+        {
+            _logger.LogInformation("Excel seeding initiated by {User}. Filename={FileName}", User.Identity?.Name, file.FileName);
+
+            using var stream = file.OpenReadStream();
+            var result = await _excelDataSeedingService.SeedFromExcelAsync(stream, User.Identity?.Name);
+
+            return Ok(new
+            {
+                message = "Excel seeding completed",
+                departments = result.Departments,
+                employees = result.Employees,
+                assets = result.Assets,
+                inventory = result.Inventory,
+                timestamp = DateTime.UtcNow
+            });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to seed from Excel");
+            return StatusCode(500, new { error = "Failed to seed from Excel", details = ex.Message });
         }
     }
 }

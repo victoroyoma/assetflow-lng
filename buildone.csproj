@@ -24,6 +24,10 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
+    <!-- Excel parsing for seeding -->
+    <PackageReference Include="ClosedXML" Version="0.105.0" />
+    <!-- QR Code generation -->
+    <PackageReference Include="QRCoder" Version="1.6.0" />
   </ItemGroup>
 
 </Project>

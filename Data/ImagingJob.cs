@@ -4,6 +4,10 @@ using buildone.Data.Enums;
 
 namespace buildone.Data;
 
+/// <summary>
+/// Represents a job that can be either an Imaging job or a Maintenance job
+/// </summary>
+[Table("Jobs")]
 public class ImagingJob
 {
     public int Id { get; set; }
@@ -16,8 +20,11 @@ public class ImagingJob
     public int? TechnicianId { get; set; }
 
     [Required]
+    [Display(Name = "Job Type")]
+    public JobType JobType { get; set; } = JobType.Imaging;
+
     [Display(Name = "Imaging Type")]
-    public ImagingType ImagingType { get; set; }
+    public ImagingType? ImagingType { get; set; }
 
     [StringLength(50, ErrorMessage = "Image version cannot exceed 50 characters")]
     [Display(Name = "Image Version")]
@@ -65,6 +72,7 @@ public class ImagingJob
 
     // Collection navigation properties
     public ICollection<JobComment> Comments { get; set; } = new List<JobComment>();
+    public ICollection<JobAttachment> Attachments { get; set; } = new List<JobAttachment>();
 
     // Computed properties for display
     [Display(Name = "Duration")]
@@ -73,7 +81,9 @@ public class ImagingJob
         : null;
 
     [Display(Name = "Job Description")]
-    public string JobDescription => $"{ImagingType} - {Asset?.AssetTag ?? "Unknown Asset"}";
+    public string JobDescription => JobType == JobType.Maintenance 
+        ? $"Maintenance - {Asset?.AssetTag ?? "Unknown Asset"}"
+        : $"{ImagingType?.ToString() ?? "Imaging"} - {Asset?.AssetTag ?? "Unknown Asset"}";
 
     [Display(Name = "Is Overdue")]
     public bool IsOverdue => ScheduledAt.HasValue && 

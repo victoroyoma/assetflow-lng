@@ -24,6 +24,46 @@
             Defines role names used throughout the application
             </summary>
         </member>
+        <member name="M:buildone.Controllers.AttachmentsController.UploadJobAttachment(System.Int32,Microsoft.AspNetCore.Http.IFormFile,System.String)">
+            <summary>
+            Upload attachment for an imaging job
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.AttachmentsController.UploadAssetAttachment(System.Int32,Microsoft.AspNetCore.Http.IFormFile,System.String)">
+            <summary>
+            Upload attachment for an asset
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.AttachmentsController.GetJobAttachments(System.Int32)">
+            <summary>
+            Get job attachments
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.AttachmentsController.GetAssetAttachments(System.Int32)">
+            <summary>
+            Get asset attachments
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.AttachmentsController.DownloadJobAttachment(System.Int32)">
+            <summary>
+            Download job attachment
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.AttachmentsController.DownloadAssetAttachment(System.Int32)">
+            <summary>
+            Download asset attachment
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.AttachmentsController.DeleteJobAttachment(System.Int32)">
+            <summary>
+            Delete job attachment
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.AttachmentsController.DeleteAssetAttachment(System.Int32)">
+            <summary>
+            Delete asset attachment
+            </summary>
+        </member>
         <member name="M:buildone.Controllers.DataSeedingController.SeedBasicData">
             <summary>
             Seeds basic data (roles and admin user)
@@ -43,9 +83,35 @@
             </summary>
             <returns>Database statistics</returns>
         </member>
+        <member name="M:buildone.Controllers.DataSeedingController.SeedFromExcel(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Seeds data from an uploaded Excel (.xlsx) file. Accepts a multipart/form-data file upload.
+            Supports sheets named: Departments, Employees, Assets, Inventory. Sheets not present will be skipped.
+            </summary>
+        </member>
         <member name="M:buildone.Controllers.NotificationsController.GetNotifications">
             <summary>
             Gets recent notifications including warranty alerts, job updates, and system events
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.QRCodeController.GenerateAssetQRCode(System.Int32,System.Int32)">
+            <summary>
+            Generate QR code for an asset by Asset ID
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.QRCodeController.GenerateAssetURLQRCode(System.Int32,System.Int32)">
+            <summary>
+            Generate QR code with URL to asset details page
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.QRCodeController.GetAssetQRCodeBase64(System.Int32,System.Int32)">
+            <summary>
+            Get QR code as base64 string for inline display
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.QRCodeController.LookupAssetByQRCode(buildone.Controllers.QRCodeLookupRequest)">
+            <summary>
+            Lookup asset by QR code scan (asset tag or URL)
             </summary>
         </member>
         <member name="M:buildone.Controllers.SearchController.Search(System.String)">
@@ -54,6 +120,16 @@
             </summary>
             <param name="q">Search query</param>
             <returns>Search results grouped by category</returns>
+        </member>
+        <member name="T:buildone.Data.ImagingJob">
+            <summary>
+            Represents a job that can be either an Imaging job or a Maintenance job
+            </summary>
+        </member>
+        <member name="T:buildone.Data.MaintenanceHistory">
+            <summary>
+            Tracks complete history of all maintenance activities for audit and record purposes
+            </summary>
         </member>
         <member name="T:buildone.DTOs.ApiResponse`1">
             <summary>
@@ -316,6 +392,110 @@
         </member>
         <member name="M:buildone.Migrations.AddInventoryWarrantyFields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
+        </member>
+        <member name="T:buildone.Migrations.AddFileAttachments">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddFileAttachments.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddFileAttachments.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddFileAttachments.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:buildone.Migrations.AddJobTypeToJobs">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddJobTypeToJobs.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddJobTypeToJobs.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddJobTypeToJobs.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:buildone.Migrations.AddMaintenanceHistory">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddMaintenanceHistory.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddMaintenanceHistory.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddMaintenanceHistory.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Services.IExcelDataSeedingService.SeedFromExcelAsync(System.IO.Stream,System.String)">
+            <summary>
+            Seeds data from an Excel workbook stream. The workbook may contain one or more sheets
+            named: Departments, Employees, Assets, Inventory, ImagingJobs. Sheets that are missing
+            will be skipped.
+            </summary>
+            <param name="stream">Input stream for the uploaded Excel (.xlsx) file</param>
+            <param name="uploadedBy">Optional user who uploaded the file (Audit)</param>
+            <returns>Counts of records processed for each category</returns>
+        </member>
+        <member name="M:buildone.Services.IFileStorageService.SaveFileAsync(Microsoft.AspNetCore.Http.IFormFile,System.String)">
+            <summary>
+            Saves an uploaded file to storage
+            </summary>
+            <param name="file">The uploaded file</param>
+            <param name="folder">Folder path (e.g., "jobs", "assets")</param>
+            <returns>Relative file path</returns>
+        </member>
+        <member name="M:buildone.Services.IFileStorageService.DeleteFileAsync(System.String)">
+            <summary>
+            Deletes a file from storage
+            </summary>
+            <param name="filePath">Relative file path</param>
+        </member>
+        <member name="M:buildone.Services.IFileStorageService.GetPhysicalPath(System.String)">
+            <summary>
+            Gets the physical path for a file
+            </summary>
+            <param name="filePath">Relative file path</param>
+            <returns>Full physical path</returns>
+        </member>
+        <member name="M:buildone.Services.IFileStorageService.FileExistsAsync(System.String)">
+            <summary>
+            Checks if a file exists
+            </summary>
+            <param name="filePath">Relative file path</param>
+        </member>
+        <member name="M:buildone.Services.IFileStorageService.GetFileStreamAsync(System.String)">
+            <summary>
+            Gets file stream for download
+            </summary>
+            <param name="filePath">Relative file path</param>
+        </member>
+        <member name="M:buildone.Services.IQRCodeService.GenerateAssetQRCode(System.String,System.Int32)">
+            <summary>
+            Generates a QR code for an asset
+            </summary>
+            <param name="assetTag">Asset tag to encode</param>
+            <param name="size">QR code size in pixels (default: 300)</param>
+            <returns>PNG image as byte array</returns>
+        </member>
+        <member name="M:buildone.Services.IQRCodeService.GenerateAssetQRCodeBase64(System.String,System.Int32)">
+            <summary>
+            Generates a QR code as base64 string for inline display
+            </summary>
+            <param name="assetTag">Asset tag to encode</param>
+            <param name="size">QR code size in pixels (default: 300)</param>
+            <returns>Base64 encoded image string</returns>
+        </member>
+        <member name="M:buildone.Services.IQRCodeService.GenerateAssetURLQRCode(System.Int32,System.String,System.Int32)">
+            <summary>
+            Generates QR code with URL to asset details page
+            </summary>
+            <param name="assetId">Asset ID</param>
+            <param name="baseUrl">Base URL of the application</param>
+            <param name="size">QR code size in pixels</param>
+            <returns>PNG image as byte array</returns>
         </member>
         <member name="T:buildone.Validators.CreateAssetValidator">
             <summary>

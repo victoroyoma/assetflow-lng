@@ -77,6 +77,7 @@ public class Asset
 
     public ICollection<ImagingJob> ImagingJobs { get; set; } = new List<ImagingJob>();
     public ICollection<AssetHistory> History { get; set; } = new List<AssetHistory>();
+    public ICollection<AssetAttachment> Attachments { get; set; } = new List<AssetAttachment>();
 
     // Computed properties for display
     [Display(Name = "Asset Description")]

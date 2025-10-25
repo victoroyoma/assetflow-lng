@@ -276,6 +276,43 @@
             </div>
         </div>
 
+        <!-- Attachments Card -->
+        <div class="card mb-4" id="asset-attachments-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h6 class="card-title mb-0"><i class="fas fa-paperclip me-2"></i>Attachments</h6>
+                <small class="text-muted">Images & documents</small>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <input type="file" id="assetAttachmentFile" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <input type="text" id="assetAttachmentDescription" class="form-control" placeholder="Description (optional)" />
+                </div>
+                <div class="d-flex gap-2 mb-3">
+                    <button class="btn btn-primary" id="uploadAssetAttachmentBtn">Upload</button>
+                    <button class="btn btn-outline-secondary" id="refreshAssetAttachmentsBtn">Refresh</button>
+                </div>
+
+                <div id="assetAttachmentsList"><p class="text-muted">Loading attachments...</p></div>
+            </div>
+        </div>
+
+        <!-- QR Code Card -->
+        <div class="card mb-4" id="asset-qr-card">
+            <div class="card-header">
+                <h6 class="card-title mb-0"><i class="fas fa-qrcode me-2"></i>QR Code</h6>
+            </div>
+            <div class="card-body text-center">
+                <div id="assetQrContainer">
+                    <p class="text-muted">Loading QR code...</p>
+                </div>
+                <div class="mt-2">
+                    <a id="downloadAssetQrBtn" class="btn btn-sm btn-outline-primary" style="display:none;" target="_blank">Download QR</a>
+                </div>
+            </div>
+        </div>
+
         <!-- Audit Information -->
         <div class="card mb-4">
             <div class="card-header">
@@ -440,4 +477,117 @@
             margin-left: 0;
         }
     </style>
+}
+
+@section Scripts {
+    <script>
+        const assetId = @Model.Asset.Id;
+
+        // Asset Attachments
+        async function loadAssetAttachments() {
+            const listEl = document.getElementById('assetAttachmentsList');
+            listEl.innerHTML = '<p class="text-muted">Loading attachments...</p>';
+            try {
+                const res = await fetch(`/api/attachments/asset/${assetId}`, { credentials: 'same-origin' });
+                if (!res.ok) throw new Error('Failed to load attachments');
+                const attachments = await res.json();
+                if (!attachments || attachments.length === 0) {
+                    listEl.innerHTML = '<p class="text-muted">No attachments uploaded for this asset.</p>';
+                    return;
+                }
+
+                const html = attachments.map(a => {
+                    const preview = a.isImage ? `<img src="${a.downloadUrl}" alt="${a.fileName}" style="max-width:90px;max-height:70px;" class="me-2 img-thumbnail" />` : '<i class="fas fa-file-alt fa-2x me-2"></i>';
+                    return `
+                        <div class="d-flex align-items-center justify-content-between mb-2 attachment-item" data-id="${a.id}">
+                            <div class="d-flex align-items-center">
+                                ${preview}
+                                <div>
+                                    <div><strong>${a.fileName}</strong></div>
+                                    <div class="text-muted small">${a.fileSize} • ${a.uploadedAt ? new Date(a.uploadedAt).toLocaleString() : ''}</div>
+                                </div>
+                            </div>
+                            <div>
+                                <a class="btn btn-sm btn-outline-primary me-1" href="${a.downloadUrl}" target="_blank">Download</a>
+                                <button class="btn btn-sm btn-danger" onclick="deleteAssetAttachment(${a.id})">Delete</button>
+                            </div>
+                        </div>`;
+                }).join('');
+
+                listEl.innerHTML = html;
+            } catch (err) {
+                listEl.innerHTML = `<div class="alert alert-danger">Error loading attachments: ${err.message}</div>`;
+            }
+        }
+
+        async function uploadAssetAttachment() {
+            const fileInput = document.getElementById('assetAttachmentFile');
+            const desc = document.getElementById('assetAttachmentDescription').value || '';
+            if (!fileInput.files || fileInput.files.length === 0) {
+                alert('Please select a file to upload');
+                return;
+            }
+            const file = fileInput.files[0];
+            const fd = new FormData();
+            fd.append('file', file);
+            fd.append('description', desc);
+
+            const btn = document.getElementById('uploadAssetAttachmentBtn');
+            btn.disabled = true; btn.innerText = 'Uploading...';
+            try {
+                const res = await fetch(`/api/attachments/asset/${assetId}`, { method: 'POST', body: fd, credentials: 'same-origin' });
+                const payload = await res.json();
+                if (!res.ok) throw new Error(payload?.error || payload?.message || 'Upload failed');
+                fileInput.value = '';
+                document.getElementById('assetAttachmentDescription').value = '';
+                await loadAssetAttachments();
+                alert(payload.message || 'Uploaded successfully');
+            } catch (err) {
+                alert('Upload failed: ' + err.message);
+            } finally {
+                btn.disabled = false; btn.innerHTML = 'Upload';
+            }
+        }
+
+        async function deleteAssetAttachment(id) {
+            if (!confirm('Delete this attachment?')) return;
+            try {
+                const res = await fetch(`/api/attachments/asset/${id}`, { method: 'DELETE', credentials: 'same-origin' });
+                const payload = await res.json();
+                if (!res.ok) throw new Error(payload?.error || payload?.message || 'Delete failed');
+                await loadAssetAttachments();
+                alert(payload.message || 'Deleted');
+            } catch (err) {
+                alert('Delete failed: ' + err.message);
+            }
+        }
+
+        // QR code
+        async function loadAssetQr() {
+            const container = document.getElementById('assetQrContainer');
+            const downloadBtn = document.getElementById('downloadAssetQrBtn');
+            try {
+                const res = await fetch(`/api/qrcode/asset/${assetId}/base64`, { credentials: 'same-origin' });
+                if (!res.ok) throw new Error('Failed to get QR code');
+                const payload = await res.json();
+                if (payload?.qrCode) {
+                    container.innerHTML = `<img src="${payload.qrCode}" alt="QR Code" style="max-width:160px;" class="img-fluid" />`;
+                    downloadBtn.href = `/api/qrcode/asset/${assetId}/generate-url`;
+                    downloadBtn.style.display = 'inline-block';
+                    downloadBtn.innerText = 'Download URL QR';
+                } else {
+                    container.innerHTML = '<p class="text-muted">No QR data returned</p>';
+                }
+            } catch (err) {
+                container.innerHTML = `<div class="text-muted">Unable to load QR code: ${err.message}</div>`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('uploadAssetAttachmentBtn').addEventListener('click', uploadAssetAttachment);
+            document.getElementById('refreshAssetAttachmentsBtn').addEventListener('click', loadAssetAttachments);
+            loadAssetAttachments();
+            loadAssetQr();
+        });
+    </script>
 }

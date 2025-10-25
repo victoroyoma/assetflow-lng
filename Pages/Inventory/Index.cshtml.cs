@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using buildone.Data;
@@ -83,6 +84,46 @@ public class IndexModel : PageModel
             PageIndex,
             PageSize
         );
+    }
+
+    public async Task<IActionResult> OnPostDeleteAsync(int id)
+    {
+        var inventory = await _context.Inventories.FindAsync(id);
+
+        if (inventory == null)
+        {
+            return NotFound();
+        }
+
+        _context.Inventories.Remove(inventory);
+        await _context.SaveChangesAsync();
+
+        TempData["SuccessMessage"] = "Inventory item deleted successfully.";
+        return RedirectToPage();
+    }
+
+    public async Task<IActionResult> OnPostDeleteSelectedAsync(List<int> selectedIds)
+    {
+        if (selectedIds == null || !selectedIds.Any())
+        {
+            TempData["ErrorMessage"] = "No items selected to delete.";
+            return RedirectToPage();
+        }
+
+        var itemsToDelete = await _context.Inventories
+            .Where(i => selectedIds.Contains(i.Id))
+            .ToListAsync();
+
+        if (!itemsToDelete.Any())
+        {
+            return NotFound();
+        }
+
+        _context.Inventories.RemoveRange(itemsToDelete);
+        await _context.SaveChangesAsync();
+
+        TempData["SuccessMessage"] = $"{itemsToDelete.Count} inventory items deleted successfully.";
+        return RedirectToPage();
     }
 
     public class InventoryStatistics

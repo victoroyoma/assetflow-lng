@@ -139,6 +139,21 @@
                                                 <i class="fas fa-rocket me-2"></i>Seed Bulk Data
                                             </button>
                                         </div>
+
+                                        <hr />
+
+                                        <!-- Excel Upload -->
+                                        <div class="mb-3">
+                                            <h6 class="fw-bold">
+                                                <i class="fas fa-file-excel me-2 text-info"></i>Excel Import
+                                            </h6>
+                                            <p class="text-muted small mb-2">
+                                                Upload an Excel file to preview and seed custom data.
+                                            </p>
+                                            <button type="button" class="btn btn-info w-100" data-bs-toggle="modal" data-bs-target="#excelUploadModal">
+                                                <i class="fas fa-upload me-2"></i>Upload Excel File
+                                            </button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -203,11 +218,312 @@
     </div>
 </div>
 
+<!-- Excel Upload Modal -->
+<div class="modal fade" id="excelUploadModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title"><i class="fas fa-file-excel me-2"></i>Excel Import - Preview & Seed</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Upload Section -->
+                <div id="upload-section">
+                    <div class="alert alert-info">
+                        <strong>Excel Format Requirements:</strong>
+                        <ul class="mb-0 mt-2">
+                            <li>Supported sheets: <code>Departments</code>, <code>Employees</code>, <code>Assets</code>, <code>Inventory</code></li>
+                            <li>First row must contain column headers</li>
+                            <li>See <a href="#" data-bs-toggle="modal" data-bs-target="#formatGuideModal">format guide</a> for detailed column requirements</li>
+                        </ul>
+                    </div>
+                    <div class="mb-3">
+                        <label for="excelFileInput" class="form-label">Select Excel File (.xlsx)</label>
+                        <input type="file" class="form-control" id="excelFileInput" accept=".xlsx,.xls">
+                    </div>
+                    <button class="btn btn-primary" id="previewExcelBtn">
+                        <i class="fas fa-eye me-2"></i>Preview Data
+                    </button>
+                </div>
+
+                <!-- Preview Section -->
+                <div id="preview-section" style="display: none;">
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <strong>File loaded successfully!</strong> Review the data below and click "Seed to Database" to proceed.
+                    </div>
+
+                    <!-- Tabs for different sheets -->
+                    <ul class="nav nav-tabs" id="sheetTabs" role="tablist">
+                        <!-- Tabs will be generated dynamically -->
+                    </ul>
+                    <div class="tab-content mt-3" id="sheetTabContent">
+                        <!-- Tab content will be generated dynamically -->
+                    </div>
+
+                    <div class="mt-3 d-flex justify-content-between">
+                        <button class="btn btn-secondary" id="backToUploadBtn">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Upload
+                        </button>
+                        <button class="btn btn-success" id="seedToDatabaseBtn">
+                            <i class="fas fa-database me-2"></i>Seed to Database
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Progress Section -->
+                <div id="progress-section" style="display: none;">
+                    <div class="text-center py-4">
+                        <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <h5>Seeding database...</h5>
+                        <p class="text-muted">This may take a few moments depending on the file size.</p>
+                    </div>
+                </div>
+
+                <!-- Result Section -->
+                <div id="result-section" style="display: none;">
+                    <div id="result-message"></div>
+                    <button class="btn btn-primary mt-3" onclick="location.reload()">
+                        <i class="fas fa-sync me-2"></i>Refresh Page
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Format Guide Modal -->
+<div class="modal fade" id="formatGuideModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Excel Format Guide</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <h6 class="fw-bold">Departments Sheet</h6>
+                <p class="small">Columns: <code>Name</code>, <code>Code</code>, <code>Description</code></p>
+                
+                <h6 class="fw-bold mt-3">Employees Sheet</h6>
+                <p class="small">Columns: <code>FirstName</code>, <code>LastName</code>, <code>Email</code>, <code>Phone</code>, <code>DepartmentCode</code></p>
+                
+                <h6 class="fw-bold mt-3">Assets Sheet</h6>
+                <p class="small">Columns: <code>AssetTag</code>, <code>PcId</code>, <code>Type</code>, <code>Brand</code>, <code>Model</code>, <code>SerialNumber</code>, <code>Status</code>, <code>ImagingType</code>, <code>DeploymentType</code></p>
+                
+                <h6 class="fw-bold mt-3">Inventory Sheet</h6>
+                <p class="small">Columns: <code>ItemName</code>, <code>SKU</code>, <code>Category</code>, <code>Quantity</code>, <code>UnitPrice</code>, <code>Location</code></p>
+                
+                <div class="alert alert-info mt-3">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Download sample template: <a href="/templates/seeding-template.xlsx" download>seeding-template.xlsx</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
+    <!-- SheetJS library for Excel parsing -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+
     <script>
+        let excelData = null;
+        let uploadedFile = null;
+
         // Auto-refresh statistics every 30 seconds
         setInterval(function() {
-            location.reload();
+            // Only refresh if modal is not open
+            if (!document.getElementById('excelUploadModal').classList.contains('show')) {
+                location.reload();
+            }
         }, 30000);
+
+        // Preview Excel button
+        document.getElementById('previewExcelBtn').addEventListener('click', async function() {
+            const fileInput = document.getElementById('excelFileInput');
+            if (!fileInput.files || fileInput.files.length === 0) {
+                alert('Please select an Excel file');
+                return;
+            }
+
+            uploadedFile = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+
+                    // Parse all sheets
+                    excelData = {};
+                    const supportedSheets = ['Departments', 'Employees', 'Assets', 'Inventory'];
+
+                    workbook.SheetNames.forEach(sheetName => {
+                        if (supportedSheets.includes(sheetName)) {
+                            const worksheet = workbook.Sheets[sheetName];
+                            const jsonData = XLSX.utils.sheet_to_json(worksheet);
+                            if (jsonData.length > 0) {
+                                excelData[sheetName] = jsonData;
+                            }
+                        }
+                    });
+
+                    if (Object.keys(excelData).length === 0) {
+                        alert('No supported sheets found. Please ensure your Excel file contains at least one of: Departments, Employees, Assets, or Inventory');
+                        return;
+                    }
+
+                    displayPreview();
+                } catch (err) {
+                    alert('Error reading Excel file: ' + err.message);
+                    console.error(err);
+                }
+            };
+
+            reader.readAsArrayBuffer(uploadedFile);
+        });
+
+        function displayPreview() {
+            document.getElementById('upload-section').style.display = 'none';
+            document.getElementById('preview-section').style.display = 'block';
+
+            // Build tabs
+            const tabsHtml = Object.keys(excelData).map((sheetName, index) => {
+                const active = index === 0 ? 'active' : '';
+                const count = excelData[sheetName].length;
+                return `
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link ${active}" id="${sheetName}-tab" data-bs-toggle="tab" 
+                                data-bs-target="#${sheetName}-content" type="button" role="tab">
+                            ${sheetName} <span class="badge bg-secondary ms-1">${count}</span>
+                        </button>
+                    </li>
+                `;
+            }).join('');
+            document.getElementById('sheetTabs').innerHTML = tabsHtml;
+
+            // Build tab content
+            const contentHtml = Object.keys(excelData).map((sheetName, index) => {
+                const active = index === 0 ? 'show active' : '';
+                const rows = excelData[sheetName];
+                const columns = rows.length > 0 ? Object.keys(rows[0]) : [];
+
+                const tableHtml = `
+                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                        <table class="table table-sm table-bordered table-hover">
+                            <thead class="table-light sticky-top">
+                                <tr>
+                                    <th>#</th>
+                                    ${columns.map(col => `<th>${col}</th>`).join('')}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${rows.map((row, idx) => `
+                                    <tr>
+                                        <td>${idx + 1}</td>
+                                        ${columns.map(col => `<td>${row[col] || ''}</td>`).join('')}
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+
+                return `
+                    <div class="tab-pane fade ${active}" id="${sheetName}-content" role="tabpanel">
+                        <div class="alert alert-info">
+                            <strong>${sheetName}:</strong> ${rows.length} record(s) found
+                        </div>
+                        ${tableHtml}
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('sheetTabContent').innerHTML = contentHtml;
+        }
+
+        // Back to upload
+        document.getElementById('backToUploadBtn').addEventListener('click', function() {
+            document.getElementById('preview-section').style.display = 'none';
+            document.getElementById('upload-section').style.display = 'block';
+            excelData = null;
+        });
+
+        // Seed to database
+        document.getElementById('seedToDatabaseBtn').addEventListener('click', async function() {
+            if (!uploadedFile) {
+                alert('No file to upload');
+                return;
+            }
+
+            if (!confirm('Are you sure you want to seed this data to the database? This will create new records.')) {
+                return;
+            }
+
+            // Show progress
+            document.getElementById('preview-section').style.display = 'none';
+            document.getElementById('progress-section').style.display = 'block';
+
+            try {
+                const formData = new FormData();
+                formData.append('file', uploadedFile);
+
+                const response = await fetch('/api/dataseeding/seed-from-excel', {
+                    method: 'POST',
+                    body: formData,
+                    credentials: 'same-origin'
+                });
+
+                const result = await response.json();
+
+                // Show results
+                document.getElementById('progress-section').style.display = 'none';
+                document.getElementById('result-section').style.display = 'block';
+
+                if (response.ok) {
+                    const summary = `
+                        <div class="alert alert-success">
+                            <h5><i class="fas fa-check-circle me-2"></i>Seeding completed successfully!</h5>
+                            <hr>
+                            <ul>
+                                ${result.departments ? `<li><strong>Departments:</strong> ${result.departments.created} created, ${result.departments.skipped} skipped</li>` : ''}
+                                ${result.employees ? `<li><strong>Employees:</strong> ${result.employees.created} created, ${result.employees.skipped} skipped</li>` : ''}
+                                ${result.assets ? `<li><strong>Assets:</strong> ${result.assets.created} created, ${result.assets.skipped} skipped</li>` : ''}
+                                ${result.inventory ? `<li><strong>Inventory:</strong> ${result.inventory.created} created, ${result.inventory.skipped} skipped</li>` : ''}
+                            </ul>
+                        </div>
+                    `;
+                    document.getElementById('result-message').innerHTML = summary;
+                } else {
+                    document.getElementById('result-message').innerHTML = `
+                        <div class="alert alert-danger">
+                            <h5><i class="fas fa-exclamation-triangle me-2"></i>Seeding failed</h5>
+                            <p>${result.error || result.details || 'Unknown error'}</p>
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                document.getElementById('progress-section').style.display = 'none';
+                document.getElementById('result-section').style.display = 'block';
+                document.getElementById('result-message').innerHTML = `
+                    <div class="alert alert-danger">
+                        <h5><i class="fas fa-exclamation-triangle me-2"></i>Error</h5>
+                        <p>${err.message}</p>
+                    </div>
+                `;
+            }
+        });
+
+        // Reset modal on close
+        document.getElementById('excelUploadModal').addEventListener('hidden.bs.modal', function() {
+            document.getElementById('upload-section').style.display = 'block';
+            document.getElementById('preview-section').style.display = 'none';
+            document.getElementById('progress-section').style.display = 'none';
+            document.getElementById('result-section').style.display = 'none';
+            document.getElementById('excelFileInput').value = '';
+            excelData = null;
+            uploadedFile = null;
+        });
     </script>
 }

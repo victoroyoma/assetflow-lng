@@ -325,6 +325,32 @@
                 </div>
             </div>
 
+            <!-- Attachments Card -->
+            <div class="card mb-4 border-0 shadow-sm" id="job-attachments-card">
+                <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0"><i class="fas fa-paperclip me-2"></i>Attachments</h5>
+                    <small class="text-muted">Supported: images & documents (max 10MB)</small>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="jobAttachmentFile" class="form-label">Select file</label>
+                        <input type="file" id="jobAttachmentFile" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="jobAttachmentDescription" class="form-label">Description (optional)</label>
+                        <input type="text" id="jobAttachmentDescription" class="form-control" placeholder="Add a short description" />
+                    </div>
+                    <div class="d-flex gap-2 mb-3">
+                        <button class="btn btn-primary" id="uploadJobAttachmentBtn">Upload Attachment</button>
+                        <button class="btn btn-outline-secondary" id="refreshJobAttachmentsBtn">Refresh</button>
+                    </div>
+
+                    <div id="jobAttachmentsList">
+                        <p class="text-muted">Loading attachments...</p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Statistics Card -->
             @if (Model.Job.Status == buildone.Data.Enums.JobStatus.Completed || Model.Job.Status == buildone.Data.Enums.JobStatus.Failed)
             {
@@ -445,4 +471,106 @@
     function showJobHistory(jobId) {
         alert('Job history functionality coming soon!');
     }
+</script>
+
+<script>
+    // Attachments: Imaging Job
+    const jobId = @Model.Job.Id;
+
+    async function loadJobAttachments() {
+        const listEl = document.getElementById('jobAttachmentsList');
+        listEl.innerHTML = '<p class="text-muted">Loading attachments...</p>';
+        try {
+            const res = await fetch(`/api/attachments/job/${jobId}`, { credentials: 'same-origin' });
+            if (!res.ok) throw new Error('Failed to load attachments');
+            const attachments = await res.json();
+            if (!attachments || attachments.length === 0) {
+                listEl.innerHTML = '<p class="text-muted">No attachments uploaded for this job.</p>';
+                return;
+            }
+
+            const html = attachments.map(a => {
+                const preview = a.isImage ? `<img src="${a.downloadUrl}" alt="${a.fileName}" style="max-width:100px;max-height:80px;" class="me-2 img-thumbnail" />` : '<i class="fas fa-file-alt fa-2x me-2"></i>';
+                return `
+                    <div class="d-flex align-items-center justify-content-between mb-2 attachment-item" data-id="${a.id}">
+                        <div class="d-flex align-items-center">
+                            ${preview}
+                            <div>
+                                <div><strong>${a.fileName}</strong></div>
+                                <div class="text-muted small">${a.fileSize} • ${a.uploadedAt ? new Date(a.uploadedAt).toLocaleString() : ''}</div>
+                                ${a.description ? `<div class="small">${a.description}</div>` : ''}
+                            </div>
+                        </div>
+                        <div>
+                            <a class="btn btn-sm btn-outline-primary me-1" href="${a.downloadUrl}" target="_blank">Download</a>
+                            <button class="btn btn-sm btn-danger" onclick="deleteJobAttachment(${a.id})">Delete</button>
+                        </div>
+                    </div>`;
+            }).join('');
+
+            listEl.innerHTML = html;
+        } catch (err) {
+            listEl.innerHTML = `<div class="alert alert-danger">Error loading attachments: ${err.message}</div>`;
+        }
+    }
+
+    async function uploadJobAttachment() {
+        const fileInput = document.getElementById('jobAttachmentFile');
+        const desc = document.getElementById('jobAttachmentDescription').value || '';
+        if (!fileInput.files || fileInput.files.length === 0) {
+            alert('Please select a file to upload');
+            return;
+        }
+
+        const file = fileInput.files[0];
+        const fd = new FormData();
+        fd.append('file', file);
+        fd.append('description', desc);
+
+        const btn = document.getElementById('uploadJobAttachmentBtn');
+        btn.disabled = true;
+        btn.innerText = 'Uploading...';
+
+        try {
+            const res = await fetch(`/api/attachments/job/${jobId}`, {
+                method: 'POST',
+                body: fd,
+                credentials: 'same-origin'
+            });
+            const payload = await res.json();
+            if (!res.ok) throw new Error(payload?.error || payload?.message || 'Upload failed');
+            // Reset
+            fileInput.value = '';
+            document.getElementById('jobAttachmentDescription').value = '';
+            await loadJobAttachments();
+            alert(payload.message || 'Uploaded successfully');
+        } catch (err) {
+            alert('Upload failed: ' + err.message);
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-upload me-1"></i>Upload Attachment';
+        }
+    }
+
+    async function deleteJobAttachment(attachmentId) {
+        if (!confirm('Delete this attachment?')) return;
+        try {
+            const res = await fetch(`/api/attachments/job/${attachmentId}`, { method: 'DELETE', credentials: 'same-origin' });
+            const payload = await res.json();
+            if (!res.ok) throw new Error(payload?.error || payload?.message || 'Delete failed');
+            await loadJobAttachments();
+            alert(payload.message || 'Deleted');
+        } catch (err) {
+            alert('Delete failed: ' + err.message);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize buttons
+        const uploadBtn = document.getElementById('uploadJobAttachmentBtn');
+        const refreshBtn = document.getElementById('refreshJobAttachmentsBtn');
+        uploadBtn.addEventListener('click', uploadJobAttachment);
+        refreshBtn.addEventListener('click', loadJobAttachments);
+        loadJobAttachments();
+    });
 </script>

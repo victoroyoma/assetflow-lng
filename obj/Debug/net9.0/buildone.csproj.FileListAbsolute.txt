@@ -544,5 +544,15 @@ C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\Serilog.Sinks.Debug.dll
 C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\Serilog.Sinks.File.dll
 C:\Users\victo\Desktop\buildone\obj\Debug\net9.0\buildone.xml
 C:\Users\victo\Desktop\buildone\obj\Debug\net9.0\buildone.sourcelink.json
-C:\Users\victo\Desktop\buildone\obj\Debug\net9.0\compressed\xnmug6gfkp-pxmpuzzyk1.gz
 C:\Users\victo\Desktop\buildone\obj\Debug\net9.0\compressed\6jdcpseux2-k7tcqqtrhj.gz
+C:\Users\victo\Desktop\buildone\obj\Debug\net9.0\compressed\n1shvvp7d9-e4rufs6fkl.gz
+C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\ClosedXML.dll
+C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\ClosedXML.Parser.dll
+C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\DocumentFormat.OpenXml.dll
+C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\DocumentFormat.OpenXml.Framework.dll
+C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\ExcelNumberFormat.dll
+C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\RBush.dll
+C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\SixLabors.Fonts.dll
+C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\System.IO.Packaging.dll
+C:\Users\victo\Desktop\buildone\bin\Debug\net9.0\QRCoder.dll
+C:\Users\victo\Desktop\buildone\obj\Debug\net9.0\compressed\xnmug6gfkp-d695w4g9jt.gz

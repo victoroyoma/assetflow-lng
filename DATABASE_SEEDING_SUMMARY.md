@@ -17,12 +17,24 @@ Successfully implemented a comprehensive database seeding solution for the Build
     - 6 Windows image versions
     - Smart job status distribution based on age
 
+- **`Services/ExcelDataSeedingService.cs`** - **NEW**
+  - Excel-based data seeding using ClosedXML
+  - Supports importing from .xlsx files
+  - Reads sheets: Departments, Employees, Assets, Inventory
+  - Automatically maps columns by header names
+  - Duplicate detection and prevention
+  - Returns counts of records created
+
+- **`Services/IExcelDataSeedingService.cs`** - **NEW**
+  - Interface for Excel seeding service
+
 ### 2. Controller
 - **`Controllers/DataSeedingController.cs`**
   - RESTful API endpoints for data seeding
-  - Three endpoints:
+  - Four endpoints:
     - `POST /api/DataSeeding/seed-basic` - Seeds roles and admin user
     - `POST /api/DataSeeding/seed-bulk` - Seeds 400+ records
+    - `POST /api/DataSeeding/seed-from-excel` - **NEW:** Seeds from Excel file upload
     - `GET /api/DataSeeding/statistics` - Returns current counts
   - Requires Administrator authorization
   - Returns detailed statistics after seeding
@@ -57,6 +69,13 @@ Successfully implemented a comprehensive database seeding solution for the Build
   - Checks if application is running
   - Opens browser to seeding page
   - Provides helpful instructions
+
+- **`seed-from-excel.ps1`** - **NEW** (PowerShell Excel import script)
+  - Uploads Excel file to API endpoint
+  - Supports authentication with credentials
+  - Real-time progress and statistics display
+  - Detailed error reporting
+  - Usage: `.\seed-from-excel.ps1 -ExcelFilePath ".\data.xlsx"`
 
 ### 5. Service Updates
 - **`Services/DataSeedingService.cs`** (Updated)
@@ -167,21 +186,59 @@ Successfully implemented a comprehensive database seeding solution for the Build
 5. Wait for confirmation (~30-60 seconds)
 ```
 
-### Method 2: PowerShell Script
+### Method 2: Excel File Import (NEW)
+```powershell
+# Create an Excel file with sheets: Departments, Employees, Assets, Inventory
+# Required columns documented below
+
+# With authentication
+$pass = ConvertTo-SecureString "Admin123!" -AsPlainText -Force
+.\seed-from-excel.ps1 -ExcelFilePath ".\seed-data.xlsx" -Username "admin@buildone.com" -Password $pass
+
+# Or without credentials (if already logged in)
+.\seed-from-excel.ps1 -ExcelFilePath ".\seed-data.xlsx"
+```
+
+#### Excel File Format
+Your Excel workbook can contain any combination of these sheets (all are optional):
+
+**Departments Sheet:**
+- Columns: `Name` (required), `Code` (optional)
+
+**Employees Sheet:**
+- Columns: `FullName` or `Name`, `Username`, `Email`, `Phone`, `DepartmentCode` or `Department`
+
+**Assets Sheet:**
+- Columns: `AssetTag`, `PcId`, `Brand`, `Model`, `SerialNumber`, `Type`, `AssignedTo` (username or email)
+
+**Inventory Sheet:**
+- Columns: `ItemName` or `Name` (required), `SKU`, `Description`, `Category`, `Unit`, `Supplier`
+- Optional: `CurrentQuantity`, `MinimumQuantity`, `MaximumQuantity`, `WarrantyPeriodMonths`, `WarrantyStartDate`, `WarrantyEndDate`
+
+**Notes:**
+- Column names are case-insensitive
+- Duplicates are automatically skipped (by Code/Name/Username/Email/SKU/AssetTag/Serial)
+- Missing sheets are silently skipped
+- Foreign keys are resolved automatically (e.g., DepartmentCode links to Department)
+
+### Method 3: PowerShell Script
 ```powershell
 .\seed-database.ps1
 ```
 
-### Method 3: API Endpoint
+### Method 4: API Endpoint
 ```powershell
 # Get statistics
 Invoke-RestMethod -Uri "https://localhost:5001/api/DataSeeding/statistics" -Method GET
 
 # Seed bulk data
 Invoke-RestMethod -Uri "https://localhost:5001/api/DataSeeding/seed-bulk" -Method POST
+
+# Seed from Excel (requires multipart/form-data)
+# See seed-from-excel.ps1 for implementation example
 ```
 
-### Method 4: Swagger UI
+### Method 5: Swagger UI
 ```
 1. Navigate to: https://localhost:5001/swagger
 2. Find DataSeeding endpoints

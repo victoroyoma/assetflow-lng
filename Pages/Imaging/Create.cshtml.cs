@@ -13,22 +13,34 @@ namespace buildone.Pages.Imaging
         private readonly IImagingJobService _imagingJobService;
         private readonly IAssetService _assetService;
         private readonly IEmployeeService _employeeService;
+        private readonly IWebHostEnvironment _environment;
+        private readonly ApplicationDbContext _context;
 
         public CreateModel(
             IImagingJobService imagingJobService,
             IAssetService assetService,
-            IEmployeeService employeeService)
+            IEmployeeService employeeService,
+            IWebHostEnvironment environment,
+            ApplicationDbContext context)
         {
             _imagingJobService = imagingJobService;
             _assetService = assetService;
             _employeeService = employeeService;
+            _environment = environment;
+            _context = context;
         }
 
         [BindProperty]
         public ImagingJobCreateModel ImagingJob { get; set; } = default!;
 
+        [BindProperty]
+        public List<IFormFile>? MaintenanceFiles { get; set; }
+
         public List<Asset> AvailableAssets { get; set; } = new();
         public List<Employee> Technicians { get; set; } = new();
+        
+        [BindProperty(SupportsGet = true)]
+        public string? JobType { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -37,7 +49,8 @@ namespace buildone.Pages.Imaging
                 await LoadDropdownData();
                 ImagingJob = new ImagingJobCreateModel
                 {
-                    ScheduledAt = DateTime.Now.AddHours(1) // Default to 1 hour from now
+                    ScheduledAt = DateTime.Now.AddHours(1), // Default to 1 hour from now
+                    JobType = JobType == "Maintenance" ? Data.Enums.JobType.Maintenance : Data.Enums.JobType.Imaging
                 };
                 return Page();
             }
@@ -93,7 +106,8 @@ namespace buildone.Pages.Imaging
                 {
                     AssetId = ImagingJob.AssetId,
                     TechnicianId = ImagingJob.TechnicianId == 0 ? null : ImagingJob.TechnicianId,
-                    ImagingType = ImagingJob.ImagingType,
+                    JobType = ImagingJob.JobType,
+                    ImagingType = ImagingJob.JobType == Data.Enums.JobType.Imaging ? ImagingJob.ImagingType : null,
                     ImageVersion = ImagingJob.ImageVersion?.Trim(),
                     Priority = ImagingJob.Priority,
                     Status = JobStatus.Pending,
@@ -105,7 +119,14 @@ namespace buildone.Pages.Imaging
 
                 var createdJob = await _imagingJobService.CreateImagingJobAsync(imagingJob);
 
-                TempData["SuccessMessage"] = $"Imaging job for asset '{asset.AssetTag}' has been scheduled successfully.";
+                // Handle file uploads for maintenance jobs
+                if (ImagingJob.JobType == Data.Enums.JobType.Maintenance && MaintenanceFiles != null && MaintenanceFiles.Any())
+                {
+                    await SaveMaintenanceFilesAsync(createdJob.Id, MaintenanceFiles);
+                }
+
+                var jobTypeText = ImagingJob.JobType == Data.Enums.JobType.Maintenance ? "Maintenance" : "Imaging";
+                TempData["SuccessMessage"] = $"{jobTypeText} job for asset '{asset.AssetTag}' has been scheduled successfully.";
                 return RedirectToPage("./Queue");
             }
             catch (Exception ex)
@@ -141,6 +162,56 @@ namespace buildone.Pages.Imaging
                 ModelState.AddModelError(string.Empty, "Error loading dropdown data.");
             }
         }
+
+        private async Task SaveMaintenanceFilesAsync(int jobId, List<IFormFile> files)
+        {
+            try
+            {
+                var uploadPath = Path.Combine(_environment.WebRootPath, "uploads", "jobs", jobId.ToString());
+                Directory.CreateDirectory(uploadPath);
+
+                var userId = User.Identity?.Name ?? "System";
+
+                foreach (var file in files)
+                {
+                    if (file.Length > 0)
+                    {
+                        // Generate unique filename
+                        var fileExtension = Path.GetExtension(file.FileName);
+                        var uniqueFileName = $"{Guid.NewGuid()}{fileExtension}";
+                        var filePath = Path.Combine(uploadPath, uniqueFileName);
+
+                        // Save file to disk
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+
+                        // Create attachment record
+                        var attachment = new JobAttachment
+                        {
+                            JobId = jobId,
+                            FileName = file.FileName,
+                            FilePath = Path.Combine("uploads", "jobs", jobId.ToString(), uniqueFileName),
+                            ContentType = file.ContentType,
+                            FileSizeBytes = file.Length,
+                            Description = $"Uploaded during job creation",
+                            UploadedBy = userId,
+                            UploadedAt = DateTime.UtcNow
+                        };
+
+                        _context.JobAttachments.Add(attachment);
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                // Log error but don't fail the job creation
+                Console.WriteLine($"Error saving maintenance files: {ex.Message}");
+            }
+        }
     }
 
     public class ImagingJobCreateModel
@@ -152,9 +223,12 @@ namespace buildone.Pages.Imaging
         [Display(Name = "Technician")]
         public int? TechnicianId { get; set; }
 
-        [Required(ErrorMessage = "Imaging type is required")]
+        [Required(ErrorMessage = "Job type is required")]
+        [Display(Name = "Job Type")]
+        public JobType JobType { get; set; } = JobType.Imaging;
+
         [Display(Name = "Imaging Type")]
-        public ImagingType ImagingType { get; set; } = ImagingType.Fresh;
+        public ImagingType? ImagingType { get; set; } = Data.Enums.ImagingType.Fresh;
 
         [StringLength(50, ErrorMessage = "Image version cannot exceed 50 characters")]
         [Display(Name = "Image Version")]

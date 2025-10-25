@@ -1,0 +1,542 @@
+2025-10-25 12:17:25.226 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-25 12:17:30.133 +01:00 [INF] Database initialized successfully
+2025-10-25 12:17:30.149 +01:00 [INF] BuildOne started successfully
+2025-10-25 12:17:33.345 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-25 12:17:33.444 +01:00 [INF] HTTP GET /Inventory responded 302 in 111.3391 ms
+2025-10-25 12:17:34.246 +01:00 [INF] HTTP GET /Account/Login responded 200 in 750.8524 ms
+2025-10-25 12:17:34.401 +01:00 [INF] HTTP GET /css/site.css responded 304 in 5.5774 ms
+2025-10-25 12:17:34.401 +01:00 [INF] HTTP GET /lib/jquery/dist/jquery.min.js responded 304 in 25.2162 ms
+2025-10-25 12:17:34.401 +01:00 [INF] HTTP GET /lib/bootstrap/dist/css/bootstrap.min.css responded 304 in 47.7662 ms
+2025-10-25 12:17:34.401 +01:00 [INF] HTTP GET /lib/bootstrap/dist/js/bootstrap.bundle.min.js responded 304 in 25.1610 ms
+2025-10-25 12:17:34.401 +01:00 [INF] HTTP GET /lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js responded 304 in 38.2531 ms
+2025-10-25 12:17:34.401 +01:00 [INF] HTTP GET /lib/jquery-validation/dist/jquery.validate.min.js responded 304 in 24.9922 ms
+2025-10-25 12:17:34.409 +01:00 [INF] HTTP GET /js/site.js responded 304 in 0.4028 ms
+2025-10-25 12:17:35.155 +01:00 [INF] HTTP GET /api/notifications responded 302 in 2.7224 ms
+2025-10-25 12:17:36.685 +01:00 [INF] HTTP GET /Account/Login responded 200 in 16.5213 ms
+2025-10-25 12:17:36.755 +01:00 [INF] HTTP GET /favicon.ico responded 304 in 0.3829 ms
+2025-10-25 12:18:02.660 +01:00 [INF] HTTP POST /Account/Login responded 302 in 704.8454 ms
+2025-10-25 12:18:03.569 +01:00 [INF] HTTP GET /Inventory responded 200 in 892.4497 ms
+2025-10-25 12:18:03.615 +01:00 [INF] HTTP GET /css/brand.css responded 304 in 0.4739 ms
+2025-10-25 12:18:04.210 +01:00 [INF] HTTP GET /api/notifications responded 200 in 254.9988 ms
+2025-10-25 12:18:18.260 +01:00 [INF] HTTP GET /Imaging responded 200 in 592.4018 ms
+2025-10-25 12:18:18.489 +01:00 [INF] HTTP GET /api/notifications responded 200 in 33.1204 ms
+2025-10-25 12:18:23.952 +01:00 [INF] HTTP GET /Imaging/Create responded 200 in 342.3717 ms
+2025-10-25 12:18:24.195 +01:00 [INF] HTTP GET /api/notifications responded 200 in 41.0826 ms
+2025-10-25 12:18:34.701 +01:00 [INF] HTTP GET /Reports responded 200 in 310.1618 ms
+2025-10-25 12:18:34.892 +01:00 [INF] HTTP GET /api/notifications responded 200 in 8.1283 ms
+2025-10-25 12:22:50.309 +01:00 [INF] HTTP GET /Assets responded 200 in 207.0173 ms
+2025-10-25 12:22:50.804 +01:00 [INF] HTTP GET /api/notifications responded 200 in 48.3884 ms
+2025-10-25 12:22:59.460 +01:00 [INF] HTTP GET /Assets responded 200 in 50.2778 ms
+2025-10-25 12:22:59.637 +01:00 [INF] HTTP GET /api/notifications responded 200 in 16.0126 ms
+2025-10-25 12:23:17.666 +01:00 [INF] HTTP GET /Assets responded 200 in 45.1661 ms
+2025-10-25 12:23:18.030 +01:00 [INF] HTTP GET /api/notifications responded 200 in 10.0318 ms
+2025-10-25 12:23:23.500 +01:00 [INF] HTTP GET /Assets responded 200 in 30.4082 ms
+2025-10-25 12:23:23.860 +01:00 [INF] HTTP GET /api/notifications responded 200 in 9.7588 ms
+2025-10-25 12:24:44.516 +01:00 [INF] HTTP GET /Assets responded 200 in 59.2433 ms
+2025-10-25 12:24:44.812 +01:00 [INF] HTTP GET /api/notifications responded 200 in 36.7948 ms
+2025-10-25 12:24:47.486 +01:00 [INF] HTTP GET /Assets responded 200 in 42.3436 ms
+2025-10-25 12:24:47.675 +01:00 [INF] HTTP GET /api/notifications responded 200 in 8.4553 ms
+2025-10-25 12:24:51.187 +01:00 [INF] HTTP GET /Assets responded 200 in 41.1284 ms
+2025-10-25 12:24:51.374 +01:00 [INF] HTTP GET /api/notifications responded 200 in 6.5340 ms
+2025-10-25 12:27:12.110 +01:00 [INF] HTTP GET /Assets responded 200 in 66.2282 ms
+2025-10-25 12:27:12.517 +01:00 [INF] HTTP GET /api/notifications responded 200 in 40.1873 ms
+2025-10-25 13:26:18.977 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-25 13:26:19.255 +01:00 [FTL] Application failed to start
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\victo\Desktop\buildone\Program.cs:line 206
+2025-10-25 14:01:31.393 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-25 14:01:32.929 +01:00 [INF] Database initialized successfully
+2025-10-25 14:01:32.934 +01:00 [INF] BuildOne started successfully
+2025-10-25 14:01:35.912 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-25 14:01:37.171 +01:00 [INF] HTTP GET /api/notifications responded 200 in 1253.8841 ms
+2025-10-25 14:01:37.449 +01:00 [INF] HTTP GET /api/notifications responded 200 in 278.8192 ms
+2025-10-25 14:01:46.548 +01:00 [INF] HTTP GET /Assets/Create responded 200 in 701.3530 ms
+2025-10-25 14:01:46.934 +01:00 [INF] HTTP GET /api/notifications responded 200 in 20.8135 ms
+2025-10-25 14:02:33.228 +01:00 [INF] HTTP GET /Assets responded 200 in 376.5448 ms
+2025-10-25 14:02:33.663 +01:00 [INF] HTTP GET /api/notifications responded 200 in 47.5319 ms
+2025-10-25 14:02:36.041 +01:00 [INF] HTTP GET /Assets/Scan responded 200 in 28.1279 ms
+2025-10-25 14:03:21.733 +01:00 [INF] HTTP GET /api/notifications responded 200 in 127.5871 ms
+2025-10-25 14:04:06.401 +01:00 [INF] HTTP GET /Inventory responded 200 in 327.0149 ms
+2025-10-25 14:04:07.075 +01:00 [INF] HTTP GET /api/notifications responded 200 in 51.7857 ms
+2025-10-25 14:04:12.348 +01:00 [INF] HTTP GET /Inventory/Create responded 200 in 195.8884 ms
+2025-10-25 14:04:12.592 +01:00 [INF] HTTP GET /api/notifications responded 200 in 50.6905 ms
+2025-10-25 14:04:43.859 +01:00 [INF] HTTP GET /Admin/SeedData responded 200 in 85.9396 ms
+2025-10-25 14:04:44.226 +01:00 [INF] HTTP GET /api/notifications responded 200 in 9.5950 ms
+2025-10-25 14:05:12.628 +01:00 [INF] HTTP GET /SystemSettings responded 200 in 156.8530 ms
+2025-10-25 14:05:12.877 +01:00 [INF] HTTP GET /api/notifications responded 200 in 28.4822 ms
+2025-10-25 14:05:20.990 +01:00 [INF] HTTP GET /RoleManagement responded 200 in 73.1615 ms
+2025-10-25 14:05:21.218 +01:00 [INF] HTTP GET /api/notifications responded 200 in 28.5375 ms
+2025-10-25 14:05:26.737 +01:00 [INF] HTTP GET /UserManagement responded 200 in 96.3937 ms
+2025-10-25 14:05:26.947 +01:00 [INF] HTTP GET /api/notifications responded 200 in 11.2448 ms
+2025-10-25 14:05:32.771 +01:00 [INF] HTTP GET /Reports responded 200 in 431.2719 ms
+2025-10-25 14:05:33.068 +01:00 [INF] HTTP GET /api/notifications responded 200 in 11.7079 ms
+2025-10-25 14:05:40.617 +01:00 [INF] HTTP GET /Reports/WarrantyAlerts responded 200 in 105.0718 ms
+2025-10-25 14:05:40.818 +01:00 [INF] HTTP GET /api/notifications responded 200 in 4.4463 ms
+2025-10-25 14:05:43.692 +01:00 [INF] HTTP GET /Reports/InventoryReport responded 200 in 63.5098 ms
+2025-10-25 14:05:43.895 +01:00 [INF] HTTP GET /api/notifications responded 200 in 4.6452 ms
+2025-10-25 14:06:20.196 +01:00 [INF] HTTP GET /Reports/WarrantyAlerts responded 200 in 56.2754 ms
+2025-10-25 14:06:20.453 +01:00 [INF] HTTP GET /api/notifications responded 200 in 29.4083 ms
+2025-10-25 14:06:37.210 +01:00 [INF] HTTP GET /Assets responded 200 in 77.0768 ms
+2025-10-25 14:06:37.587 +01:00 [INF] HTTP GET /api/notifications responded 200 in 9.5131 ms
+2025-10-25 14:06:40.978 +01:00 [INF] HTTP GET /Assets/Create responded 200 in 22.5062 ms
+2025-10-25 14:06:41.186 +01:00 [INF] HTTP GET /api/notifications responded 200 in 8.1548 ms
+2025-10-25 14:07:31.596 +01:00 [INF] HTTP GET /Imaging responded 200 in 142.3446 ms
+2025-10-25 14:07:31.834 +01:00 [INF] HTTP GET /api/notifications responded 200 in 25.2155 ms
+2025-10-25 14:07:38.159 +01:00 [INF] HTTP GET /Assets responded 200 in 72.5681 ms
+2025-10-25 14:07:38.512 +01:00 [INF] HTTP GET /api/notifications responded 200 in 9.2892 ms
+2025-10-25 14:07:40.741 +01:00 [INF] HTTP GET /Assets/Scan responded 200 in 3.9376 ms
+2025-10-25 14:07:41.337 +01:00 [INF] HTTP GET /api/notifications responded 200 in 8.1818 ms
+2025-10-25 14:17:04.018 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-25 14:17:05.393 +01:00 [INF] Database initialized successfully
+2025-10-25 14:17:05.397 +01:00 [INF] BuildOne started successfully
+2025-10-25 14:17:14.709 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-25 14:17:14.823 +01:00 [INF] HTTP GET /Admin/SeedData responded 302 in 118.6039 ms
+2025-10-25 14:17:15.071 +01:00 [INF] HTTP GET /Account/Login responded 200 in 219.3871 ms
+2025-10-25 14:17:16.041 +01:00 [INF] HTTP GET /api/notifications responded 200 in 555.6105 ms
+2025-10-25 14:17:19.705 +01:00 [INF] HTTP POST /Account/Login responded 400 in 23.0700 ms
+2025-10-25 14:17:31.476 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-25 14:17:32.183 +01:00 [INF] HTTP GET / responded 200 in 766.4665 ms
+2025-10-25 14:17:32.563 +01:00 [INF] HTTP GET /api/notifications responded 200 in 30.6630 ms
+2025-10-25 14:17:39.291 +01:00 [INF] HTTP GET /Assets/Create responded 200 in 315.7542 ms
+2025-10-25 14:17:39.480 +01:00 [INF] HTTP GET /api/notifications responded 200 in 5.9012 ms
+2025-10-25 14:17:45.806 +01:00 [INF] HTTP GET /Assets responded 200 in 222.5015 ms
+2025-10-25 14:17:46.155 +01:00 [INF] HTTP GET /api/notifications responded 200 in 10.9757 ms
+2025-10-25 14:17:50.501 +01:00 [INF] HTTP GET /Assets/Scan responded 200 in 31.5689 ms
+2025-10-25 14:17:50.728 +01:00 [INF] HTTP GET /api/notifications responded 200 in 11.1873 ms
+2025-10-25 14:19:38.046 +01:00 [INF] HTTP POST /api/qrcode/lookup responded 404 in 192.4956 ms
+2025-10-25 14:21:22.181 +01:00 [INF] HTTP GET /Assets responded 200 in 77.8775 ms
+2025-10-25 14:21:22.657 +01:00 [INF] HTTP GET /api/notifications responded 200 in 46.4276 ms
+2025-10-25 14:22:57.817 +01:00 [INF] HTTP GET /api/notifications responded 200 in 56.9337 ms
+2025-10-25 14:23:03.080 +01:00 [INF] HTTP GET /Imaging/Create responded 200 in 239.7756 ms
+2025-10-25 14:23:03.300 +01:00 [INF] HTTP GET /api/notifications responded 200 in 8.3968 ms
+2025-10-25 14:23:13.407 +01:00 [INF] HTTP GET /Imaging/Queue responded 200 in 259.7189 ms
+2025-10-25 14:23:15.244 +01:00 [INF] HTTP GET /api/notifications responded 200 in 9.4069 ms
+2025-10-25 14:23:45.360 +01:00 [INF] HTTP GET /Imaging/Queue responded 200 in 102.3438 ms
+2025-10-25 14:23:46.992 +01:00 [INF] HTTP GET /api/notifications responded 200 in 6.7756 ms
+2025-10-25 14:23:57.622 +01:00 [INF] HTTP GET /Admin/SeedData responded 200 in 82.7541 ms
+2025-10-25 14:23:57.838 +01:00 [INF] HTTP GET /api/notifications responded 200 in 26.3944 ms
+2025-10-25 14:24:28.869 +01:00 [INF] HTTP GET /Admin/SeedData responded 200 in 15.7133 ms
+2025-10-25 14:24:29.509 +01:00 [INF] HTTP GET /api/notifications responded 200 in 16.2799 ms
+2025-10-25 14:24:47.989 +01:00 [INF] HTTP GET /api/notifications responded 200 in 14.5436 ms
+2025-10-25 14:24:59.877 +01:00 [INF] HTTP GET /Admin/SeedData responded 200 in 23.0774 ms
+2025-10-25 14:25:00.723 +01:00 [INF] HTTP GET /api/notifications responded 200 in 38.5058 ms
+2025-10-25 14:25:30.860 +01:00 [INF] HTTP GET /Admin/SeedData responded 200 in 8.4908 ms
+2025-10-25 14:25:31.715 +01:00 [INF] HTTP GET /api/notifications responded 200 in 10.6446 ms
+2025-10-25 14:26:01.868 +01:00 [INF] HTTP GET /Admin/SeedData responded 200 in 33.0062 ms
+2025-10-25 14:26:02.583 +01:00 [INF] HTTP GET /api/notifications responded 200 in 44.5177 ms
+2025-10-25 14:26:32.860 +01:00 [INF] HTTP GET /Admin/SeedData responded 200 in 19.8950 ms
+2025-10-25 14:26:33.723 +01:00 [INF] HTTP GET /api/notifications responded 200 in 27.9754 ms
+2025-10-25 14:27:03.870 +01:00 [INF] HTTP GET /Admin/SeedData responded 200 in 8.4524 ms
+2025-10-25 14:27:04.544 +01:00 [INF] HTTP GET /api/notifications responded 200 in 18.6360 ms
+2025-10-25 14:27:14.860 +01:00 [INF] HTTP GET /api/notifications responded 200 in 79.8320 ms
+2025-10-25 14:27:23.300 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-25 14:27:23.411 +01:00 [INF] HTTP GET / responded 200 in 112.7432 ms
+2025-10-25 14:27:23.624 +01:00 [INF] HTTP GET /api/notifications responded 200 in 4.0366 ms
+2025-10-25 14:27:39.861 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-25 14:27:39.937 +01:00 [INF] HTTP GET / responded 200 in 76.4677 ms
+2025-10-25 14:27:40.115 +01:00 [INF] HTTP GET /api/notifications responded 200 in 7.6773 ms
+2025-10-25 14:27:45.395 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-25 14:27:45.464 +01:00 [INF] HTTP GET / responded 200 in 70.8446 ms
+2025-10-25 14:27:45.670 +01:00 [INF] HTTP GET /api/notifications responded 200 in 4.0934 ms
+2025-10-25 14:28:22.584 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-25 14:28:22.688 +01:00 [INF] HTTP GET / responded 200 in 105.0866 ms
+2025-10-25 14:28:23.004 +01:00 [INF] HTTP GET /api/notifications responded 200 in 24.1402 ms
+2025-10-25 14:28:27.619 +01:00 [INF] HTTP GET /Assets/Create responded 200 in 26.3521 ms
+2025-10-25 14:28:27.815 +01:00 [INF] HTTP GET /api/notifications responded 200 in 3.9030 ms
+2025-10-25 14:28:30.725 +01:00 [INF] HTTP GET /Assets responded 200 in 37.1711 ms
+2025-10-25 14:28:31.094 +01:00 [INF] HTTP GET /api/notifications responded 200 in 10.2535 ms
+2025-10-25 14:28:34.121 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-25 14:28:34.197 +01:00 [INF] HTTP GET / responded 200 in 76.8329 ms
+2025-10-25 14:28:34.402 +01:00 [INF] HTTP GET /api/notifications responded 200 in 7.6122 ms
+2025-10-25 14:37:31.888 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-25 14:37:33.256 +01:00 [INF] Database initialized successfully
+2025-10-25 14:37:33.261 +01:00 [INF] BuildOne started successfully
+2025-10-25 14:37:35.914 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-25 14:37:37.359 +01:00 [INF] HTTP GET /api/notifications responded 200 in 1437.6332 ms
+2025-10-25 14:37:45.327 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-25 14:37:46.407 +01:00 [INF] HTTP GET / responded 200 in 1130.6037 ms
+2025-10-25 14:37:46.797 +01:00 [INF] HTTP GET /api/notifications responded 200 in 45.4834 ms
+2025-10-25 14:40:08.779 +01:00 [INF] HTTP GET /Admin/SeedData responded 200 in 124.6674 ms
+2025-10-25 14:40:54.713 +01:00 [INF] HTTP GET /api/notifications responded 200 in 67.4885 ms
+2025-10-25 14:41:24.706 +01:00 [INF] HTTP GET /Admin/SeedData responded 200 in 44.2894 ms
+2025-10-25 14:41:55.243 +01:00 [INF] HTTP GET /api/notifications responded 200 in 54.5474 ms
+2025-10-25 14:42:16.569 +01:00 [INF] HTTP GET /Imaging responded 200 in 309.5711 ms
+2025-10-25 14:42:16.894 +01:00 [INF] HTTP GET /api/notifications responded 200 in 9.4334 ms
+2025-10-25 14:42:20.072 +01:00 [INF] HTTP GET /Imaging/Create responded 200 in 359.7351 ms
+2025-10-25 14:42:20.316 +01:00 [INF] HTTP GET /api/notifications responded 200 in 16.2370 ms
+2025-10-25 14:42:37.418 +01:00 [INF] HTTP GET /Assets responded 200 in 208.9327 ms
+2025-10-25 14:42:37.794 +01:00 [INF] HTTP GET /api/notifications responded 200 in 43.5053 ms
+2025-10-25 14:42:45.480 +01:00 [INF] HTTP GET /UserManagement responded 200 in 147.9678 ms
+2025-10-25 14:42:45.670 +01:00 [INF] HTTP GET /api/notifications responded 200 in 4.9666 ms
+2025-10-25 14:42:50.348 +01:00 [INF] HTTP GET /RoleManagement responded 200 in 66.5020 ms
+2025-10-25 14:42:50.734 +01:00 [INF] HTTP GET /api/notifications responded 200 in 4.5760 ms
+2025-10-25 14:42:56.281 +01:00 [INF] HTTP GET /UserManagement responded 200 in 15.6305 ms
+2025-10-25 14:42:56.560 +01:00 [INF] HTTP GET /api/notifications responded 200 in 14.5774 ms
+2025-10-25 14:43:06.113 +01:00 [INF] HTTP GET /Employees responded 200 in 69.5656 ms
+2025-10-25 14:43:06.314 +01:00 [INF] HTTP GET /api/notifications responded 200 in 8.5645 ms
+2025-10-25 14:43:18.463 +01:00 [INF] HTTP GET /Employees/Edit responded 200 in 221.8507 ms
+2025-10-25 14:43:18.616 +01:00 [INF] HTTP GET /api/notifications responded 200 in 9.2391 ms
+2025-10-25 14:44:16.879 +01:00 [INF] Employee updated with ID 1009
+2025-10-25 14:44:16.889 +01:00 [INF] HTTP POST /Employees/Edit responded 302 in 516.5468 ms
+2025-10-25 14:44:16.924 +01:00 [INF] Loading employee details for ID: 1009
+2025-10-25 14:44:16.938 +01:00 [INF] Successfully loaded employee: Amanda Okafor (ID: 1009)
+2025-10-25 14:44:16.994 +01:00 [INF] HTTP GET /Employees/Details/1009 responded 200 in 85.5685 ms
+2025-10-25 14:44:17.348 +01:00 [INF] HTTP GET /api/notifications responded 200 in 36.7971 ms
+2025-10-25 14:44:26.843 +01:00 [INF] HTTP GET /Assets/Details/1332 responded 200 in 386.2430 ms
+2025-10-25 14:44:27.040 +01:00 [INF] HTTP GET /api/notifications responded 200 in 9.4355 ms
+2025-10-25 14:44:27.114 +01:00 [ERR] Failed executing DbCommand (12ms) [Parameters=[@__assetId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[FileName], [a].[AssetId], [a].[ContentType], [a].[Description], [a].[FilePath], [a].[FileSizeBytes], [a].[UploadedAt], [a].[UploadedBy]
+FROM [AssetAttachments] AS [a]
+WHERE [a].[AssetId] = @__assetId_0
+ORDER BY [a].[UploadedAt] DESC
+2025-10-25 14:44:28.223 +01:00 [ERR] An exception occurred while iterating over the results of a query for context type 'buildone.Data.ApplicationDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid object name 'AssetAttachments'.
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:b201f673-ab83-4338-bdd8-61e9f98c8ed3
+Error Number:208,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid object name 'AssetAttachments'.
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:b201f673-ab83-4338-bdd8-61e9f98c8ed3
+Error Number:208,State:1,Class:16
+2025-10-25 14:44:28.256 +01:00 [ERR] HTTP GET /api/attachments/asset/1332 responded 500 in 1223.5969 ms
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid object name 'AssetAttachments'.
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at buildone.Controllers.AttachmentsController.GetAssetAttachments(Int32 assetId) in C:\Users\victo\Desktop\buildone\Controllers\AttachmentsController.cs:line 197
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+ClientConnectionId:b201f673-ab83-4338-bdd8-61e9f98c8ed3
+Error Number:208,State:1,Class:16
+2025-10-25 14:44:28.306 +01:00 [INF] HTTP GET /api/qrcode/asset/1332/base64 responded 200 in 1271.9020 ms
+2025-10-25 14:44:28.357 +01:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid object name 'AssetAttachments'.
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at buildone.Controllers.AttachmentsController.GetAssetAttachments(Int32 assetId) in C:\Users\victo\Desktop\buildone\Controllers\AttachmentsController.cs:line 197
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+ClientConnectionId:b201f673-ab83-4338-bdd8-61e9f98c8ed3
+Error Number:208,State:1,Class:16
+2025-10-25 14:46:04.747 +01:00 [INF] Asset updated with ID 1332
+2025-10-25 14:46:04.755 +01:00 [INF] HTTP POST /Assets/Details/1332 responded 302 in 111.9220 ms
+2025-10-25 14:46:04.843 +01:00 [INF] HTTP GET /Assets/Details/1332 responded 200 in 64.7375 ms
+2025-10-25 14:46:05.055 +01:00 [ERR] Failed executing DbCommand (2ms) [Parameters=[@__assetId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[FileName], [a].[AssetId], [a].[ContentType], [a].[Description], [a].[FilePath], [a].[FileSizeBytes], [a].[UploadedAt], [a].[UploadedBy]
+FROM [AssetAttachments] AS [a]
+WHERE [a].[AssetId] = @__assetId_0
+ORDER BY [a].[UploadedAt] DESC
+2025-10-25 14:46:05.060 +01:00 [ERR] An exception occurred while iterating over the results of a query for context type 'buildone.Data.ApplicationDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid object name 'AssetAttachments'.
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:94360b39-6382-40cd-acf1-95294cd7d2ed
+Error Number:208,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid object name 'AssetAttachments'.
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:94360b39-6382-40cd-acf1-95294cd7d2ed
+Error Number:208,State:1,Class:16
+2025-10-25 14:46:05.073 +01:00 [ERR] HTTP GET /api/attachments/asset/1332 responded 500 in 32.7587 ms
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid object name 'AssetAttachments'.
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at buildone.Controllers.AttachmentsController.GetAssetAttachments(Int32 assetId) in C:\Users\victo\Desktop\buildone\Controllers\AttachmentsController.cs:line 197
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+ClientConnectionId:94360b39-6382-40cd-acf1-95294cd7d2ed
+Error Number:208,State:1,Class:16
+2025-10-25 14:46:05.074 +01:00 [INF] HTTP GET /api/notifications responded 200 in 32.8594 ms
+2025-10-25 14:46:05.077 +01:00 [INF] HTTP GET /api/qrcode/asset/1332/base64 responded 200 in 35.8862 ms
+2025-10-25 14:46:05.098 +01:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid object name 'AssetAttachments'.
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at buildone.Controllers.AttachmentsController.GetAssetAttachments(Int32 assetId) in C:\Users\victo\Desktop\buildone\Controllers\AttachmentsController.cs:line 197
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+ClientConnectionId:94360b39-6382-40cd-acf1-95294cd7d2ed
+Error Number:208,State:1,Class:16
+2025-10-25 14:46:20.373 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-25 14:46:20.478 +01:00 [INF] HTTP GET / responded 200 in 107.2698 ms
+2025-10-25 14:46:20.666 +01:00 [INF] HTTP GET /api/notifications responded 200 in 5.6413 ms
+2025-10-25 14:46:24.994 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-25 14:46:25.112 +01:00 [INF] HTTP GET / responded 200 in 120.5563 ms
+2025-10-25 14:46:25.286 +01:00 [INF] HTTP GET /api/notifications responded 200 in 7.7796 ms
+2025-10-25 14:46:28.856 +01:00 [INF] HTTP GET /Imaging responded 200 in 72.6485 ms
+2025-10-25 14:46:29.340 +01:00 [INF] HTTP GET /api/notifications responded 200 in 7.7822 ms
+2025-10-25 14:46:38.966 +01:00 [INF] HTTP GET /Imaging/Create responded 200 in 48.5575 ms
+2025-10-25 14:46:39.153 +01:00 [INF] HTTP GET /api/notifications responded 200 in 6.6213 ms
+2025-10-25 14:46:41.194 +01:00 [INF] HTTP GET /Imaging/Queue responded 200 in 175.6784 ms
+2025-10-25 14:46:42.798 +01:00 [INF] HTTP GET /api/notifications responded 200 in 6.5910 ms
+2025-10-25 14:46:49.666 +01:00 [INF] HTTP GET /Assets responded 200 in 48.9837 ms
+2025-10-25 14:46:50.497 +01:00 [INF] HTTP GET /api/notifications responded 200 in 41.0301 ms
+2025-10-25 14:47:04.060 +01:00 [INF] HTTP GET /Assets responded 200 in 57.8056 ms
+2025-10-25 14:47:04.251 +01:00 [INF] HTTP GET /api/notifications responded 200 in 39.4308 ms
+2025-10-25 14:49:12.114 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-25 14:49:16.131 +01:00 [INF] Database initialized successfully
+2025-10-25 14:49:16.143 +01:00 [INF] BuildOne started successfully
+2025-10-25 14:49:16.602 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-25 14:49:16.736 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-25 14:49:17.398 +01:00 [INF] HTTP GET / responded 200 in 794.8388 ms
+2025-10-25 14:49:18.347 +01:00 [INF] HTTP GET /api/notifications responded 200 in 758.7138 ms
+2025-10-25 14:49:25.299 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-25 14:49:25.576 +01:00 [INF] HTTP GET / responded 200 in 345.4134 ms
+2025-10-25 14:49:25.754 +01:00 [INF] HTTP GET /api/notifications responded 200 in 11.9481 ms
+2025-10-25 14:49:34.758 +01:00 [INF] HTTP GET /api/notifications responded 200 in 21.8559 ms
+2025-10-25 14:49:43.750 +01:00 [INF] HTTP GET /api/notifications responded 200 in 20.6308 ms
+2025-10-25 14:54:25.863 +01:00 [INF] HTTP GET /api/notifications responded 200 in 44.7128 ms
+2025-10-25 14:55:48.563 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-25 14:55:48.716 +01:00 [FTL] Application failed to start
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\victo\Desktop\buildone\Program.cs:line 208
+2025-10-25 14:56:15.538 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-25 14:56:15.702 +01:00 [FTL] Application failed to start
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\victo\Desktop\buildone\Program.cs:line 208
+2025-10-25 15:02:17.924 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-25 15:02:19.329 +01:00 [INF] Database initialized successfully
+2025-10-25 15:02:19.334 +01:00 [INF] BuildOne started successfully
+2025-10-25 15:02:26.321 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-25 15:02:27.502 +01:00 [INF] HTTP GET /api/notifications responded 200 in 1183.5399 ms
+2025-10-25 15:02:35.793 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-25 15:02:36.747 +01:00 [INF] HTTP GET / responded 200 in 1001.8469 ms
+2025-10-25 15:02:37.203 +01:00 [INF] HTTP GET /api/notifications responded 200 in 77.3239 ms
+2025-10-25 15:02:46.090 +01:00 [INF] HTTP GET /Imaging/Create responded 200 in 421.7873 ms
+2025-10-25 15:02:46.303 +01:00 [INF] HTTP GET /api/notifications responded 200 in 13.9769 ms
+2025-10-25 15:04:58.833 +01:00 [INF] HTTP GET /api/notifications responded 200 in 52.4437 ms
+2025-10-25 15:05:35.157 +01:00 [INF] HTTP GET /api/notifications responded 200 in 69.7270 ms
+2025-10-25 15:05:38.005 +01:00 [INF] HTTP GET /Imaging/Create responded 200 in 78.0291 ms
+2025-10-25 15:05:38.347 +01:00 [INF] HTTP GET /api/notifications responded 200 in 13.7617 ms
+2025-10-25 15:05:57.891 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-25 15:05:59.370 +01:00 [INF] Database initialized successfully
+2025-10-25 15:05:59.374 +01:00 [INF] BuildOne started successfully
+2025-10-25 15:06:06.320 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-25 15:06:07.535 +01:00 [INF] HTTP GET /api/notifications responded 200 in 1206.4867 ms
+2025-10-25 15:06:14.068 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-25 15:06:15.053 +01:00 [INF] HTTP GET / responded 200 in 1031.9769 ms
+2025-10-25 15:06:15.343 +01:00 [INF] HTTP GET /api/notifications responded 200 in 62.8875 ms
+2025-10-25 15:06:17.959 +01:00 [INF] HTTP GET /Imaging/Create responded 200 in 408.4698 ms
+2025-10-25 15:06:18.141 +01:00 [INF] HTTP GET /api/notifications responded 200 in 6.1693 ms
+2025-10-25 15:11:18.957 +01:00 [INF] HTTP GET /api/notifications responded 200 in 111.7510 ms
+2025-10-25 15:16:18.892 +01:00 [INF] HTTP GET /api/notifications responded 200 in 64.7811 ms
+2025-10-25 15:18:18.700 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-25 15:18:18.890 +01:00 [FTL] Application failed to start
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\victo\Desktop\buildone\Program.cs:line 208
+2025-10-25 15:19:06.429 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-25 15:19:06.573 +01:00 [FTL] Application failed to start
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\victo\Desktop\buildone\Program.cs:line 208
+2025-10-25 15:20:27.657 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-25 15:20:31.350 +01:00 [WRN] No store type was specified for the decimal property 'LaborHours' on entity type 'MaintenanceHistory'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-10-25 15:20:31.368 +01:00 [WRN] No store type was specified for the decimal property 'PartsCost' on entity type 'MaintenanceHistory'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-10-25 15:20:33.616 +01:00 [INF] Database initialized successfully
+2025-10-25 15:20:33.628 +01:00 [INF] BuildOne started successfully
+2025-10-25 15:20:34.864 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-25 15:20:34.977 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-25 15:20:36.179 +01:00 [INF] HTTP GET / responded 200 in 1315.8963 ms
+2025-10-25 15:20:37.119 +01:00 [INF] HTTP GET /api/notifications responded 200 in 571.5610 ms
+2025-10-25 15:20:40.407 +01:00 [INF] HTTP GET /Imaging/Create responded 200 in 384.8372 ms
+2025-10-25 15:20:40.694 +01:00 [INF] HTTP GET /api/notifications responded 200 in 19.1309 ms

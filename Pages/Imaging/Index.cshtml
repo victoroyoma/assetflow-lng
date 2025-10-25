@@ -1,7 +1,7 @@
 @page
 @model buildone.Pages.Imaging.IndexModel
 @{
-    ViewData["Title"] = "Imaging Jobs";
+    ViewData["Title"] = "Jobs";
 }
 
 <div class="container-fluid py-4">
@@ -10,16 +10,19 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <h2 class="mb-1">
-                        <i class="fas fa-compact-disc me-2 text-primary"></i>Imaging Jobs
+                        <i class="fas fa-tasks me-2 text-primary"></i>Jobs Management
                     </h2>
-                    <p class="text-muted mb-0">View and manage all imaging jobs</p>
+                    <p class="text-muted mb-0">View and manage all imaging and maintenance jobs</p>
                 </div>
                 <div>
                     <a asp-page="/Imaging/Queue" class="btn btn-primary">
                         <i class="fas fa-clock me-2"></i>Job Queue
                     </a>
-                    <a asp-page="/Imaging/Create" class="btn btn-success">
-                        <i class="fas fa-plus me-2"></i>Create New Job
+                    <a asp-page="/Imaging/Create" asp-route-jobType="Imaging" class="btn btn-success me-1">
+                        <i class="fas fa-compact-disc me-2"></i>New Imaging Job
+                    </a>
+                    <a asp-page="/Imaging/Create" asp-route-jobType="Maintenance" class="btn btn-warning">
+                        <i class="fas fa-tools me-2"></i>New Maintenance Job
                     </a>
                 </div>
             </div>

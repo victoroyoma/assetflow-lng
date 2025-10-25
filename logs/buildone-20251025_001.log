@@ -1,0 +1,47 @@
+2025-10-25 15:23:32.153 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-25 15:23:32.299 +01:00 [FTL] Application failed to start
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\victo\Desktop\buildone\Program.cs:line 208
+2025-10-25 15:24:10.122 +01:00 [INF] Starting BuildOne Asset Management System
+2025-10-25 15:24:13.445 +01:00 [WRN] No store type was specified for the decimal property 'LaborHours' on entity type 'MaintenanceHistory'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-10-25 15:24:13.450 +01:00 [WRN] No store type was specified for the decimal property 'PartsCost' on entity type 'MaintenanceHistory'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-10-25 15:24:16.009 +01:00 [INF] Database initialized successfully
+2025-10-25 15:24:16.022 +01:00 [INF] BuildOne started successfully
+2025-10-25 15:24:18.381 +01:00 [WRN] Failed to determine the https port for redirect.
+2025-10-25 15:24:18.512 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-25 15:24:19.504 +01:00 [INF] HTTP GET / responded 200 in 1119.7215 ms
+2025-10-25 15:24:19.612 +01:00 [INF] HTTP GET /css/site.css responded 200 in 20.0256 ms
+2025-10-25 15:24:20.375 +01:00 [INF] HTTP GET /api/notifications responded 200 in 573.4169 ms
+2025-10-25 15:24:25.707 +01:00 [INF] HTTP GET /Imaging/Create responded 200 in 533.6041 ms
+2025-10-25 15:24:25.788 +01:00 [INF] HTTP GET /css/site.css responded 304 in 1.9782 ms
+2025-10-25 15:24:26.002 +01:00 [INF] HTTP GET /api/notifications responded 200 in 23.8685 ms
+2025-10-25 15:24:33.271 +01:00 [INF] HTTP GET /Assets responded 200 in 307.3168 ms
+2025-10-25 15:24:33.316 +01:00 [INF] HTTP GET /css/site.css responded 304 in 0.5186 ms
+2025-10-25 15:24:33.658 +01:00 [INF] HTTP GET /api/notifications responded 200 in 58.9288 ms
+2025-10-25 15:29:33.876 +01:00 [INF] HTTP GET /api/notifications responded 200 in 47.8073 ms
+2025-10-25 15:34:33.896 +01:00 [INF] HTTP GET /api/notifications responded 200 in 61.2846 ms
+2025-10-25 15:39:33.869 +01:00 [INF] HTTP GET /api/notifications responded 200 in 44.8304 ms
+2025-10-25 15:42:11.122 +01:00 [INF] HTTP GET /api/notifications responded 200 in 349.4772 ms
+2025-10-25 15:42:26.458 +01:00 [INF] Asset Management Dashboard accessed
+2025-10-25 15:42:26.588 +01:00 [INF] HTTP GET / responded 200 in 131.2856 ms
+2025-10-25 15:42:26.671 +01:00 [INF] HTTP GET /css/site.css responded 304 in 0.5174 ms
+2025-10-25 15:42:26.924 +01:00 [INF] HTTP GET /api/notifications responded 200 in 9.3234 ms
+2025-10-25 15:42:34.935 +01:00 [INF] HTTP GET /Imaging responded 200 in 134.3848 ms
+2025-10-25 15:42:35.224 +01:00 [INF] HTTP GET /api/notifications responded 200 in 7.1177 ms
+2025-10-25 15:42:49.337 +01:00 [INF] HTTP GET /Imaging/Create responded 200 in 76.1834 ms
+2025-10-25 15:42:49.502 +01:00 [INF] HTTP GET /api/notifications responded 200 in 8.4186 ms
+2025-10-25 15:42:52.210 +01:00 [INF] HTTP GET /Imaging responded 200 in 64.6574 ms
+2025-10-25 15:42:54.055 +01:00 [INF] HTTP GET /Imaging/Create responded 200 in 37.7600 ms
+2025-10-25 15:42:54.250 +01:00 [INF] HTTP GET /api/notifications responded 200 in 4.9119 ms
+2025-10-25 15:43:40.105 +01:00 [INF] HTTP GET /Inventory responded 200 in 324.7883 ms
+2025-10-25 15:43:40.339 +01:00 [INF] HTTP GET /api/notifications responded 200 in 25.4844 ms
+2025-10-25 15:43:43.444 +01:00 [INF] HTTP GET /Inventory/Create responded 200 in 158.9767 ms
+2025-10-25 15:43:43.645 +01:00 [INF] HTTP GET /api/notifications responded 200 in 9.3231 ms
+2025-10-25 15:43:56.417 +01:00 [INF] HTTP GET /Assets responded 200 in 51.7204 ms
+2025-10-25 15:43:56.795 +01:00 [INF] HTTP GET /api/notifications responded 200 in 9.8803 ms

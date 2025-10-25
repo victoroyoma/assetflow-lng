@@ -191,9 +191,12 @@ builder.Services.AddScoped<IImagingJobService, ImagingJobService>();
 builder.Services.AddScoped<IAssetHistoryService, AssetHistoryService>();
 builder.Services.AddScoped<IDataSeedingService, DataSeedingService>();
 builder.Services.AddScoped<IBulkDataSeedingService, BulkDataSeedingService>();
+builder.Services.AddScoped<IExcelDataSeedingService, ExcelDataSeedingService>();
 builder.Services.AddScoped<IJobCommentService, JobCommentService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<IExportService, ExportService>();
+builder.Services.AddScoped<IFileStorageService, FileStorageService>();
+builder.Services.AddScoped<IQRCodeService, QRCodeService>();
 builder.Services.AddMemoryCache();
 
 // Add health checks with detailed diagnostics

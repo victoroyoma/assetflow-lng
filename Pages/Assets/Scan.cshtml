@@ -1,0 +1,494 @@
+@page
+@model buildone.Pages.Assets.ScanModel
+@{
+    ViewData["Title"] = "Scan Assets (QR & Barcode)";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-qrcode text-primary"></i> Scan Assets (QR & Barcode)</h2>
+                <a asp-page="./Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Assets
+                </a>
+            </div>
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-triangle"></i> @TempData["ErrorMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            <!-- Scanner Card -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-camera"></i> QR Code & Barcode Scanner</h5>
+                </div>
+                <div class="card-body">
+                    <div id="scanner-container" style="display: none;">
+                        <div id="qr-reader" style="width: 100%; max-width: 600px; margin: 0 auto;"></div>
+                        <div class="text-center mt-3">
+                            <span class="badge bg-info me-2" id="scan-mode-badge">Scanning: QR & Barcodes</span>
+                            <button class="btn btn-danger" id="stop-scanner-btn">
+                                <i class="fas fa-stop"></i> Stop Scanner
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="scanner-controls" class="text-center">
+                        <div class="mb-3">
+                            <p class="text-muted">Position QR codes or barcodes in front of your camera. Scanned items will be added to the table below for review.</p>
+                        </div>
+                        <div class="mb-3">
+                            <div class="btn-group" role="group">
+                                <input type="radio" class="btn-check" name="scanType" id="scanBoth" value="both" checked>
+                                <label class="btn btn-outline-primary" for="scanBoth">
+                                    <i class="fas fa-qrcode"></i> QR & Barcode
+                                </label>
+
+                                <input type="radio" class="btn-check" name="scanType" id="scanQR" value="qr">
+                                <label class="btn btn-outline-primary" for="scanQR">
+                                    <i class="fas fa-qrcode"></i> QR Only
+                                </label>
+
+                                <input type="radio" class="btn-check" name="scanType" id="scanBarcode" value="barcode">
+                                <label class="btn btn-outline-primary" for="scanBarcode">
+                                    <i class="fas fa-barcode"></i> Barcode Only
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-lg" id="start-scanner-btn">
+                            <i class="fas fa-camera"></i> Start Camera Scanner
+                        </button>
+                        <div class="mt-3">
+                            <p class="text-muted">Or manually enter asset tag:</p>
+                            <div class="input-group mb-3" style="max-width: 500px; margin: 0 auto;">
+                                <input type="text" class="form-control" id="manual-asset-tag" placeholder="Enter asset tag or barcode">
+                                <button class="btn btn-outline-primary" id="manual-add-btn">
+                                    <i class="fas fa-plus"></i> Add to Table
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="scan-result" style="display: none;" class="mt-4">
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle"></i> <strong>Scanned:</strong> <span id="scanned-text"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scanned Items Table -->
+            <div class="card">
+                <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fas fa-table"></i> Scanned Items (<span id="scanned-count">0</span>)</h5>
+                    <div>
+                        <button class="btn btn-sm btn-success" id="save-all-btn" disabled>
+                            <i class="fas fa-save"></i> Save All Assets
+                        </button>
+                        <button class="btn btn-sm btn-danger" id="clear-all-btn" disabled>
+                            <i class="fas fa-trash"></i> Clear All
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="no-items-message" class="text-center py-4">
+                        <i class="fas fa-inbox text-muted" style="font-size: 3rem;"></i>
+                        <p class="text-muted mt-2">No items scanned yet. Start scanning to add items to the table.</p>
+                    </div>
+                    <div id="scanned-table-container" style="display: none;">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="scanned-items-table">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">#</th>
+                                        <th width="15%">Code Type</th>
+                                        <th width="20%">Scanned Code</th>
+                                        <th width="15%">Status</th>
+                                        <th width="25%">Asset Info</th>
+                                        <th width="15%">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="scanned-items-body">
+                                    <!-- Items will be added here dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Modal -->
+            <div class="modal fade" id="editItemModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Scanned Item</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" id="edit-item-index">
+                            <div class="mb-3">
+                                <label class="form-label">Scanned Code</label>
+                                <input type="text" class="form-control" id="edit-scanned-code" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Asset Tag</label>
+                                <input type="text" class="form-control" id="edit-asset-tag" placeholder="Enter asset tag">
+                                <small class="text-muted">Update the asset tag if needed</small>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Notes</label>
+                                <textarea class="form-control" id="edit-notes" rows="3" placeholder="Add any notes about this scan"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" id="save-edit-btn">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Html5-qrcode library from CDN (supports both QR and barcodes) -->
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+
+    <script>
+        let html5QrCode = null;
+        let isScanning = false;
+        let scannedItems = [];
+        let itemCounter = 0;
+        const editModal = new bootstrap.Modal(document.getElementById('editItemModal'));
+
+        // Detect code type (simple heuristic)
+        function detectCodeType(code) {
+            // QR codes are typically longer and may contain URLs or special characters
+            if (code.length > 20 || code.includes('http') || code.includes('/')) {
+                return 'QR Code';
+            }
+            // Barcodes are typically numeric or alphanumeric with specific patterns
+            if (/^[0-9]{8,14}$/.test(code)) {
+                return 'Barcode (UPC/EAN)';
+            }
+            if (/^[0-9A-Z\-]{8,}$/.test(code)) {
+                return 'Barcode';
+            }
+            return 'QR Code / Barcode';
+        }
+
+        // Get selected scan type
+        function getScanType() {
+            return document.querySelector('input[name="scanType"]:checked').value;
+        }
+
+        // Start camera scanner
+        document.getElementById('start-scanner-btn').addEventListener('click', async function() {
+            try {
+                const scanType = getScanType();
+                document.getElementById('scanner-controls').style.display = 'none';
+                document.getElementById('scanner-container').style.display = 'block';
+
+                // Update badge text
+                const badgeText = {
+                    'both': 'Scanning: QR & Barcodes',
+                    'qr': 'Scanning: QR Codes Only',
+                    'barcode': 'Scanning: Barcodes Only'
+                }[scanType];
+                document.getElementById('scan-mode-badge').textContent = badgeText;
+
+                html5QrCode = new Html5Qrcode("qr-reader");
+                isScanning = true;
+
+                // Configure formats based on selection
+                let formatsToSupport = [];
+                if (scanType === 'both' || scanType === 'qr') {
+                    formatsToSupport.push(Html5QrcodeSupportedFormats.QR_CODE);
+                }
+                if (scanType === 'both' || scanType === 'barcode') {
+                    formatsToSupport.push(
+                        Html5QrcodeSupportedFormats.EAN_13,
+                        Html5QrcodeSupportedFormats.EAN_8,
+                        Html5QrcodeSupportedFormats.UPC_A,
+                        Html5QrcodeSupportedFormats.UPC_E,
+                        Html5QrcodeSupportedFormats.CODE_128,
+                        Html5QrcodeSupportedFormats.CODE_39,
+                        Html5QrcodeSupportedFormats.CODE_93
+                    );
+                }
+
+                await html5QrCode.start(
+                    { facingMode: "environment" },
+                    {
+                        fps: 10,
+                        qrbox: { width: 250, height: 250 },
+                        formatsToSupport: formatsToSupport.length > 0 ? formatsToSupport : undefined
+                    },
+                    onScanSuccess,
+                    onScanFailure
+                );
+            } catch (err) {
+                console.error('Error starting scanner:', err);
+                alert('Failed to start camera: ' + err);
+                stopScanner();
+            }
+        });
+
+        // Stop scanner
+        document.getElementById('stop-scanner-btn').addEventListener('click', function() {
+            stopScanner();
+        });
+
+        async function stopScanner() {
+            if (html5QrCode && isScanning) {
+                try {
+                    await html5QrCode.stop();
+                    html5QrCode.clear();
+                } catch (err) {
+                    console.error('Error stopping scanner:', err);
+                }
+            }
+            isScanning = false;
+            html5QrCode = null;
+            document.getElementById('scanner-container').style.display = 'none';
+            document.getElementById('scanner-controls').style.display = 'block';
+        }
+
+        function onScanSuccess(decodedText, decodedResult) {
+            console.log('Scanned:', decodedText, decodedResult);
+            
+            // Check for duplicates
+            const isDuplicate = scannedItems.some(item => item.scannedCode === decodedText);
+            if (isDuplicate) {
+                showScanResult(decodedText, true);
+                return;
+            }
+
+            showScanResult(decodedText, false);
+            addItemToTable(decodedText, decodedResult.result.format);
+        }
+
+        function onScanFailure(error) {
+            // Ignore scan failures (happens continuously while searching)
+        }
+
+        function showScanResult(code, isDuplicate) {
+            const resultDiv = document.getElementById('scan-result');
+            const textSpan = document.getElementById('scanned-text');
+            textSpan.textContent = code + (isDuplicate ? ' (Duplicate - already in table)' : '');
+            resultDiv.className = isDuplicate ? 'mt-4 alert alert-warning' : 'mt-4 alert alert-success';
+            resultDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                resultDiv.style.display = 'none';
+            }, 2000);
+        }
+
+        // Manual add
+        document.getElementById('manual-add-btn').addEventListener('click', function() {
+            const code = document.getElementById('manual-asset-tag').value.trim();
+            if (code) {
+                const isDuplicate = scannedItems.some(item => item.scannedCode === code);
+                if (isDuplicate) {
+                    alert('This code is already in the table.');
+                    return;
+                }
+                addItemToTable(code, null);
+                document.getElementById('manual-asset-tag').value = '';
+                showScanResult(code, false);
+            } else {
+                alert('Please enter a code');
+            }
+        });
+
+        // Allow Enter key for manual add
+        document.getElementById('manual-asset-tag').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('manual-add-btn').click();
+            }
+        });
+
+        // Add item to table
+        async function addItemToTable(code, format) {
+            itemCounter++;
+            const codeType = format ? `${format}` : detectCodeType(code);
+            
+            const item = {
+                id: itemCounter,
+                scannedCode: code,
+                codeType: codeType,
+                assetTag: code, // Default to scanned code
+                status: 'pending',
+                assetInfo: null,
+                notes: ''
+            };
+
+            scannedItems.push(item);
+            renderTable();
+            updateButtons();
+
+            // Try to lookup asset
+            await lookupAsset(code, itemCounter);
+        }
+
+        // Lookup asset
+        async function lookupAsset(code, itemId) {
+            try {
+                const res = await fetch('/api/qrcode/lookup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ scannedData: code }),
+                    credentials: 'same-origin'
+                });
+
+                const item = scannedItems.find(i => i.id === itemId);
+                if (!item) return;
+
+                if (res.ok) {
+                    const data = await res.json();
+                    item.status = 'found';
+                    item.assetInfo = data.asset;
+                } else {
+                    item.status = 'not-found';
+                }
+                renderTable();
+            } catch (err) {
+                console.error('Lookup error:', err);
+                const item = scannedItems.find(i => i.id === itemId);
+                if (item) {
+                    item.status = 'error';
+                    renderTable();
+                }
+            }
+        }
+
+        // Render table
+        function renderTable() {
+            const tbody = document.getElementById('scanned-items-body');
+            const noItemsMsg = document.getElementById('no-items-message');
+            const tableContainer = document.getElementById('scanned-table-container');
+            
+            if (scannedItems.length === 0) {
+                noItemsMsg.style.display = 'block';
+                tableContainer.style.display = 'none';
+                return;
+            }
+
+            noItemsMsg.style.display = 'none';
+            tableContainer.style.display = 'block';
+
+            tbody.innerHTML = scannedItems.map((item, index) => {
+                const statusBadge = {
+                    'pending': '<span class="badge bg-secondary">Checking...</span>',
+                    'found': '<span class="badge bg-success">Found</span>',
+                    'not-found': '<span class="badge bg-warning text-dark">Not Found</span>',
+                    'error': '<span class="badge bg-danger">Error</span>'
+                }[item.status] || '<span class="badge bg-secondary">Unknown</span>';
+
+                const assetInfo = item.assetInfo 
+                    ? `<small>${item.assetInfo.assetTag}<br>${item.assetInfo.brand || ''} ${item.assetInfo.model || ''}</small>`
+                    : '<small class="text-muted">N/A</small>';
+
+                return `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td><span class="badge bg-info">${item.codeType}</span></td>
+                        <td><code>${item.scannedCode}</code></td>
+                        <td>${statusBadge}</td>
+                        <td>${assetInfo}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary me-1" onclick="editItem(${index})">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="removeItem(${index})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            document.getElementById('scanned-count').textContent = scannedItems.length;
+        }
+
+        // Edit item
+        window.editItem = function(index) {
+            const item = scannedItems[index];
+            document.getElementById('edit-item-index').value = index;
+            document.getElementById('edit-scanned-code').value = item.scannedCode;
+            document.getElementById('edit-asset-tag').value = item.assetTag;
+            document.getElementById('edit-notes').value = item.notes || '';
+            editModal.show();
+        };
+
+        // Save edit
+        document.getElementById('save-edit-btn').addEventListener('click', function() {
+            const index = parseInt(document.getElementById('edit-item-index').value);
+            const item = scannedItems[index];
+            item.assetTag = document.getElementById('edit-asset-tag').value.trim();
+            item.notes = document.getElementById('edit-notes').value.trim();
+            renderTable();
+            editModal.hide();
+        });
+
+        // Remove item
+        window.removeItem = function(index) {
+            if (confirm('Remove this item from the table?')) {
+                scannedItems.splice(index, 1);
+                renderTable();
+                updateButtons();
+            }
+        };
+
+        // Clear all
+        document.getElementById('clear-all-btn').addEventListener('click', function() {
+            if (confirm('Clear all scanned items?')) {
+                scannedItems = [];
+                renderTable();
+                updateButtons();
+            }
+        });
+
+        // Update buttons
+        function updateButtons() {
+            const hasItems = scannedItems.length > 0;
+            document.getElementById('save-all-btn').disabled = !hasItems;
+            document.getElementById('clear-all-btn').disabled = !hasItems;
+        }
+
+        // Save all (placeholder - you can implement batch save API)
+        document.getElementById('save-all-btn').addEventListener('click', async function() {
+            if (scannedItems.length === 0) return;
+
+            const notFoundItems = scannedItems.filter(i => i.status === 'not-found');
+            if (notFoundItems.length > 0) {
+                const proceed = confirm(`${notFoundItems.length} item(s) were not found in the system. Do you want to create them?`);
+                if (!proceed) return;
+            }
+
+            // For now, show summary
+            alert(`Ready to save ${scannedItems.length} items:\n\n` +
+                  `- Found: ${scannedItems.filter(i => i.status === 'found').length}\n` +
+                  `- Not Found: ${scannedItems.filter(i => i.status === 'not-found').length}\n\n` +
+                  `Batch save functionality can be implemented to create/update assets.`);
+        });
+
+        // Initialize
+        updateButtons();
+    </script>
+}

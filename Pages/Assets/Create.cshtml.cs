@@ -30,7 +30,7 @@ namespace buildone.Pages.Assets
         public List<Employee> Employees { get; set; } = new();
         public List<Department> Departments { get; set; } = new();
 
-        public async Task<IActionResult> OnGetAsync(int? newDepartmentId = null)
+        public async Task<IActionResult> OnGetAsync(int? newDepartmentId = null, string? assetTag = null)
         {
             try
             {
@@ -42,6 +42,13 @@ namespace buildone.Pages.Assets
                 {
                     Asset.DepartmentId = newDepartmentId.Value;
                     TempData["SuccessMessage"] = "Department created successfully. It has been pre-selected below.";
+                }
+                
+                // If asset tag is provided (from QR scan), pre-fill it
+                if (!string.IsNullOrWhiteSpace(assetTag))
+                {
+                    Asset.AssetTag = assetTag;
+                    TempData["InfoMessage"] = $"Asset tag '{assetTag}' pre-filled from scan. Please complete the asset details.";
                 }
                 
                 return Page();

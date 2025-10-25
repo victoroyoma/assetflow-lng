@@ -106,7 +106,7 @@ body {
 }
 
 /* ==========================================================================
-   Sidebar Navigation
+   Sidebar Navigation - BuildOne Energy Brand
    ========================================================================== */
 
 .sidebar {
@@ -115,12 +115,13 @@ body {
     left: 0;
     width: var(--sidebar-width);
     height: 100vh;
-    background: linear-gradient(180deg, var(--gray-900) 0%, var(--gray-800) 100%);
+    background: linear-gradient(180deg, #009739 0%, #007D30 50%, #007129 100%);
     color: white;
     transition: all var(--transition-normal);
     z-index: 1000;
     display: flex;
     flex-direction: column;
+    box-shadow: 4px 0 20px rgba(0, 151, 57, 0.2);
 }
 
 .sidebar-menu {
@@ -131,132 +132,205 @@ body {
 }
 
 .sidebar-menu::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
 }
 
 .sidebar-menu::-webkit-scrollbar-track {
-    background: var(--gray-800);
+    background: rgba(0, 151, 57, 0.2);
+    border-radius: 4px;
 }
 
 .sidebar-menu::-webkit-scrollbar-thumb {
-    background: var(--gray-600);
-    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
 }
 
 .sidebar-menu::-webkit-scrollbar-thumb:hover {
-    background: var(--gray-500);
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .sidebar-header {
     padding: 1.5rem 1.25rem;
-    border-bottom: 1px solid var(--gray-700);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     flex-shrink: 0;
+    background: rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-brand {
     display: flex;
     align-items: center;
-    font-size: var(--font-size-xl);
+    font-size: 1.35rem;
     font-weight: 700;
     color: white;
     text-decoration: none;
 }
 
+.sidebar-brand i {
+    color: white;
+    font-size: 1.5rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
 .brand-text {
-    background: linear-gradient(135deg, #3b82f6, #06b6d4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: white;
+    font-weight: 800;
+    letter-spacing: 0.5px;
 }
 
 .sidebar-toggle {
-    color: var(--gray-400);
+    color: rgba(255, 255, 255, 0.7);
     border: none;
     background: none;
     font-size: 1.25rem;
     padding: 0.5rem;
     margin-left: auto;
+    transition: all 0.3s ease;
 }
 
 .sidebar-toggle:hover {
     color: white;
+    transform: scale(1.1);
 }
 
 .sidebar .nav-link {
     display: flex;
     align-items: center;
     padding: 0.875rem 1.25rem;
-    color: var(--gray-300);
+    margin: 0.25rem 0.75rem;
+    color: rgba(255, 255, 255, 0.85);
     text-decoration: none;
-    transition: all var(--transition-fast);
-    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+    border-radius: 10px;
     position: relative;
+    font-weight: 500;
+    border-left: 3px solid transparent;
+}
+
+.sidebar .nav-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background: white;
+    transition: width 0.3s ease;
+    border-radius: 10px 0 0 10px;
 }
 
 .sidebar .nav-link:hover {
     color: white;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-left-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(8px);
+    border-left-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar .nav-link:hover::before {
+    width: 3px;
 }
 
 .sidebar .nav-link.active {
-    color: white;
-    background-color: rgba(59, 130, 246, 0.15);
-    border-left-color: var(--primary-color);
+    color: var(--brand-green);
+    background: rgba(255, 255, 255, 0.95);
+    border-left-color: var(--brand-green);
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar .nav-link.active i {
+    color: var(--brand-green);
 }
 
 .sidebar .nav-link i {
-    width: 20px;
+    width: 22px;
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.sidebar .nav-link:hover i {
+    color: #F2C800;
+    transform: scale(1.1);
 }
 
 .nav-text {
     margin-left: 0.75rem;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .nav-arrow {
     margin-left: auto;
     font-size: 0.75rem;
     transition: transform var(--transition-fast);
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .nav-link[aria-expanded="true"] .nav-arrow {
     transform: rotate(180deg);
+    color: white;
 }
 
 .sub-link {
     font-size: var(--font-size-sm);
     padding-left: 3rem !important;
-    color: var(--gray-400) !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-weight: 500;
 }
 
 .sub-link:hover {
-    color: var(--gray-200) !important;
+    color: white !important;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.sub-link::before {
+    content: '→';
+    position: absolute;
+    left: 2rem;
+    color: white;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.sub-link:hover::before {
+    opacity: 1;
+    left: 2.2rem;
 }
 
 .sidebar-footer {
     padding: 1rem 1.25rem;
-    border-top: 1px solid var(--gray-700);
+    border-top: 2px solid rgba(242, 200, 0, 0.2);
     flex-shrink: 0;
     margin-top: auto;
+    background: linear-gradient(135deg, rgba(0, 76, 151, 0.3) 0%, rgba(0, 51, 92, 0.5) 100%);
 }
 
 .user-info {
     display: flex;
     align-items: center;
+    padding: 0.5rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.user-info:hover {
+    background: rgba(242, 200, 0, 0.1);
 }
 
 .user-avatar {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+    background: linear-gradient(135deg, #009739 0%, #00B347 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 0.75rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: white;
+    border: 2px solid #F2C800;
+    box-shadow: 0 4px 8px rgba(0, 151, 57, 0.3);
 }
 
 .user-details {
@@ -264,14 +338,16 @@ body {
 }
 
 .user-name {
-    font-weight: 600;
+    font-weight: 700;
     font-size: var(--font-size-sm);
     color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .user-role {
     font-size: var(--font-size-xs);
-    color: var(--gray-400);
+    color: #F2C800;
+    font-weight: 600;
 }
 
 /* ==========================================================================
@@ -723,6 +799,33 @@ body {
 .badge-warning { background-color: var(--warning-color); }
 .badge-danger { background-color: var(--danger-color); }
 .badge-info { background-color: var(--info-color); }
+
+/* Override Bootstrap badge colors for better readability */
+.badge.bg-primary,
+.badge.bg-secondary,
+.badge.bg-success,
+.badge.bg-danger,
+.badge.bg-info {
+    color: #fff !important;
+}
+
+/* Card headers with colored backgrounds */
+.card-header.bg-primary,
+.card-header.bg-secondary,
+.card-header.bg-success,
+.card-header.bg-danger,
+.card-header.bg-info {
+    color: #fff !important;
+}
+
+/* Ensure icons and other backgrounds have proper text color */
+.bg-primary:not(.bg-opacity-10):not(.bg-opacity-25):not(.bg-opacity-50):not(.bg-opacity-75),
+.bg-secondary:not(.bg-opacity-10):not(.bg-opacity-25):not(.bg-opacity-50):not(.bg-opacity-75),
+.bg-success:not(.bg-opacity-10):not(.bg-opacity-25):not(.bg-opacity-50):not(.bg-opacity-75),
+.bg-danger:not(.bg-opacity-10):not(.bg-opacity-25):not(.bg-opacity-50):not(.bg-opacity-75),
+.bg-info:not(.bg-opacity-10):not(.bg-opacity-25):not(.bg-opacity-50):not(.bg-opacity-75) {
+    color: #fff !important;
+}
 
 /* ==========================================================================
    Alerts
