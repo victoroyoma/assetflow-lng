@@ -40,6 +40,9 @@
                         <div id="qr-reader" style="width: 100%; max-width: 600px; margin: 0 auto;"></div>
                         <div class="text-center mt-3">
                             <span class="badge bg-info me-2" id="scan-mode-badge">Scanning: QR & Barcodes</span>
+                            <button class="btn btn-warning btn-sm me-2" id="switch-camera-btn">
+                                <i class="fas fa-sync-alt"></i> Switch Camera
+                            </button>
                             <button class="btn btn-danger" id="stop-scanner-btn">
                                 <i class="fas fa-stop"></i> Stop Scanner
                             </button>
@@ -50,6 +53,15 @@
                         <div class="mb-3">
                             <p class="text-muted">Position QR codes or barcodes in front of your camera. Scanned items will be added to the table below for review.</p>
                         </div>
+                        
+                        <!-- Camera Selection -->
+                        <div class="mb-3">
+                            <label for="camera-select" class="form-label"><i class="fas fa-video"></i> Select Camera</label>
+                            <select class="form-select mx-auto" id="camera-select" style="max-width: 500px;">
+                                <option value="">Loading cameras...</option>
+                            </select>
+                        </div>
+
                         <div class="mb-3">
                             <div class="btn-group" role="group">
                                 <input type="radio" class="btn-check" name="scanType" id="scanBoth" value="both" checked>
@@ -175,6 +187,51 @@
         let scannedItems = [];
         let itemCounter = 0;
         const editModal = new bootstrap.Modal(document.getElementById('editItemModal'));
+        let availableCameras = [];
+        let currentCameraIndex = 0;
+
+        // Load available cameras on page load
+        async function loadCameras() {
+            try {
+                const devices = await Html5Qrcode.getCameras();
+                availableCameras = devices;
+                
+                const cameraSelect = document.getElementById('camera-select');
+                cameraSelect.innerHTML = '';
+                
+                if (devices && devices.length > 0) {
+                    devices.forEach((device, index) => {
+                        const option = document.createElement('option');
+                        option.value = device.id;
+                        option.textContent = device.label || `Camera ${index + 1}`;
+                        cameraSelect.appendChild(option);
+                    });
+                    
+                    // Select the last camera by default (usually external/USB cameras)
+                    if (devices.length > 1) {
+                        cameraSelect.selectedIndex = devices.length - 1;
+                        currentCameraIndex = devices.length - 1;
+                    }
+                } else {
+                    cameraSelect.innerHTML = '<option value="">No cameras found</option>';
+                }
+            } catch (err) {
+                console.error('Error loading cameras:', err);
+                document.getElementById('camera-select').innerHTML = '<option value="">Error loading cameras</option>';
+            }
+        }
+
+        // Load cameras when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCameras();
+        });
+
+        // Update current camera index when user changes selection
+        document.getElementById('camera-select').addEventListener('change', function() {
+            const selectedId = this.value;
+            currentCameraIndex = availableCameras.findIndex(cam => cam.id === selectedId);
+            if (currentCameraIndex === -1) currentCameraIndex = 0;
+        });
 
         // Detect code type (simple heuristic)
         function detectCodeType(code) {
@@ -201,6 +258,14 @@
         document.getElementById('start-scanner-btn').addEventListener('click', async function() {
             try {
                 const scanType = getScanType();
+                const cameraSelect = document.getElementById('camera-select');
+                const selectedCameraId = cameraSelect.value;
+                
+                if (!selectedCameraId) {
+                    alert('Please select a camera first');
+                    return;
+                }
+                
                 document.getElementById('scanner-controls').style.display = 'none';
                 document.getElementById('scanner-container').style.display = 'block';
 
@@ -232,8 +297,9 @@
                     );
                 }
 
+                // Use the selected camera ID
                 await html5QrCode.start(
-                    { facingMode: "environment" },
+                    selectedCameraId,
                     {
                         fps: 10,
                         qrbox: { width: 250, height: 250 },
@@ -252,6 +318,60 @@
         // Stop scanner
         document.getElementById('stop-scanner-btn').addEventListener('click', function() {
             stopScanner();
+        });
+
+        // Switch camera button
+        document.getElementById('switch-camera-btn').addEventListener('click', async function() {
+            if (!isScanning || availableCameras.length <= 1) {
+                return;
+            }
+            
+            try {
+                // Stop current scanner
+                await html5QrCode.stop();
+                html5QrCode.clear();
+                
+                // Switch to next camera
+                currentCameraIndex = (currentCameraIndex + 1) % availableCameras.length;
+                const nextCamera = availableCameras[currentCameraIndex];
+                
+                // Restart with new camera
+                const scanType = getScanType();
+                let formatsToSupport = [];
+                
+                if (scanType === 'both' || scanType === 'qr') {
+                    formatsToSupport.push(Html5QrcodeSupportedFormats.QR_CODE);
+                }
+                if (scanType === 'both' || scanType === 'barcode') {
+                    formatsToSupport.push(
+                        Html5QrcodeSupportedFormats.EAN_13,
+                        Html5QrcodeSupportedFormats.EAN_8,
+                        Html5QrcodeSupportedFormats.UPC_A,
+                        Html5QrcodeSupportedFormats.UPC_E,
+                        Html5QrcodeSupportedFormats.CODE_128,
+                        Html5QrcodeSupportedFormats.CODE_39,
+                        Html5QrcodeSupportedFormats.CODE_93
+                    );
+                }
+                
+                await html5QrCode.start(
+                    nextCamera.id,
+                    {
+                        fps: 10,
+                        qrbox: { width: 250, height: 250 },
+                        formatsToSupport: formatsToSupport.length > 0 ? formatsToSupport : undefined
+                    },
+                    onScanSuccess,
+                    onScanFailure
+                );
+                
+                // Show notification
+                const cameraName = nextCamera.label || `Camera ${currentCameraIndex + 1}`;
+                showToast('Camera switched to: ' + cameraName, 'info');
+            } catch (err) {
+                console.error('Error switching camera:', err);
+                alert('Failed to switch camera: ' + err);
+            }
         });
 
         async function stopScanner() {
@@ -297,6 +417,22 @@
             setTimeout(() => {
                 resultDiv.style.display = 'none';
             }, 2000);
+        }
+
+        // Simple toast notification
+        function showToast(message, type = 'info') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = 'top: 80px; right: 20px; z-index: 9999; min-width: 300px;';
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 3000);
         }
 
         // Manual add
