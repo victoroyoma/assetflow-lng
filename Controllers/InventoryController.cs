@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using buildone.Data;
 using buildone.Data.Enums;
 using buildone.DTOs;
+using buildone.Services;
 
 namespace buildone.Controllers;
 
@@ -14,11 +15,15 @@ public class InventoryController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
     private readonly ILogger<InventoryController> _logger;
+    private readonly IEmailService _emailService;
+    private readonly IConfiguration _configuration;
 
-    public InventoryController(ApplicationDbContext context, ILogger<InventoryController> logger)
+    public InventoryController(ApplicationDbContext context, ILogger<InventoryController> logger, IEmailService emailService, IConfiguration configuration)
     {
         _context = context;
         _logger = logger;
+        _emailService = emailService;
+        _configuration = configuration;
     }
 
     [HttpGet]
@@ -235,6 +240,20 @@ public class InventoryController : ControllerBase
             _logger.LogInformation("Inventory {Id} restocked by {Quantity}. Previous: {Previous}, New: {New}",
                 id, dto.Quantity, previousQuantity, inventory.CurrentQuantity);
 
+            // Send email notification for restock if enabled
+            var inventoryAlertsEnabled = _configuration.GetValue<bool>("Email:InventoryAlerts", true);
+            if (inventoryAlertsEnabled)
+            {
+                await _emailService.SendInventoryRestockedNotificationAsync(
+                    inventory.ItemName,
+                    dto.Quantity,
+                    inventory.CurrentQuantity,
+                    User.Identity?.Name ?? "System",
+                    DateTime.UtcNow,
+                    dto.Reference
+                );
+            }
+
             var result = new InventoryDto
             {
                 Id = inventory.Id,
@@ -407,6 +426,37 @@ public class InventoryController : ControllerBase
 
             _logger.LogInformation("Inventory {Id} withdrawal. User: {User}, Quantity: {Qty}, Remaining: {Remaining}",
                 id, User.Identity?.Name, dto.Quantity, inventory.CurrentQuantity);
+
+            // Check if inventory alerts are enabled
+            var inventoryAlertsEnabled = _configuration.GetValue<bool>("Email:InventoryAlerts", true);
+
+            // Send email notification for withdrawal if enabled
+            if (inventoryAlertsEnabled)
+            {
+                await _emailService.SendInventoryWithdrawnNotificationAsync(
+                    inventory.ItemName,
+                    dto.Quantity,
+                    inventory.CurrentQuantity,
+                    User.Identity?.Name ?? "System",
+                    DateTime.UtcNow,
+                    dto.Remarks
+                );
+            }
+
+            // Check if now low stock and send alert if enabled
+            var lowStockThreshold = _configuration.GetValue<int>("Email:LowStockThreshold", 10);
+            var outOfStockThreshold = _configuration.GetValue<int>("Email:OutOfStockThreshold", 0);
+
+            if (inventoryAlertsEnabled && 
+                (inventory.CurrentQuantity <= lowStockThreshold || inventory.CurrentQuantity <= outOfStockThreshold))
+            {
+                await _emailService.SendInventoryLowStockAlertAsync(
+                    inventory.ItemName,
+                    inventory.CurrentQuantity,
+                    inventory.MinimumQuantity,
+                    inventory.StorageLocation
+                );
+            }
 
             var result = new InventoryDto
             {

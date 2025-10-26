@@ -283,7 +283,7 @@
 
         async function addItemToTable(code, format) {
             itemCounter++;
-            const codeType = format ? `${format}` : detectCodeType(code);
+            const codeType = format ? format : detectCodeType(code);
             const item = { id: itemCounter, scannedCode: code, codeType: codeType, assetTag: code, status: 'pending', assetInfo: null, notes: '' };
             scannedItems.push(item); renderTable(); updateButtons(); await lookupAsset(code, itemCounter);
         }
@@ -306,21 +306,19 @@
 
             tbody.innerHTML = scannedItems.map((item, index) => {
                 const statusBadge = { 'pending': '<span class="badge bg-secondary">Checking...</span>', 'found': '<span class="badge bg-success">Found</span>', 'not-found': '<span class="badge bg-warning text-dark">Not Found</span>', 'error': '<span class="badge bg-danger">Error</span>' }[item.status] || '<span class="badge bg-secondary">Unknown</span>';
-                const assetInfo = item.assetInfo ? `<small>${item.assetInfo.assetTag ?? item.assetInfo.model ?? item.assetInfo.ItemName || ''}<br>${item.assetInfo.brand || ''} ${item.assetInfo.model || ''}</small>` : '<small class="text-muted">N/A</small>';
+                const assetInfo = item.assetInfo ? '<small>' + (item.assetInfo.assetTag || item.assetInfo.model || item.assetInfo.ItemName || '') + '<br>' + (item.assetInfo.brand || '') + ' ' + (item.assetInfo.model || '') + '</small>' : '<small class="text-muted">N/A</small>';
 
-                return `
-                    <tr>
-                        <td>${index + 1}</td>
-                        <td><span class="badge bg-info">${item.codeType}</span></td>
-                        <td><code>${item.scannedCode}</code></td>
-                        <td>${statusBadge}</td>
-                        <td>${assetInfo}</td>
-                        <td>
-                            <button class="btn btn-sm btn-outline-primary me-1" onclick="editItem(${index})"><i class="fas fa-edit"></i> Edit</button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="removeItem(${index})"><i class="fas fa-trash"></i></button>
-                        </td>
-                    </tr>
-                `;
+                return '<tr>' +
+                    '<td>' + (index + 1) + '</td>' +
+                    '<td><span class="badge bg-info">' + item.codeType + '</span></td>' +
+                    '<td><code>' + item.scannedCode + '</code></td>' +
+                    '<td>' + statusBadge + '</td>' +
+                    '<td>' + assetInfo + '</td>' +
+                    '<td>' +
+                        '<button class="btn btn-sm btn-outline-primary me-1" onclick="editItem(' + index + ')"><i class="fas fa-edit"></i> Edit</button>' +
+                        '<button class="btn btn-sm btn-outline-danger" onclick="removeItem(' + index + ')"><i class="fas fa-trash"></i></button>' +
+                    '</td>' +
+                '</tr>';
             }).join('');
 
             document.getElementById('scanned-count').textContent = scannedItems.length;
@@ -339,8 +337,11 @@
         document.getElementById('save-all-btn').addEventListener('click', async function() {
             if (scannedItems.length === 0) return;
             const notFoundItems = scannedItems.filter(i => i.status === 'not-found');
-            if (notFoundItems.length > 0) { const proceed = confirm(`${notFoundItems.length} item(s) were not found in the system. Do you want to create them?`); if (!proceed) return; }
-            alert(`Ready to save ${scannedItems.length} items:\n\n- Found: ${scannedItems.filter(i => i.status === 'found').length}\n- Not Found: ${scannedItems.filter(i => i.status === 'not-found').length}\n\nBatch save functionality can be implemented to create/update inventory items.`);
+            if (notFoundItems.length > 0) { 
+                const proceed = confirm(notFoundItems.length + ' item(s) were not found in the system. Do you want to create them?'); 
+                if (!proceed) return; 
+            }
+            alert('Ready to save ' + scannedItems.length + ' items:\n\n- Found: ' + scannedItems.filter(i => i.status === 'found').length + '\n- Not Found: ' + scannedItems.filter(i => i.status === 'not-found').length + '\n\nBatch save functionality can be implemented to create/update inventory items.');
         });
 
         updateButtons();

@@ -68,6 +68,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXNzZXRzXFNjYW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/victo/Desktop/buildone/Pages/Audit/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXVkaXRcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Audit/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXVkaXRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/victo/Desktop/buildone/Pages/Audit/Scan.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXVkaXRcU2Nhbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/victo/Desktop/buildone/Pages/DbTest.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGJUZXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

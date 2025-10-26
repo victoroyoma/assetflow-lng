@@ -197,6 +197,8 @@ builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<IExportService, ExportService>();
 builder.Services.AddScoped<IFileStorageService, FileStorageService>();
 builder.Services.AddScoped<IQRCodeService, QRCodeService>();
+builder.Services.AddScoped<IAssetAuditService, AssetAuditService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddMemoryCache();
 
 // Add health checks with detailed diagnostics

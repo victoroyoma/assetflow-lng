@@ -150,6 +150,32 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="#auditSubmenu" data-bs-toggle="collapse" aria-expanded="false">
+                        <i class="fas fa-clipboard-check me-2"></i>
+                        <span class="nav-text">Asset Audit</span>
+                        <i class="fas fa-chevron-down ms-auto nav-arrow"></i>
+                    </a>
+                    <div class="collapse" id="auditSubmenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link sub-link" asp-area="" asp-page="/Audit/Index">
+                                    <i class="fas fa-list me-2"></i>Audit History
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-link" asp-area="" asp-page="/Audit/Create">
+                                    <i class="fas fa-plus me-2"></i>Start Audit
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-link" asp-area="" asp-page="/Audit/Scan">
+                                    <i class="fas fa-qrcode me-2"></i>Scan Assets
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#reportsSubmenu" data-bs-toggle="collapse" aria-expanded="false">
                         <i class="fas fa-chart-bar me-2"></i>
                         <span class="nav-text">Reports</span>

@@ -115,7 +115,7 @@ body {
     left: 0;
     width: var(--sidebar-width);
     height: 100vh;
-    background: linear-gradient(180deg, #009739 0%, #007D30 50%, #007129 100%);
+    background: linear-gradient(180deg, #0ac90a 0%, #0e9c45 50%, #045722 100%);
     color: white;
     transition: all var(--transition-normal);
     z-index: 1000;
@@ -136,7 +136,7 @@ body {
 }
 
 .sidebar-menu::-webkit-scrollbar-track {
-    background: rgba(0, 151, 57, 0.2);
+    background: rgba(5, 151, 61, 0.555);
     border-radius: 4px;
 }
 
@@ -188,7 +188,7 @@ body {
 }
 
 .sidebar-toggle:hover {
-    color: white;
+    color: rgb(12, 12, 12);
     transform: scale(1.1);
 }
 
@@ -197,7 +197,7 @@ body {
     align-items: center;
     padding: 0.875rem 1.25rem;
     margin: 0.25rem 0.75rem;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgb(14, 13, 13);
     text-decoration: none;
     transition: all 0.3s ease;
     border-radius: 10px;
@@ -232,7 +232,7 @@ body {
 
 .sidebar .nav-link.active {
     color: var(--brand-green);
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(0, 0, 0, 0.95);
     border-left-color: var(--brand-green);
     font-weight: 700;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);

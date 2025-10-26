@@ -24,6 +24,56 @@
             Defines role names used throughout the application
             </summary>
         </member>
+        <member name="M:buildone.Controllers.AssetAuditController.ProcessScannedAsset(buildone.Controllers.ProcessScanRequest)">
+            <summary>
+            Process a scanned asset during audit
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.AssetAuditController.GetAuditsBySession(System.String)">
+            <summary>
+            Get audits by session ID
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.AssetAuditController.GetAuditStatistics(System.String)">
+            <summary>
+            Get audit statistics
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.AssetAuditController.GetAudits(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
+            <summary>
+            Get audits by date range
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.AssetAuditController.GetAllAssetsForAudit(System.String)">
+            <summary>
+            Get all assets for audit with their current audit status
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.AssetAuditController.UpdateAssetStatus(System.Int32,buildone.Controllers.UpdateAssetStatusRequest)">
+            <summary>
+            Update asset status and location during audit
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.AssetAuditController.UpdateAuditRecord(System.Int32,buildone.Controllers.UpdateAuditRequest)">
+            <summary>
+            Update an audit record
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.AssetAuditController.DeleteAuditRecord(System.Int32,buildone.Controllers.DeleteAuditRequest)">
+            <summary>
+            Delete an audit record (soft delete with history)
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.AssetAuditController.GetDeletedHistory(System.String)">
+            <summary>
+            Get deleted audit history
+            </summary>
+        </member>
+        <member name="M:buildone.Controllers.AssetAuditController.ClearAllAudits">
+            <summary>
+            Clear all audit records (hard delete all audits and audit delete history)
+            </summary>
+        </member>
         <member name="M:buildone.Controllers.AttachmentsController.UploadJobAttachment(System.Int32,Microsoft.AspNetCore.Http.IFormFile,System.String)">
             <summary>
             Upload attachment for an imaging job
@@ -120,6 +170,46 @@
             </summary>
             <param name="q">Search query</param>
             <returns>Search results grouped by category</returns>
+        </member>
+        <member name="T:buildone.Data.AssetAudit">
+            <summary>
+            Represents an asset audit record tracking physical verification of assets
+            </summary>
+        </member>
+        <member name="P:buildone.Data.AssetAudit.AssetId">
+            <summary>
+            Asset ID if the asset exists, null if it's a new discovery
+            </summary>
+        </member>
+        <member name="P:buildone.Data.AssetAudit.IsNewAsset">
+            <summary>
+            Indicates if this asset was newly discovered during audit (not in system)
+            </summary>
+        </member>
+        <member name="P:buildone.Data.AssetAudit.PreviousStatus">
+            <summary>
+            Previous status before audit (for comparison)
+            </summary>
+        </member>
+        <member name="P:buildone.Data.AssetAudit.PreviousLocation">
+            <summary>
+            Previous location before audit (for comparison)
+            </summary>
+        </member>
+        <member name="P:buildone.Data.AssetAudit.AuditSessionId">
+            <summary>
+            Audit session ID to group multiple scans in one audit session
+            </summary>
+        </member>
+        <member name="P:buildone.Data.AssetAudit.IsDeleted">
+            <summary>
+            Soft delete flag - true if record has been deleted from audit
+            </summary>
+        </member>
+        <member name="T:buildone.Data.AssetAuditDeleteHistory">
+            <summary>
+            Tracks history of deleted asset audit records for audit trail purposes
+            </summary>
         </member>
         <member name="T:buildone.Data.ImagingJob">
             <summary>
@@ -427,6 +517,42 @@
             <inheritdoc />
         </member>
         <member name="M:buildone.Migrations.AddMaintenanceHistory.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:buildone.Migrations.AddAssetAuditAndLocationToAsset">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddAssetAuditAndLocationToAsset.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddAssetAuditAndLocationToAsset.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddAssetAuditAndLocationToAsset.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:buildone.Migrations.AddIsAuditedAndLastAuditDateToAsset">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddIsAuditedAndLastAuditDateToAsset.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddIsAuditedAndLastAuditDateToAsset.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddIsAuditedAndLastAuditDateToAsset.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:buildone.Migrations.AddAuditDeleteHistoryAndSoftDelete">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddAuditDeleteHistoryAndSoftDelete.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddAuditDeleteHistoryAndSoftDelete.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:buildone.Migrations.AddAuditDeleteHistoryAndSoftDelete.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="M:buildone.Services.IExcelDataSeedingService.SeedFromExcelAsync(System.IO.Stream,System.String)">

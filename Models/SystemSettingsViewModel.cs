@@ -56,5 +56,9 @@ namespace buildone.Models
         public bool NotificationsEnabled { get; set; } = true;
         public bool WarrantyAlerts { get; set; } = true;
         public bool ImagingJobAlerts { get; set; } = true;
+        public bool InventoryAlerts { get; set; } = true;
+        public int LowStockThreshold { get; set; } = 10;
+        public int OutOfStockThreshold { get; set; } = 0;
+        public string InventoryAlertRecipients { get; set; } = "";
     }
 }

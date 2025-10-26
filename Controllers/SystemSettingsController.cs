@@ -164,7 +164,11 @@ namespace buildone.Controllers
                     FromName = _configuration["Email:FromName"] ?? "",
                     NotificationsEnabled = bool.Parse(_configuration["Email:NotificationsEnabled"] ?? "true"),
                     WarrantyAlerts = bool.Parse(_configuration["Email:WarrantyAlerts"] ?? "true"),
-                    ImagingJobAlerts = bool.Parse(_configuration["Email:ImagingJobAlerts"] ?? "true")
+                    ImagingJobAlerts = bool.Parse(_configuration["Email:ImagingJobAlerts"] ?? "true"),
+                    InventoryAlerts = bool.Parse(_configuration["Email:InventoryAlerts"] ?? "true"),
+                    LowStockThreshold = int.Parse(_configuration["Email:LowStockThreshold"] ?? "10"),
+                    OutOfStockThreshold = int.Parse(_configuration["Email:OutOfStockThreshold"] ?? "0"),
+                    InventoryAlertRecipients = _configuration["Email:InventoryAlertRecipients"] ?? ""
                 }
             };
         }

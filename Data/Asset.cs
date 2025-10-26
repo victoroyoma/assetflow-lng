@@ -49,6 +49,10 @@ public class Asset
     [Display(Name = "Status")]
     public AssetStatus Status { get; set; } = AssetStatus.InStock;
 
+    [StringLength(200, ErrorMessage = "Location cannot exceed 200 characters")]
+    [Display(Name = "Location")]
+    public string? Location { get; set; }
+
     [Display(Name = "Assigned Employee")]
     public int? AssignedEmployeeId { get; set; }
 
@@ -67,6 +71,12 @@ public class Asset
 
     [Display(Name = "Last Updated")]
     public DateTime LastUpdated => UpdatedAt ?? CreatedAt;
+
+    [Display(Name = "Is Audited")]
+    public bool IsAudited { get; set; } = false;
+
+    [Display(Name = "Last Audit Date")]
+    public DateTime? LastAuditDate { get; set; }
 
     // Navigation properties
     [ForeignKey("AssignedEmployeeId")]

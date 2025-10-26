@@ -22,6 +22,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
     public DbSet<JobAttachment> JobAttachments { get; set; }
     public DbSet<AssetAttachment> AssetAttachments { get; set; }
     public DbSet<MaintenanceHistory> MaintenanceHistory { get; set; }
+    public DbSet<AssetAudit> AssetAudits { get; set; }
+    public DbSet<AssetAuditDeleteHistory> AssetAuditDeleteHistories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -245,6 +247,36 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
             entity.HasOne(mh => mh.Technician)
                 .WithMany()
                 .HasForeignKey(mh => mh.TechnicianId)
+                .OnDelete(DeleteBehavior.SetNull);
+        });
+
+        // Configure AssetAudit entity
+        modelBuilder.Entity<AssetAudit>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.AssetTag).IsRequired().HasMaxLength(50);
+            entity.Property(e => e.AssetType).IsRequired().HasMaxLength(50);
+            entity.Property(e => e.AuditedBy).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.Location).HasMaxLength(100);
+            entity.Property(e => e.PreviousLocation).HasMaxLength(100);
+            entity.Property(e => e.Notes).HasMaxLength(1000);
+            entity.Property(e => e.SerialNumber).HasMaxLength(100);
+            entity.Property(e => e.Brand).HasMaxLength(100);
+            entity.Property(e => e.Model).HasMaxLength(100);
+            entity.Property(e => e.AuditSessionId).HasMaxLength(50);
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
+            
+            // Indexes for performance
+            entity.HasIndex(e => e.AssetId);
+            entity.HasIndex(e => e.AssetTag);
+            entity.HasIndex(e => e.AuditDate);
+            entity.HasIndex(e => e.AuditSessionId);
+            entity.HasIndex(e => new { e.AuditDate, e.AuditedBy });
+            
+            // Configure relationship with Asset (optional)
+            entity.HasOne(aa => aa.Asset)
+                .WithMany()
+                .HasForeignKey(aa => aa.AssetId)
                 .OnDelete(DeleteBehavior.SetNull);
         });
 

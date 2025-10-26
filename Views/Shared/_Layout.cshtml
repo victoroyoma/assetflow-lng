@@ -61,6 +61,11 @@
                                     <i class="bi bi-boxes"></i> Inventory
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-page="/Audit/Index">
+                                    <i class="fas fa-clipboard-check"></i> Asset Audit
+                                </a>
+                            </li>
                             @if (User.IsInRole("Administrator"))
                             {
                                 <li class="nav-item dropdown">
